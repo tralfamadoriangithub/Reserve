@@ -3,7 +3,6 @@ package com.epam.task6.dao.impl;
 import java.util.HashMap;
 
 import com.epam.task6.dao.DataManager;
-import com.epam.task6.dao.IDataManager;
 
 public class JsonDataManager extends DataManager{
 

@@ -3,7 +3,6 @@ package com.epam.task6.dao.impl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import com.epam.task6.dao.IAccessManager;
 import com.epam.task6.dao.impl.connectionpool.ConnectionPool;
