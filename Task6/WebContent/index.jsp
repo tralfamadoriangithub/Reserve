@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="style.css" rel="stylesheet" type="text/css"/>
 <title>ZKH</title>
 </head>
 <body>
 	<header>
-		<c:import url="header.html"></c:import>
+		<c:import url="jsp/header.jsp"></c:import>
 	</header>
 	
 </body>

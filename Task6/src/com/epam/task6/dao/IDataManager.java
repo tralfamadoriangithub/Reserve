@@ -1,10 +1,11 @@
 package com.epam.task6.dao;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
 
 public interface IDataManager {
 	
-	public ResultSet query( String query );
+	public HashMap<String, String> query( String query );
 
 	public void update( String query );
 

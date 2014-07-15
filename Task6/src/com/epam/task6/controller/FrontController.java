@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.epam.task6.logic.CommandHelper;
+import com.epam.task6.logic.ICommand;
+
 /**
  * Servlet implementation class FrontController
  */
@@ -34,8 +37,16 @@ public class FrontController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			RequestDispatcher dispatcher = request.getRequestDispatcher( "register.jsp" );
-			dispatcher.forward( request, response );
+		ICommand command = CommandHelper.getInstance().getCommand( request.getParameter( "command" ) );
+		String page = null;
+		if( null != command){
+			page = command.execute( request );
+		}else{
+			page = JspPageName.ERROR_PAGE;
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher( page );
+		dispatcher.forward( request, response );
 		
 	}
 
