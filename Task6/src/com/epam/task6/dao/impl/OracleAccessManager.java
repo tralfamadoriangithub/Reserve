@@ -3,7 +3,20 @@ package com.epam.task6.dao.impl;
 import com.epam.task6.dao.IAccessManager;
 import com.epam.task6.entity.User;
 
-public class OracleAccessManager implements IAccessManager{
+public class OracleAccessManager implements IAccessManager {
+
+	private static OracleAccessManager instance;
+
+	private OracleAccessManager() {
+
+	}
+
+	public static OracleAccessManager getInstance() {
+		if ( instance == null ) {
+			instance = new OracleAccessManager();
+		}
+		return instance;
+	}
 
 	@Override
 	public User signIn( String user, String password ) {
@@ -14,13 +27,13 @@ public class OracleAccessManager implements IAccessManager{
 	@Override
 	public void signOut() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void register( String user, String password ) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

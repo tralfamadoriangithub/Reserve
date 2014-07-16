@@ -13,6 +13,18 @@ public class MySQLDataManager extends DataManager{
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
 	private Connection connection;
 	private Statement statement;
+	private static MySQLDataManager instance;
+	
+	private MySQLDataManager() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public static MySQLDataManager getInstance(){
+		if( null == instance ){
+			instance = new MySQLDataManager();
+		}
+		return instance;
+	}
 	
 	@Override
 	public HashMap<String, String> query( String query ) {
@@ -34,16 +46,16 @@ public class MySQLDataManager extends DataManager{
 		
 	}
 	
-	private void linkToDataSource() {
-		System.out.println("Get connection");
-		connection = connectionPool.hardConnection();
-		try {
-			statement = connection.createStatement();
-		} catch ( SQLException e ) {
-			e.printStackTrace();
-		}
-		System.out.println("Connected");
-	}
+//	private void linkToDataSource() {
+//		System.out.println("Get connection");
+//		connection = connectionPool.hardConnection();
+//		try {
+//			statement = connection.createStatement();
+//		} catch ( SQLException e ) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("Connected");
+//	}
 
 	private void unlinkFromDataSource() {
 		connectionPool.releaseConnection( connection );

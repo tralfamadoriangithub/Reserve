@@ -1,10 +1,13 @@
 package com.epam.task6.entity;
 
 public class Claim {
+	
 	private int claimId;
 	private String problemDescription;
 	private int addressId;
 	private int userId;
+	
+	public Claim(){}
 
 	public int getClaimId() {
 		return claimId;

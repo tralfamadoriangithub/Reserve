@@ -1,8 +1,11 @@
 package com.epam.task6.entity;
 
 public class ClaimStatus {
+	
 	private int claimStatusId;
 	private String statusValue;
+	
+	public ClaimStatus(){}
 
 	public int getClaimStatusId() {
 		return claimStatusId;

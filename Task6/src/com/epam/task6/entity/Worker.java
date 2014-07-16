@@ -6,6 +6,8 @@ public class Worker {
 	private String surname;
 	private int professionId;
 	private int qualification;
+	
+	public Worker(){}
 
 	public int getWorkerId() {
 		return workerId;

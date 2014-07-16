@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1>user</h1>
+	<jsp:useBean id="user" class="com.epam.task6.entity.User" ></jsp:useBean>
 </body>
 </html>

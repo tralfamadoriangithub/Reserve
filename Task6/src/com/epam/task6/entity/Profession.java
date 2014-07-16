@@ -1,8 +1,11 @@
 package com.epam.task6.entity;
 
 public class Profession {
+	
 	private int professionId;
 	private String professionName;
+	
+	public Profession(){}
 
 	public int getProfessionId() {
 		return professionId;

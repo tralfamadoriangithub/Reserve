@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<link href="styles.css" rel="stylesheet" type="text/css"/>
+<link href="styles/style.css" rel="stylesheet" type="text/css" />
 </head>
 <section id="logo"></section>
 <section id="headerSection" class="headerSectionStyle">

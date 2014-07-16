@@ -7,6 +7,8 @@ public class Address {
 	private int blockNumber;
 	private int flatNumber;
 	private int userId;
+	
+	public Address(){}
 
 	public int getAddressId() {
 		return addressId;

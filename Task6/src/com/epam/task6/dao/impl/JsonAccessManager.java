@@ -5,6 +5,19 @@ import com.epam.task6.entity.User;
 
 public class JsonAccessManager implements IAccessManager{
 
+    private static JsonAccessManager instance;
+	
+	private JsonAccessManager() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public static JsonAccessManager getInstance(){
+		if(instance == null){
+			instance = new JsonAccessManager();
+		}
+		return instance;
+	}
+	
 	@Override
 	public User signIn( String user, String password ) {
 		// TODO Auto-generated method stub

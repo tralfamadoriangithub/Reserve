@@ -13,11 +13,23 @@ public class MySQLAccessManager implements IAccessManager {
 
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
 	private Connection connection;
+	private static MySQLAccessManager instance;
+	
+	private MySQLAccessManager() {
+		
+	}
+	
+	public static MySQLAccessManager getInstance(){
+		if(instance == null){
+			instance = new MySQLAccessManager();
+		}
+		return instance;
+	}
 
 	@Override
 	public User signIn( final String login, final String password ) {
 		User user = null;
-		connection = connectionPool.hardConnection();
+		connection = connectionPool.getConnection();
 		try {
 			PreparedStatement preparedStatement = (PreparedStatement) connection
 					.prepareStatement( "SELECT * FROM user WHERE login = ?" );
@@ -40,6 +52,7 @@ public class MySQLAccessManager implements IAccessManager {
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
+		
 		return user;
 	}
 

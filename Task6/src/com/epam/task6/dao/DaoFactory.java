@@ -30,19 +30,19 @@ public class DaoFactory implements IDao{
 		
 		switch ( dataType ) {
 		case JSON :
-			dataManager = new JsonDataManager();
+			dataManager = JsonDataManager.getInstance();
 			break;
 			
 		case XML:
-			dataManager = new XmlDataManager();
+			dataManager = XmlDataManager.getInstance();
 			break;
 			
 		case MYSQL:
-			dataManager = new MySQLDataManager();
+			dataManager = MySQLDataManager.getInstance();
 			break;
 			
 		case ORACLE:
-			dataManager = new OracleDataManager();
+			dataManager = OracleDataManager.getInstance();
 			break;
 
 		default:
@@ -59,7 +59,7 @@ public class DaoFactory implements IDao{
 	public DataManager getDataManager() {
 		DataManager dataManager;
 		ResourceBundle bundle = ResourceBundle.getBundle( "project_properties" );
-		DataType dataType = DataType.valueOf( bundle.getString( "database" ).toUpperCase() );
+		DataType dataType = DataType.valueOf( bundle.getString( "data_type" ).toUpperCase() );
 		if( null != dataType ){
 			dataManager = getDataManager( dataType );
 		}else{
@@ -74,16 +74,16 @@ public class DaoFactory implements IDao{
 		IAccessManager accessManager = null;
 		switch ( dataManager.getDataType() ) {
 		case JSON:
-			accessManager = new JsonAccessManager();
+			accessManager = JsonAccessManager.getInstance();
 			break;
 		case MYSQL:
-			accessManager = new MySQLAccessManager();
+			accessManager = MySQLAccessManager.getInstance();
 			break;
 		case XML:
-			accessManager = new XmlAccessManager();
+			accessManager = XmlAccessManager.getInstance();
 			break;
 		case ORACLE:
-			accessManager = new OracleAccessManager();
+			accessManager = OracleAccessManager.getInstance();
 			break;
 		default:
 			break;
