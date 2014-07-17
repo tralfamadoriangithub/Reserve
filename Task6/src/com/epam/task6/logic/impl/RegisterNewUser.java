@@ -19,7 +19,7 @@ public class RegisterNewUser implements ICommand{
 		
 		DaoFactory daoFactory = DaoFactory.getInstance();
 		DataManager dataManager = daoFactory.getDataManager();
-		IAccessManager accessManager = daoFactory.getAccessManager( dataManager );
+		IAccessManager accessManager = daoFactory.getAccessManager( );
 		accessManager.register( login, password );
 		return null;
 	}

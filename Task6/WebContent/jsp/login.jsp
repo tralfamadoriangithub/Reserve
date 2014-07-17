@@ -7,8 +7,7 @@
 <link href="styles/style.css" rel="stylesheet" type="text/css"/>
 <title>Login</title>
 </head>
-<body>
-	<section>
+	<section class="main_wrapper">
 		<form action="controller" method="post">
 			<input type="hidden" name="command" value="get_user_page_command"/>
 			<p>Login:<br>
@@ -19,5 +18,4 @@
 			<input type="submit" value="Login"/>
 		</form>
 	</section>
-</body>
 </html>

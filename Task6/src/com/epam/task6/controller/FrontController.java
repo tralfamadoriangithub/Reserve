@@ -4,9 +4,12 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.epam.task6.logic.CommandHelper;
 import com.epam.task6.logic.ICommand;
@@ -44,7 +47,6 @@ public class FrontController extends HttpServlet {
 		}else{
 			page = JspPageName.ERROR_PAGE;
 		}
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher( page );
 		dispatcher.forward( request, response );
 		

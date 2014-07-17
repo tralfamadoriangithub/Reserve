@@ -1,10 +1,24 @@
 @CHARSET "ISO-8859-1";
+*{
+	margin: 0px;
+	padding: 0px;
+}
 body {
+	width: 100%;
+	background-color: #dddddd;
+	text-align: center;
+}
+
+.main_wapper{
 	max-width: 800px;
-	background-color: #777777;
-	
 }
 
 .headerSectionStyle{
-	background-color: #990000;
+	background-color: #eeeeee;
+	margin: 0px;
+	padding: 10px;
+}
+
+.loginButtonsStyle form{
+	display: inline;
 }

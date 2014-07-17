@@ -48,6 +48,7 @@ public class MySQLAccessManager implements IAccessManager {
 				}
 			}
 			resultSet.close();
+			connectionPool.releaseConnection( connection );
 			connection.close();
 		} catch ( SQLException e ) {
 			e.printStackTrace();

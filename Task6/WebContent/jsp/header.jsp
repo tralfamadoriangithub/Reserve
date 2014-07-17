@@ -7,7 +7,7 @@
 </head>
 <section id="logo"></section>
 <section id="headerSection" class="headerSectionStyle">
-	<section id="loginButtons">
+	<section id="loginButtons" class="loginButtonsStyle">
 		<form action="controller" method="post">
 			<input type="hidden" name="command" value="register_command" /> <input
 				type="submit" value="Register" />

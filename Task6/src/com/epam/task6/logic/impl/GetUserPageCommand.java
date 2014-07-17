@@ -21,8 +21,7 @@ public class GetUserPageCommand implements ICommand{
 		String password = request.getParameter( RequestParameterName.PASSWORD );
 		System.out.println("GET USER PAGE");
 		DaoFactory daoFactory = DaoFactory.getInstance();
-		DataManager dataManager = daoFactory.getDataManager();
-		IAccessManager accessManager = daoFactory.getAccessManager( dataManager );
+		IAccessManager accessManager = daoFactory.getAccessManager( );
 		User user = accessManager.signIn( login, password );
 		
 		if(user != null){
