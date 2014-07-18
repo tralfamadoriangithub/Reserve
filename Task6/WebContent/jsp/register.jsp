@@ -14,7 +14,11 @@
 		<form action="controller" method="post">
 			<input type="hidden" name="command" value="register_new_user_command"/>
 			<p>User Name:<br>
-			<input type="text" placeholder="User Name" name="user_name" required/>
+			<input type="text" placeholder="User Name" name="name" required/>
+			<p>User Surname:<br>
+			<input type="text" placeholder="User Surname" name="surname" required/>
+			<p>Phone Number:<br>
+			<input type="text" placeholder="Phone Number" name="phone" required/>
 			<p>Password:<br>
 			<input type="password" placeholder="Password" name="password" required/>
 			<p>Confirm password:<br>

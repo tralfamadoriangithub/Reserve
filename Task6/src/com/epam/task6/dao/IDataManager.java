@@ -7,7 +7,7 @@ public interface IDataManager {
 	public HashMap<String, String> query( String query );
 	public void addAddress( String street, int house, int block, int flat, int userId );
 	public void deleteAddress( int addressId );
-	public void getAddress();
+	public void getAddress( int userId );
 	public void addClaim( int addressId, int userId, String problemDescription );
 	public void getClaim();
 	public void addUser();

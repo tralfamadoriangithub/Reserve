@@ -36,4 +36,10 @@ public class OracleAccessManager implements IAccessManager {
 
 	}
 
+	@Override
+	public User register( User newUser ) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

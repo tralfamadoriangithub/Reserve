@@ -6,4 +6,5 @@ public interface IAccessManager {
 	public User signIn( String login, String password );
 	public void signOut();
 	public void register( String login, String password );
+	public User register (User newUser );
 }

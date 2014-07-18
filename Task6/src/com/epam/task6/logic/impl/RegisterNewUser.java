@@ -7,6 +7,7 @@ import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.DataManager;
 import com.epam.task6.dao.IAccessManager;
 import com.epam.task6.dao.IDataManager;
+import com.epam.task6.entity.User;
 import com.epam.task6.logic.ICommand;
 
 public class RegisterNewUser implements ICommand{
@@ -14,14 +15,26 @@ public class RegisterNewUser implements ICommand{
 	@Override
 	public String execute( HttpServletRequest request ) {
 		
-		String login = request.getParameter( RequestParameterName.LOGIN );
-		String password = request.getParameter( RequestParameterName.PASSWORD );
+		User newUser = createUser( request );
 		
-		DaoFactory daoFactory = DaoFactory.getInstance();
-		DataManager dataManager = daoFactory.getDataManager();
-		IAccessManager accessManager = daoFactory.getAccessManager( );
-		accessManager.register( login, password );
+		IAccessManager accessManager = DaoFactory.getInstance().getAccessManager( );
+		
+		
+		
 		return null;
+	}
+	
+	private User createUser(HttpServletRequest request){
+		
+		User user = new User();
+		
+		user.setLogin( request.getParameter( RequestParameterName.LOGIN ) );
+		user.setPassword( request.getParameter( RequestParameterName.PASSWORD ) );
+		user.setName( request.getParameter( RequestParameterName.NAME ) );
+		user.setSurname( request.getParameter( RequestParameterName.SURNAME ) );
+		user.setStatus( 1 );
+		
+		return user;
 	}
 
 }

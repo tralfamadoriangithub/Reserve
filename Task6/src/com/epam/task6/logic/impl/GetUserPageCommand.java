@@ -51,6 +51,7 @@ public class GetUserPageCommand implements ICommand{
 				page = JspPageName.ERROR_PAGE;
 				break;
 			}
+			request.setAttribute( "isIogin", true );
 			request.setAttribute( "user", user );
 		}else{
 			page = JspPageName.ERROR_PAGE;
