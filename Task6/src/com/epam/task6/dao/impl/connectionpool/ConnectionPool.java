@@ -13,7 +13,6 @@ public class ConnectionPool {
 	private int defaultPoolSize;
 	private ArrayBlockingQueue<Connection> freeConnections;
 	private ArrayBlockingQueue<Connection> buisyCoonnections;
-	private ArrayBlockingQueue<Connection> testQueue;
 	private final String DRIVER = "com.mysql.jdbc.Driver";
 	private final String CONNECTION = "jdbc:mysql://localhost/zkh";
 	private final String USER = "root";
@@ -27,7 +26,6 @@ public class ConnectionPool {
 		}
 		freeConnections = new ArrayBlockingQueue<>( poolSize );
 		buisyCoonnections = new ArrayBlockingQueue<>( poolSize );
-		testQueue = new ArrayBlockingQueue<>( poolSize );
 		initializeConnectionPool();
 
 	}
@@ -93,7 +91,7 @@ public class ConnectionPool {
 			buisyCoonnections.remove( conn );
 			freeConnections.add( conn );
 		} else {
-
+			
 		}
 	}
 

@@ -3,16 +3,12 @@ package com.epam.task6.dao;
 import java.util.ResourceBundle;
 
 import com.epam.task6.dao.impl.JsonAccessManager;
-import com.epam.task6.dao.impl.JsonDaoManager;
 import com.epam.task6.dao.impl.JsonDataManager;
 import com.epam.task6.dao.impl.MySQLAccessManager;
-import com.epam.task6.dao.impl.MySQLDaoManager;
 import com.epam.task6.dao.impl.MySQLDataManager;
 import com.epam.task6.dao.impl.OracleAccessManager;
-import com.epam.task6.dao.impl.OracleDaoManager;
 import com.epam.task6.dao.impl.OracleDataManager;
 import com.epam.task6.dao.impl.XmlAccessManager;
-import com.epam.task6.dao.impl.XmlDaoManager;
 import com.epam.task6.dao.impl.XmlDataManager;
 
 public class DaoFactory implements IDao {
