@@ -24,9 +24,9 @@ public class DaoFactory implements IDao {
 	}
 
 	@Override
-	public DataManager getDataManager( DataType dataType ) {
+	public IDataManager getDataManager( DataType dataType ) {
 
-		DataManager dataManager;
+		IDataManager dataManager;
 
 		switch ( dataType ) {
 		case JSON:
@@ -49,15 +49,12 @@ public class DaoFactory implements IDao {
 			dataManager = null;
 			break;
 		}
-		if ( dataManager != null ) {
-			dataManager.setDataType( dataType );
-		}
 		return dataManager;
 	}
 
 	@Override
-	public DataManager getDataManager() {
-		DataManager dataManager;
+	public IDataManager getDataManager() {
+		IDataManager dataManager;
 		ResourceBundle bundle = ResourceBundle.getBundle( "project_properties" );
 		DataType dataType = DataType.valueOf( bundle.getString( "data_type" )
 				.toUpperCase() );

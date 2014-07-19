@@ -41,12 +41,14 @@ public class FrontController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ICommand command = CommandHelper.getInstance().getCommand( request.getParameter( "command" ) );
+		System.out.println(command);
 		String page = null;
 		if( null != command){
 			page = command.execute( request );
 		}else{
 			page = JspPageName.ERROR_PAGE;
 		}
+		System.out.println(page);
 		RequestDispatcher dispatcher = request.getRequestDispatcher( page );
 		dispatcher.forward( request, response );
 		

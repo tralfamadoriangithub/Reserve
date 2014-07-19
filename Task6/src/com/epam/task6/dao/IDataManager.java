@@ -1,24 +1,67 @@
 package com.epam.task6.dao;
 
 import java.util.HashMap;
+import java.util.List;
+
+import com.epam.task6.entity.Address;
+import com.epam.task6.entity.Assignation;
+import com.epam.task6.entity.Claim;
+import com.epam.task6.entity.ClaimStatus;
+import com.epam.task6.entity.Profession;
+import com.epam.task6.entity.User;
+import com.epam.task6.entity.Worker;
 
 public interface IDataManager {
 
 	public HashMap<String, String> query( String query );
-	public void addAddress( String street, int house, int block, int flat, int userId );
-	public void deleteAddress( int addressId );
-	public void getAddress( int userId );
-	public void addClaim( int addressId, int userId, String problemDescription );
-	public void getClaim();
-	public void addUser();
-	public void deleteUser();
-	public void getUser();
-	public void setClaimStatus();
-	public void deleteClaim();
-	public void createSquad();
-	public void deleteSquad();
-	public void createAssignment();
-	public void addWorker();
-	public void deleteWorker();
+
+	public int addAddress( Address address );
+
+	public boolean updateAddress( Address address );
+
+	public boolean deleteAddress( int addressId );
+
+	public List<Address> getAddress( int... userId );
+
+	public int addClaim( Claim claim );
+
+	public boolean updateClaim( Claim claim );
+
+	public boolean deleteClaim( int claimId );
+
+	public List<Claim> getClaim( int... claimId );
+
+	public int addUser( User user );
+
+	public boolean updateUser( User user );
+
+	public boolean deleteUser( int userId );
+
+	public List<User> getUser( int... userId );
+
+	public int addWorker( Worker worker );
+
+	public boolean updateWorker( Worker worker );
+
+	public boolean deleteWorker( int workerId );
+
+	public List<Worker> getWorker( int... workerId );
+
+	public int addAssignation( Assignation assignation );
+
+	public boolean updateAssignation( Assignation assignation );
+
+	public boolean deleteAssignation( int assignationId );
+
+	public List<Assignation> getAssignation( int... assignationId );
 	
+	public int addProfession( Profession profession );
+	public boolean updateProfession( Profession profession );
+	public boolean deleteProfession( int professionId );
+	public List<Profession> getProfession( int ... professionId );
+	public int addClaimStatus( ClaimStatus claimStatus);
+	public boolean updateClaimStatus( ClaimStatus claimStatus );
+	public boolean deleteClaimStatus( ClaimStatus claimStatus );
+	public List<ClaimStatus> getClaimStatus( int ... claimId );
+
 }

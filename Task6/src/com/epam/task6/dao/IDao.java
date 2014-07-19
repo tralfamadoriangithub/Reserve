@@ -1,8 +1,8 @@
 package com.epam.task6.dao;
 
 public interface IDao {
-	public DataManager getDataManager( DataType dataType );
-	public DataManager getDataManager();
+	public IDataManager getDataManager( DataType dataType );
+	public IDataManager getDataManager();
 	public IAccessManager getAccessManager(DataType dataType );
 	public IAccessManager getAccessManager();
 }

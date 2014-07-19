@@ -14,6 +14,6 @@
 <body>
 	<c:import url="header.jsp"/>
 	<h1>user</h1>
-
+	
 </body>
 </html>

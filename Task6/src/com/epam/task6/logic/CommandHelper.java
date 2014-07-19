@@ -6,6 +6,7 @@ import java.util.Map;
 import com.epam.task6.logic.impl.NoSuchCommand;
 import com.epam.task6.logic.impl.RegisterCommand;
 import com.epam.task6.logic.impl.GetUserPageCommand;
+import com.epam.task6.logic.impl.RegisterNewUser;
 import com.epam.task6.logic.impl.SignInCommand;
 
 public class CommandHelper {
@@ -20,6 +21,7 @@ public class CommandHelper {
 	private CommandHelper(){
 		commands = new HashMap<CommandName, ICommand>();
 		commands.put( CommandName.REGISTER_COMMAND, new RegisterCommand() );
+		commands.put( CommandName.REGISTER_NEW_USER_COMMAND, new RegisterNewUser() );
 		commands.put( CommandName.GET_USER_PAGE_COMMAND, new GetUserPageCommand() );
 		commands.put( CommandName.SIGN_IN_COMMAND, new SignInCommand() );
 		commands.put( CommandName.NO_SUCH_COMMAND, new NoSuchCommand() );

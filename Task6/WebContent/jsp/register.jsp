@@ -19,6 +19,8 @@
 			<input type="text" placeholder="User Surname" name="surname" required/>
 			<p>Phone Number:<br>
 			<input type="text" placeholder="Phone Number" name="phone" required/>
+			<p>Login:<br>
+			<input type="text" placeholder="Login" name="login" required/>
 			<p>Password:<br>
 			<input type="password" placeholder="Password" name="password" required/>
 			<p>Confirm password:<br>
