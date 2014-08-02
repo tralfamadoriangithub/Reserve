@@ -13,11 +13,16 @@ public class ConnectionPool {
 	private int defaultPoolSize;
 	private ArrayBlockingQueue<Connection> freeConnections;
 	private ArrayBlockingQueue<Connection> buisyCoonnections;
+	
+	//TODO 
+	
 	private final String DRIVER = "com.mysql.jdbc.Driver";
 	private final String CONNECTION = "jdbc:mysql://localhost/zkh";
 	private final String USER = "root";
 	private final String PASSWORD = "928851";
 
+	//
+	
 	private ConnectionPool() {
 
 		int poolSize = getPoolSize();

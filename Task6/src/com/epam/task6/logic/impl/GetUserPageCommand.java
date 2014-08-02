@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
@@ -20,7 +21,7 @@ import com.epam.task6.logic.ICommand;
 public class GetUserPageCommand implements ICommand{
 
 	@Override
-	public String execute( HttpServletRequest request ) {
+	public String execute( HttpServletRequest request, HttpServletResponse response ) {
 		String page = null;
 		String login = request.getParameter( RequestParameterName.LOGIN );
 		String password = request.getParameter( RequestParameterName.PASSWORD );

@@ -3,6 +3,7 @@ package com.epam.task6.logic.impl;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
@@ -16,7 +17,7 @@ import com.epam.task6.logic.ICommand;
 public class RegisterNewUser implements ICommand {
 
 	@Override
-	public String execute( HttpServletRequest request ) {
+	public String execute( HttpServletRequest request, HttpServletResponse response ) {
 
 		User newUser = createUser( request );
 		IDataManager dataManager = DaoFactory.getInstance().getDataManager();
