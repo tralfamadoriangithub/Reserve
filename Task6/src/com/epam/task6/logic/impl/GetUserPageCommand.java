@@ -27,50 +27,54 @@ public class GetUserPageCommand implements ICommand{
 		String password = request.getParameter( RequestParameterName.PASSWORD );
 		DaoFactory daoFactory = DaoFactory.getInstance();
 		IAccessManager accessManager = daoFactory.getAccessManager( );
+		
 		User user = accessManager.signIn( login, password );
 		
 		if(user != null){
-			
+			IDataManager dataManager = daoFactory.getDataManager();
+			int userId = user.getUserId();
 			switch ( user.getStatus() ) {
 			
 			case 1:
-				loadUserData( request );
+				loadUserData(userId, request, dataManager );
 				page = JspPageName.USER_PAGE;
 				break;
 				
 			case 2:
-				loadOperatorData( request );
+				loadOperatorData( request, dataManager );
 				page = JspPageName.OPERATOR_PAGE;
 				break;
 				
 			case 3:
-				loadAdminData( request );
+				loadAdminData( request, dataManager );
 				page = JspPageName.ADMIN_PAGE;
 				break;
 
 			default:
-				page = JspPageName.ERROR_PAGE;
+				page = JspPageName.LOGIN_PAGE;
 				break;
 			}
 			request.setAttribute( "isIogin", true );
 			request.setAttribute( "user", user );
 		}else{
-			page = JspPageName.ERROR_PAGE;
+			page = JspPageName.LOGIN_PAGE;
 		}
 		
 		return page;
 	}
 
-	private void loadUserData( HttpServletRequest request ){
-		List<Address> addresses = new ArrayList<>();
-		List<Claim> claims = new ArrayList<>();
+	private void loadUserData(int userId, HttpServletRequest request, IDataManager dataManager ){
+		List<Address> addresses = dataManager.getUsersAddress( userId );
+		List<Claim> claims = dataManager.getUsersClaim( userId );
+		request.setAttribute( "addresses", addresses );
+		request.setAttribute( "claims", claims );
 	}
 	
-	private void loadOperatorData( HttpServletRequest request ){
+	private void loadOperatorData( HttpServletRequest request, IDataManager dataManager ){
 		
 	}
 	
-	private void loadAdminData(  HttpServletRequest request ){
+	private void loadAdminData(  HttpServletRequest request, IDataManager dataManager ){
 		
 	}
 }

@@ -1,13 +1,15 @@
 package com.epam.task6.entity;
 
 public class Claim {
-	
+
 	private int claimId;
 	private String problemDescription;
 	private int addressId;
 	private int userId;
-	
-	public Claim(){}
+	private int claimStatusId;
+
+	public Claim() {
+	}
 
 	public int getClaimId() {
 		return claimId;
@@ -41,16 +43,25 @@ public class Claim {
 		this.userId = userId;
 	}
 
+	public int getClaimStatusId() {
+		return claimStatusId;
+	}
+
+	public void setClaimStatusId( int claimStatusId ) {
+		this.claimStatusId = claimStatusId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + addressId;
 		result = prime * result + claimId;
+		result = prime * result + claimStatusId;
 		result = prime
 				* result
-				+ ( ( problemDescription == null ) ? 0 : problemDescription
-						.hashCode() );
+				+ ((problemDescription == null) ? 0 : problemDescription
+						.hashCode());
 		result = prime * result + userId;
 		return result;
 	}
@@ -68,6 +79,8 @@ public class Claim {
 			return false;
 		if ( claimId != other.claimId )
 			return false;
+		if ( claimStatusId != other.claimStatusId )
+			return false;
 		if ( problemDescription == null ) {
 			if ( other.problemDescription != null )
 				return false;
@@ -82,7 +95,8 @@ public class Claim {
 	public String toString() {
 		return getClass().getSimpleName() + " [claimId=" + claimId
 				+ ", problemDescription=" + problemDescription + ", addressId="
-				+ addressId + ", userId=" + userId + "]";
+				+ addressId + ", userId=" + userId + ", claimStatus="
+				+ claimStatusId + "]";
 	}
 
 }

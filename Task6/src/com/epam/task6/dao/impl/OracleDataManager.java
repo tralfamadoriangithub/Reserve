@@ -202,4 +202,16 @@ public class OracleDataManager implements IDataManager {
 		return null;
 	}
 
+	@Override
+	public List<Address> getUsersAddress( int... userId ) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Claim> getUsersClaim( int... userId ) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

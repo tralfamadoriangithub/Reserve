@@ -1,5 +1,6 @@
 package com.epam.task6.dao.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,30 +20,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MySQLDataManager implements IDataManager{
+public class MySQLDataManager implements IDataManager {
 
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
+	private Connection connection;
 	private static MySQLDataManager instance;
-	
+
 	private MySQLDataManager() {
-		// TODO Auto-generated constructor stub
 	}
-	
-	public static MySQLDataManager getInstance(){
-		if( null == instance ){
+
+	public static MySQLDataManager getInstance() {
+		if ( null == instance ) {
 			instance = new MySQLDataManager();
 		}
 		return instance;
 	}
-	
 
-	
-	private Connection getConnection(){
+	private Connection getConnection() {
 		return connectionPool.getConnection();
 	}
 
-	private void releaseConnection( Connection connection ) {
+	private void releaseConnection( Connection connection ) throws SQLException {
 		connectionPool.releaseConnection( connection );
+		connection.close();
 	}
 
 	@Override
@@ -76,6 +76,33 @@ public class MySQLDataManager implements IDataManager{
 	}
 
 	@Override
+	public List<Address> getUsersAddress( int... userId ) {
+		connection = getConnection();
+		List<Address> addresses = new ArrayList<Address>();
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement( "SELECT * FROM address WHERE user_id = ?" );
+			preparedStatement.setInt( 1, userId[0] );
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()){
+				Address address = new Address();
+				address.setAddressId( rs.getInt( "address_id" ) );
+				address.setStreet( rs.getString( "street" ) );
+				address.setHouseNumber( rs.getInt( "house" ) );
+				address.setBlockNumber( rs.getInt( "block" ) );
+				address.setFlatNumber( rs.getInt( "flat" ) );
+				address.setUserId( rs.getInt( "user_id" ) );
+				addresses.add( address );
+			}
+			preparedStatement.close();
+			releaseConnection( connection );
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		return addresses;
+	}
+
+	@Override
 	public int addClaim( Claim claim ) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -100,30 +127,56 @@ public class MySQLDataManager implements IDataManager{
 	}
 
 	@Override
+	public List<Claim> getUsersClaim( int... userId ) {
+		connection = getConnection();
+		List<Claim> claims = new ArrayList<Claim>();
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement( "SELECT * FROM claim WHERE user_id = ?" );
+			preparedStatement.setInt( 1, userId[0] );
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()){
+				Claim claim = new Claim();
+				claim.setClaimId( rs.getInt( "claim_id" ) );
+				claim.setProblemDescription( rs.getString( "problem" ) );
+				claim.setAddressId( rs.getInt( "address_id" ) );
+				claim.setUserId( rs.getInt( "user_id" ) );
+				claim.setClaimStatusId( rs.getInt( "status_id" ) );
+				claims.add( claim );
+			}
+			preparedStatement.close();
+			releaseConnection( connection );
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		return claims;
+	}
+
+	@Override
 	public int addUser( User user ) {
-		Connection connection = getConnection();
+		connection = getConnection();
 		PreparedStatement preparedStatement;
 		int newUserId = -1;
-		try
-		{
+		try {
 			preparedStatement = connection
 					.prepareStatement(
 							"INSERT INTO user (login, password, name, surname, status) VALUES (?,?,?,?,?)",
-							Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setString(1, user.getLogin());
-			preparedStatement.setString(2, user.getPassword());
-			preparedStatement.setString(3, user.getName());
-			preparedStatement.setString(4, user.getSurname());
-			preparedStatement.setInt(5, user.getStatus());
+							Statement.RETURN_GENERATED_KEYS );
+			preparedStatement.setString( 1, user.getLogin() );
+			preparedStatement.setString( 2, user.getPassword() );
+			preparedStatement.setString( 3, user.getName() );
+			preparedStatement.setString( 4, user.getSurname() );
+			preparedStatement.setInt( 5, user.getStatus() );
 			preparedStatement.executeUpdate();
 			ResultSet resultSet = preparedStatement.getGeneratedKeys();
-			if (resultSet.next())
-			{
-				newUserId = resultSet.getInt(1);
+			if ( resultSet.next() ) {
+				user.setUserId( resultSet.getInt( 1 ) );
+				//newUserId = resultSet.getInt( 1 );
 			}
-		} catch (SQLException e)
-		{
-			System.out.println("addNewUser PrparedStatement exception " + e);
+			preparedStatement.close();
+			releaseConnection( connection );
+		} catch ( SQLException e ) {
+			System.out.println( "addNewUser PrparedStatement exception " + e );
 		}
 		return newUserId;
 	}

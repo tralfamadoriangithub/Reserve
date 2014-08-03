@@ -21,7 +21,9 @@ public interface IDataManager {
 
 	public boolean deleteAddress( int addressId );
 
-	public List<Address> getAddress( int... userId );
+	public List<Address> getAddress( int... addressId );
+	
+	public List<Address> getUsersAddress( int ... userId );
 
 	public int addClaim( Claim claim );
 
@@ -30,6 +32,8 @@ public interface IDataManager {
 	public boolean deleteClaim( int claimId );
 
 	public List<Claim> getClaim( int... claimId );
+	
+	public List<Claim> getUsersClaim( int ... userId );
 
 	public int addUser( User user );
 

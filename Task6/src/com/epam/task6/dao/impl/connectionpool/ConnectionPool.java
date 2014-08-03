@@ -96,7 +96,7 @@ public class ConnectionPool {
 			buisyCoonnections.remove( conn );
 			freeConnections.add( conn );
 		} else {
-			
+			//TODO Throw exception
 		}
 	}
 

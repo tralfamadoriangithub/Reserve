@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/JSP/TagLibraryDescriptor"
+	xmlns:xsi="http://www.w3c.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/ web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<tlib-version>1.0</tlib-version>
+	<short-name>tables</short-name>
+	<uri>/WEB-INF/tld/tableTags.tld</uri>
+	<tag>
+		<name>addressestable</name>
+		<tag-class>com.epam.task6.tag.AddressesTableTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>addresses</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>claimstable</name>
+		<tag-class>com.epam.task6.tag.ClaimsTableTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>claims</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>
