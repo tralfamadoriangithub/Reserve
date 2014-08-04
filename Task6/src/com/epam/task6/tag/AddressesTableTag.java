@@ -27,6 +27,7 @@ public class AddressesTableTag extends TagSupport {
 		JspWriter out = pageContext.getOut();
 		try {
 			out.write( "<table border='1'>" );
+			out.write( "<th>Street</th><th>House</th><th>Block</th><th>Flat</th>" );
 			for ( Address address : addresses ) {
 				System.out.println( address );
 				printAddress( address, out );
@@ -42,19 +43,31 @@ public class AddressesTableTag extends TagSupport {
 
 	private void printAddress( Address address, JspWriter out )
 			throws IOException {
+		String addressId = String.valueOf( address.getAddressId() );
+		String street = address.getStreet();
+		String house = String.valueOf( address.getHouseNumber() );
+		String block = String.valueOf( address.getBlockNumber() );
+		String flat = String.valueOf( address.getFlatNumber() );
+		String userId = String.valueOf( address.getUserId() );
 		out.write( "<tr><td>" );
-		out.write( address.getStreet() );
+		out.write( street );
 		out.write( "</td><td>" );
-		out.write( String.valueOf( address.getHouseNumber() ) );
+		out.write( house );
 		out.write( "</td><td>" );
-		out.write( String.valueOf( address.getBlockNumber() ) );
+		out.write( block );
 		out.write( "</td><td>" );
-		out.write( String.valueOf( address.getFlatNumber() ) );
+		out.write( flat );
 		out.write( "</td><td>" );
 		out.write( "<form action='controller' method='post'>"
 				+ "<input type='hidden' name='command' value='create_claim_command'/>"
-				+ "<input type='hidden' name='address' value='" + address
-				+ "'/>" + "<input type='submit' value='Claim'/>" + "</form>" );
+//				+ "<input type='hidden' name='address' value='" + address + "'/>" 
+				+ "<input type='hidden' name='address_id' value='" + addressId + "'/>" 
+				+ "<input type='hidden' name='street' value='" + street + "'/>"
+				+ "<input type='hidden' name='house' value='" + house + "'/>"
+				+ "<input type='hidden' name='block' value='" + block + "'/>"
+				+ "<input type='hidden' name='flat' value='" + flat + "'/>"
+				+ "<input type='hidden' name='user_id' value='" + userId + "'/>"
+				+ "<input type='submit' value='Claim'/>" + "</form>" );
 		out.write( "</td></tr>" );
 	}
 

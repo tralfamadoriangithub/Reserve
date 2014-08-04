@@ -15,26 +15,40 @@
 
 <section id="headerSection" class="headerSectionStyle">
 	<section id="logo"></section>
-	<section id="loginButtons" class="loginButtonsStyle">
-		<form action="controller" method="post">
-			<fmt:message var="register" key="button.register" />
-			<input type="hidden" name="command" value="register_command" /> <input
-				type="submit" value="${ register }" />
-		</form>
-		<c:if test="${not session.login }">
-			<form action="controller" method="post">
-				<fmt:message var="signIn" key="button.sign_in" />
-				<input type="hidden" name="command" value="sign_in_command" /> <input
-					type="submit" value="${ signIn }" />
-			</form>
-		</c:if>
+	<section id="headerButtons" class="headerButtonsStyle">
+	
+		<section id="registerButton">
+			<a href="register.jsp"><fmt:message key="button.register"/></a>
+		</section>
+		
+		<c:choose>
+			<c:when test="${ not sessionScope.login }">
+				<section id="signInButton">
+					<a href="login.jsp"><fmt:message key="button.sign_in"/></a>
+				</section>
+			</c:when>
+			
+			<c:otherwise>
+				<section id="signOutButton">
+					<a href="logout.jsp"><fmt:message key="button.sign_out"/></a>
+				</section>
+			</c:otherwise>
+		</c:choose>
+
+	<%-- 	
 		<c:if test="${ session.login }">
+
+			<section id="signOutButton">
+				<a href="Register.jsp">Sign Out</a>
+			</section>
+
 			<form action="controller" method="post">
 				<fmt:message var="signOut" key="button.sign_out" />
 				<input type="hidden" name="command" value="sign_in_command" /> <input
 					type="submit" value="${ signOut }" />
 			</form>
-		</c:if>
+
+		</c:if> --%>
 	</section>
 	<section id="languageSelect" class="languageSelectStyle">
 		<c:choose>

@@ -7,5 +7,6 @@ public class JspPageName {
 	public static final String USER_PAGE = "user.jsp";
 	public static final String OPERATOR_PAGE = "operator.jsp";
 	public static final String ADMIN_PAGE = "admin.jsp";
+	public static final String CLAIM_PAGE = "claim.jsp";
 	public static final String ERROR_PAGE = "error.jsp";
 }

@@ -23,7 +23,6 @@ public class FrontController extends HttpServlet {
 	 */
 	public FrontController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -50,14 +49,12 @@ public class FrontController extends HttpServlet {
 		System.out.println(session.getAttribute( "currentPage" ));
 		ICommand command = CommandHelper.getInstance().getCommand(
 				request.getParameter( "command" ) );
-		//System.out.println( command );
 		String page = null;
 		if ( null != command ) {
 			page = command.execute( request, response );
 		} else {
 			page = JspPageName.ERROR_PAGE;
 		}
-		//System.out.println( page );
 		System.out.println(session.getAttribute( "currentPage" ));
 		RequestDispatcher dispatcher = request.getRequestDispatcher( page );
 		dispatcher.forward( request, response );

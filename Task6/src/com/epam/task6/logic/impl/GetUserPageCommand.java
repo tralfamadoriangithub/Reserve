@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
@@ -54,8 +55,8 @@ public class GetUserPageCommand implements ICommand{
 				page = JspPageName.LOGIN_PAGE;
 				break;
 			}
-			request.setAttribute( "isIogin", true );
-			request.setAttribute( "user", user );
+			
+			request.getSession().setAttribute( "user", user );
 		}else{
 			page = JspPageName.LOGIN_PAGE;
 		}
@@ -66,8 +67,10 @@ public class GetUserPageCommand implements ICommand{
 	private void loadUserData(int userId, HttpServletRequest request, IDataManager dataManager ){
 		List<Address> addresses = dataManager.getUsersAddress( userId );
 		List<Claim> claims = dataManager.getUsersClaim( userId );
-		request.setAttribute( "addresses", addresses );
-		request.setAttribute( "claims", claims );
+		HttpSession session = request.getSession();
+		session.setAttribute( "addresses", addresses );
+		session.setAttribute( "claims", claims );
+		session.setAttribute( "login", true );
 	}
 	
 	private void loadOperatorData( HttpServletRequest request, IDataManager dataManager ){
