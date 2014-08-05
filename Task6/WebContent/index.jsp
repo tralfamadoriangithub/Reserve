@@ -5,5 +5,5 @@
 
 
 <myTag:basepage>
-
+	<h2>Place here something wonderful</h2>
 </myTag:basepage>

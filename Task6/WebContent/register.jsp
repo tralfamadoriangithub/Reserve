@@ -6,7 +6,7 @@
 <c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="string"/>
-<fmt:message var="register" key="button.registration"/>
+<fmt:message var="register" key="label.registration"/>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${ register }</title>

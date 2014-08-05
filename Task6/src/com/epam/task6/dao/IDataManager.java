@@ -23,7 +23,9 @@ public interface IDataManager {
 
 	public List<Address> getAddress( int... addressId );
 	
-	public List<Address> getUsersAddress( int ... userId );
+	public List<Address> getAllAddresses();
+
+	public List<Address> getUsersAddress( int... userId );
 
 	public int addClaim( Claim claim );
 
@@ -33,7 +35,9 @@ public interface IDataManager {
 
 	public List<Claim> getClaim( int... claimId );
 	
-	public List<Claim> getUsersClaim( int ... userId );
+	public List<Claim> getAllClaims( );
+
+	public List<Claim> getUsersClaim( int... userId );
 
 	public int addUser( User user );
 
@@ -42,6 +46,8 @@ public interface IDataManager {
 	public boolean deleteUser( int userId );
 
 	public List<User> getUser( int... userId );
+	
+	public List<User> getAllUsers();
 
 	public int addWorker( Worker worker );
 
@@ -50,6 +56,8 @@ public interface IDataManager {
 	public boolean deleteWorker( int workerId );
 
 	public List<Worker> getWorker( int... workerId );
+	
+	public List<Worker> getAllWorkers();
 
 	public int addAssignation( Assignation assignation );
 
@@ -59,13 +67,26 @@ public interface IDataManager {
 
 	public List<Assignation> getAssignation( int... assignationId );
 	
+	public List<Assignation> getAllAssignations();
+
 	public int addProfession( Profession profession );
+
 	public boolean updateProfession( Profession profession );
+
 	public boolean deleteProfession( int professionId );
-	public List<Profession> getProfession( int ... professionId );
-	public int addClaimStatus( ClaimStatus claimStatus);
+
+	public List<Profession> getProfession( int... professionId );
+	
+	public List<Profession> getAllProfessions();
+
+	public int addClaimStatus( ClaimStatus claimStatus );
+
 	public boolean updateClaimStatus( ClaimStatus claimStatus );
+
 	public boolean deleteClaimStatus( ClaimStatus claimStatus );
-	public List<ClaimStatus> getClaimStatus( int ... claimId );
+
+	public List<ClaimStatus> getClaimStatus( int... claimId );
+	
+	public List<ClaimStatus> getAllClaimStatuses();
 
 }

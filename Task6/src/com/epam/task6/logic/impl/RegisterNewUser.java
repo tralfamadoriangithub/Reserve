@@ -1,15 +1,11 @@
 package com.epam.task6.logic.impl;
 
-import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
 import com.epam.task6.dao.DaoFactory;
-import com.epam.task6.dao.DataManager;
-import com.epam.task6.dao.IAccessManager;
 import com.epam.task6.dao.IDataManager;
 import com.epam.task6.entity.User;
 import com.epam.task6.logic.ICommand;
@@ -21,7 +17,7 @@ public class RegisterNewUser implements ICommand {
 
 		User newUser = createUser( request );
 		IDataManager dataManager = DaoFactory.getInstance().getDataManager();
-		newUser.setUserId( dataManager.addUser( newUser ) );
+		dataManager.addUser( newUser );
 		if ( newUser.getUserId() == -1 ) {
 			return JspPageName.ERROR_PAGE;
 		} else {

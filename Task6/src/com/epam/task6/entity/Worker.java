@@ -6,6 +6,7 @@ public class Worker {
 	private String surname;
 	private int professionId;
 	private int qualification;
+	private int assignationId;
 	
 	public Worker(){}
 
@@ -48,11 +49,20 @@ public class Worker {
 	public void setQualification( int qualification ) {
 		this.qualification = qualification;
 	}
+	
+	public int getAssignationId() {
+		return assignationId;
+	}
+
+	public void setAssignationId( int assignationId ) {
+		this.assignationId = assignationId;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + assignationId;
 		result = prime * result + ( ( name == null ) ? 0 : name.hashCode() );
 		result = prime * result + professionId;
 		result = prime * result + qualification;
@@ -71,6 +81,8 @@ public class Worker {
 		if ( getClass() != obj.getClass() )
 			return false;
 		Worker other = (Worker) obj;
+		if ( assignationId != other.assignationId )
+			return false;
 		if ( name == null ) {
 			if ( other.name != null )
 				return false;
@@ -92,9 +104,12 @@ public class Worker {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [workerId=" + workerId
-				+ ", name=" + name + ", surname=" + surname + ", professionId="
-				+ professionId + ", qualification=" + qualification + "]";
+		return getClass().getSimpleName() + " [workerId=" + workerId + ", name=" + name + ", surname="
+				+ surname + ", professionId=" + professionId
+				+ ", qualification=" + qualification + ", assignationId="
+				+ assignationId + "]";
 	}
+
+	
 
 }

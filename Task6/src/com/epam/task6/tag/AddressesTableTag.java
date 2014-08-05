@@ -14,14 +14,6 @@ public class AddressesTableTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
 	private List<Address> addresses;
 
-	public void setAddresses( List<Address> addresses ) {
-		this.addresses = addresses;
-	}
-
-	public List<Address> getAddresses() {
-		return addresses;
-	}
-
 	@Override
 	public int doStartTag() throws JspException {
 		JspWriter out = pageContext.getOut();
@@ -29,8 +21,7 @@ public class AddressesTableTag extends TagSupport {
 			out.write( "<table border='1'>" );
 			out.write( "<th>Street</th><th>House</th><th>Block</th><th>Flat</th>" );
 			for ( Address address : addresses ) {
-				System.out.println( address );
-				printAddress( address, out );
+				printAddressRow( address, out );
 			}
 			out.write( "</table>" );
 		} catch ( IOException e ) {
@@ -41,7 +32,7 @@ public class AddressesTableTag extends TagSupport {
 		return SKIP_BODY;
 	}
 
-	private void printAddress( Address address, JspWriter out )
+	private void printAddressRow( Address address, JspWriter out )
 			throws IOException {
 		String addressId = String.valueOf( address.getAddressId() );
 		String street = address.getStreet();
@@ -70,5 +61,20 @@ public class AddressesTableTag extends TagSupport {
 				+ "<input type='submit' value='Claim'/>" + "</form>" );
 		out.write( "</td></tr>" );
 	}
+	
+	public void setAddresses( List<Address> addresses ) {
+		this.addresses = addresses;
+	}
+	
+	public void setAddresses( Address address ){
+		addresses.add( address );
+	}
 
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public Address getAddresses( int index ){
+		return addresses.get( index );
+	}
 }

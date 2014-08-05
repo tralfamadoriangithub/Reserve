@@ -34,21 +34,6 @@
 				</section>
 			</c:otherwise>
 		</c:choose>
-
-	<%-- 	
-		<c:if test="${ session.login }">
-
-			<section id="signOutButton">
-				<a href="Register.jsp">Sign Out</a>
-			</section>
-
-			<form action="controller" method="post">
-				<fmt:message var="signOut" key="button.sign_out" />
-				<input type="hidden" name="command" value="sign_in_command" /> <input
-					type="submit" value="${ signOut }" />
-			</form>
-
-		</c:if> --%>
 	</section>
 	<section id="languageSelect" class="languageSelectStyle">
 		<c:choose>

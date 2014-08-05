@@ -1,6 +1,7 @@
 package com.epam.task6.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -104,8 +105,29 @@ public class MySQLDataManager implements IDataManager {
 
 	@Override
 	public int addClaim( Claim claim ) {
-		// TODO Auto-generated method stub
-		return 0;
+		connection = getConnection();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection
+					.prepareStatement(
+							"INSERT INTO claim (problem, address_id, user_id, status_id) VALUES (?,?,?,?)",
+							Statement.RETURN_GENERATED_KEYS );
+			preparedStatement.setString( 1, claim.getProblemDescription() );
+			preparedStatement.setInt( 2, claim.getAddressId() );
+			preparedStatement.setInt( 3, claim.getUserId() );
+			preparedStatement.setInt( 4, 0 );
+			preparedStatement.executeUpdate();
+			ResultSet resultSet = preparedStatement.getGeneratedKeys();
+			if ( resultSet.next() ) {
+				claim.setClaimId( resultSet.getInt( 1 ) );
+				//newUserId = resultSet.getInt( 1 );
+			}
+			preparedStatement.close();
+			releaseConnection( connection );
+		} catch ( SQLException e ) {
+			System.out.println( "addNewUser PrparedStatement exception " + e );
+		}
+		return claim.getClaimId();
 	}
 
 	@Override
@@ -141,7 +163,7 @@ public class MySQLDataManager implements IDataManager {
 				claim.setProblemDescription( rs.getString( "problem" ) );
 				claim.setAddressId( rs.getInt( "address_id" ) );
 				claim.setUserId( rs.getInt( "user_id" ) );
-				claim.setClaimStatusId( rs.getInt( "status_id" ) );
+				claim.setClaimStatusId( rs.getInt( "claim_status_id" ) );
 				claims.add( claim );
 			}
 			preparedStatement.close();
@@ -156,7 +178,6 @@ public class MySQLDataManager implements IDataManager {
 	public int addUser( User user ) {
 		connection = getConnection();
 		PreparedStatement preparedStatement;
-		int newUserId = -1;
 		try {
 			preparedStatement = connection
 					.prepareStatement(
@@ -171,14 +192,13 @@ public class MySQLDataManager implements IDataManager {
 			ResultSet resultSet = preparedStatement.getGeneratedKeys();
 			if ( resultSet.next() ) {
 				user.setUserId( resultSet.getInt( 1 ) );
-				//newUserId = resultSet.getInt( 1 );
 			}
 			preparedStatement.close();
 			releaseConnection( connection );
 		} catch ( SQLException e ) {
 			System.out.println( "addNewUser PrparedStatement exception " + e );
 		}
-		return newUserId;
+		return 0;
 	}
 
 	@Override
@@ -293,5 +313,131 @@ public class MySQLDataManager implements IDataManager {
 	public List<ClaimStatus> getClaimStatus( int... claimId ) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Address> getAllAddresses() {
+		
+		connection = getConnection();
+		List<Address> addresses = new ArrayList<>();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM address");
+			Address address;
+			while(rs.next()){
+				address = new Address();
+				address.setAddressId( rs.getInt( "address_id" ) );
+				address.setStreet( rs.getString( "street" ) );
+				address.setHouseNumber( rs.getInt( "house" ) );
+				address.setBlockNumber( rs.getInt( "block" ) );
+				address.setFlatNumber( rs.getInt( "flat" ) );
+				address.setUserId( rs.getInt( "user_id" ) );
+				addresses.add( address );
+			}
+			statement.close();
+			releaseConnection( connection );
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		return addresses;
+	}
+
+	@Override
+	public List<Claim> getAllClaims() {
+		
+		connection = getConnection();
+		List<Claim> claims = new ArrayList<>();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM claim");
+			Claim claim;
+			while(rs.next()){
+				claim = new Claim();
+				claim.setClaimId( rs.getInt( "claim_id" ) );
+				claim.setProblemDescription( rs.getString( "problem" ) );
+				claim.setAddressId( rs.getInt( "address_id" ) );
+				claim.setUserId( rs.getInt( "user_id" ) );
+				claim.setClaimStatusId( rs.getInt( "claim_status_id" ) );
+				claims.add( claim );
+			}
+			statement.close();
+			releaseConnection( connection );
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		return claims;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		List<User> users = new ArrayList<>();
+		
+		return users;
+	}
+
+	@Override
+	public List<Worker> getAllWorkers() {
+		
+		connection = getConnection();
+		List<Worker> workers = new ArrayList<>();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM worker");
+			Worker worker;
+			while(rs.next()){
+				worker = new Worker();
+				worker.setWorkerId( rs.getInt( "worker_id" ) );
+				worker.setName( rs.getString( "name" ) );
+				worker.setSurname( rs.getString( "surname" ) );
+				worker.setProfessionId( rs.getInt( "profession_id" ) );
+				worker.setQualification( rs.getInt( "qualification" ) );
+				worker.setAssignationId( rs.getInt( "assignation_id" ) );
+				workers.add( worker );
+			}
+			statement.close();
+			releaseConnection( connection );
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		return workers;
+	}
+
+	@Override
+	public List<Assignation> getAllAssignations() {
+		
+		connection = getConnection();
+		List<Assignation> assignations = new ArrayList<>();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM assignation");
+			Assignation assignation;
+			while(rs.next()){
+				assignation = new Assignation();
+				assignation.setAssignationId( rs.getInt( "assignation_id" ) );
+				assignation.setClaimId( rs.getInt( "claim_id" ) );
+				assignation.setBeginWork( rs.getDate( "begin_work" ) );
+				assignation.setEndWork( rs.getDate( "end_work" ) );
+				assignations.add( assignation );
+			}
+			statement.close();
+			releaseConnection( connection );
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+		return assignations;
+	}
+
+	@Override
+	public List<Profession> getAllProfessions() {
+		List<Profession> professions = new ArrayList<>();
+		
+		return professions;
+	}
+
+	@Override
+	public List<ClaimStatus> getAllClaimStatuses() {
+		List<ClaimStatus> claimStatuses = new ArrayList<>();
+		
+		return claimStatuses;
 	}
 }

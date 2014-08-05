@@ -11,15 +11,8 @@ import com.epam.task6.entity.Claim;
 
 public class ClaimsTableTag extends TagSupport{
 
+	private static final long serialVersionUID = 1L;
 	private List<Claim> claims;
-	
-	public void setClaims(List<Claim> claims){
-		this.claims = claims;
-	}
-	
-	public List<Claim> getClaims(){
-		return claims;
-	}
 	
 	@Override
 	public int doStartTag() throws JspException {
@@ -48,6 +41,22 @@ public class ClaimsTableTag extends TagSupport{
 				+ "<input type='hidden' name='address' value='" + claim
 				+ "'/>" + "<input type='submit' value='Edit'/>" + "</form>" );
 		out.write( "</td></tr>" );
+	}
+	
+	public void setClaims(List<Claim> claims){
+		this.claims = claims;
+	}
+	
+	public void setClaims( Claim claim ){
+		claims.add( claim );
+	}
+	
+	public List<Claim> getClaims(){
+		return claims;
+	}
+	
+	public Claim getClaims(int index){
+		return claims.get( index );
 	}
 	
 }

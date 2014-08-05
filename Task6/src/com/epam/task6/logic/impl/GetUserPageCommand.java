@@ -15,8 +15,10 @@ import com.epam.task6.dao.DataType;
 import com.epam.task6.dao.IAccessManager;
 import com.epam.task6.dao.IDataManager;
 import com.epam.task6.entity.Address;
+import com.epam.task6.entity.Assignation;
 import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.User;
+import com.epam.task6.entity.Worker;
 import com.epam.task6.logic.ICommand;
 
 public class GetUserPageCommand implements ICommand{
@@ -55,7 +57,7 @@ public class GetUserPageCommand implements ICommand{
 				page = JspPageName.LOGIN_PAGE;
 				break;
 			}
-			
+			request.getSession().setAttribute( "login", true );
 			request.getSession().setAttribute( "user", user );
 		}else{
 			page = JspPageName.LOGIN_PAGE;
@@ -70,11 +72,14 @@ public class GetUserPageCommand implements ICommand{
 		HttpSession session = request.getSession();
 		session.setAttribute( "addresses", addresses );
 		session.setAttribute( "claims", claims );
-		session.setAttribute( "login", true );
 	}
 	
 	private void loadOperatorData( HttpServletRequest request, IDataManager dataManager ){
-		
+		List<Worker> workers = dataManager.getAllWorkers();
+		List<Assignation> assignations = dataManager.getAllAssignations();
+		HttpSession session = request.getSession();
+		session.setAttribute( "workers", workers );
+		session.setAttribute( "assignations", assignations );
 	}
 	
 	private void loadAdminData(  HttpServletRequest request, IDataManager dataManager ){

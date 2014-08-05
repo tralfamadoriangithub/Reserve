@@ -1,8 +1,5 @@
 <%@ tag description="Base layout tag" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@attribute name="header" fragment="true"%>
-<%@ attribute name="aside" fragment="true"%>
-<%@ attribute name="footer" fragment="true"%>
 
 <html>
 <head>
@@ -15,7 +12,6 @@
 		</header>
 		<section class="mainContent">
 			<aside id="pageAside">
-				<%-- <jsp:invoke fragment="aside" /> --%>
 				<c:import url="aside.jsp" />
 			</aside>
 			<section id="pageBody">

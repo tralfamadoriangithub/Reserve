@@ -9,6 +9,7 @@ import com.epam.task6.logic.impl.NoSuchCommand;
 import com.epam.task6.logic.impl.RegisterCommand;
 import com.epam.task6.logic.impl.GetUserPageCommand;
 import com.epam.task6.logic.impl.RegisterNewUser;
+import com.epam.task6.logic.impl.SendClaimCommand;
 import com.epam.task6.logic.impl.SignInCommand;
 
 public class CommandHelper {
@@ -28,6 +29,7 @@ public class CommandHelper {
 		commands.put( CommandName.SIGN_IN_COMMAND, new SignInCommand() );
 		commands.put( CommandName.CHANGE_LANGUAGE_COMMAND, new ChangeLanguageCommand() );
 		commands.put( CommandName.CREATE_CLAIM_COMMAND, new CreateClaimCommand() );
+		commands.put( CommandName.SEND_CLAIM_COMMAND, new SendClaimCommand() );
 		commands.put( CommandName.NO_SUCH_COMMAND, new NoSuchCommand() );
 	}
 	

@@ -21,6 +21,6 @@
 		<p>
 			<fmt:message key="label.password"/>:<br> <input type="password" placeholder="Password"
 				name="password" value="" required /> <br> <input type="submit"
-				value="Login" />
+				value='<fmt:message key="button.sign_in"/>' />
 	</form>
 </myTag:basepage>

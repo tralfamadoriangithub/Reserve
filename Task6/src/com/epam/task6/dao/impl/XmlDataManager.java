@@ -214,5 +214,47 @@ public class XmlDataManager implements IDataManager {
 		return null;
 	}
 
+	@Override
+	public List<Address> getAllAddresses() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Claim> getAllClaims() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Worker> getAllWorkers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Assignation> getAllAssignations() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Profession> getAllProfessions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ClaimStatus> getAllClaimStatuses() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }
