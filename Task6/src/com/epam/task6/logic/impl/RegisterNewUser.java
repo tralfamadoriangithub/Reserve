@@ -5,19 +5,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
+import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.IDataManager;
 import com.epam.task6.entity.User;
+import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
 
 public class RegisterNewUser implements ICommand {
 
 	@Override
-	public String execute( HttpServletRequest request, HttpServletResponse response ) {
+	public String execute( HttpServletRequest request, HttpServletResponse response ) throws CommandException {
 
 		User newUser = createUser( request );
 		IDataManager dataManager = DaoFactory.getInstance().getDataManager();
-		dataManager.addUser( newUser );
+		try {
+			dataManager.addUser( newUser );
+		} catch ( DaoException e ) {
+			throw new CommandException( "Exception in \"RegisterNewUserCommand\"", e );
+		}
 		if ( newUser.getUserId() == -1 ) {
 			return JspPageName.ERROR_PAGE;
 		} else {

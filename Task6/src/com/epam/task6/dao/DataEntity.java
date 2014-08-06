@@ -8,5 +8,4 @@ public final class DataEntity{
 	public static final String WORKER = "worker";
 	public static final String STATUS = "status";
 	public static final String APPOINTMENT = "appointment";
-	public static final String SQUAD = "squad";
 }

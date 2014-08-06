@@ -1,6 +1,5 @@
 package com.epam.task6.logic.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
+import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
-import com.epam.task6.dao.DataManager;
 import com.epam.task6.dao.DataType;
 import com.epam.task6.dao.IAccessManager;
 import com.epam.task6.dao.IDataManager;
@@ -19,19 +18,25 @@ import com.epam.task6.entity.Assignation;
 import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.Worker;
+import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
 
 public class GetUserPageCommand implements ICommand{
 
 	@Override
-	public String execute( HttpServletRequest request, HttpServletResponse response ) {
+	public String execute( HttpServletRequest request, HttpServletResponse response ) throws CommandException {
 		String page = null;
+		User user = null;
 		String login = request.getParameter( RequestParameterName.LOGIN );
 		String password = request.getParameter( RequestParameterName.PASSWORD );
 		DaoFactory daoFactory = DaoFactory.getInstance();
 		IAccessManager accessManager = daoFactory.getAccessManager( );
 		
-		User user = accessManager.signIn( login, password );
+		try {
+			user = accessManager.signIn( login, password );
+		} catch ( DaoException e ) {
+			throw new CommandException( "Exception in \"GetUserPageCommand\"", e );
+		}
 		
 		if(user != null){
 			IDataManager dataManager = daoFactory.getDataManager();
@@ -39,12 +44,20 @@ public class GetUserPageCommand implements ICommand{
 			switch ( user.getStatus() ) {
 			
 			case 1:
-				loadUserData(userId, request, dataManager );
+				try {
+					loadUserData(userId, request, dataManager );
+				} catch ( DaoException e ) {
+					throw new CommandException( "Exception in \"GetUserPageCommand\"", e );
+				}
 				page = JspPageName.USER_PAGE;
 				break;
 				
 			case 2:
-				loadOperatorData( request, dataManager );
+				try {
+					loadOperatorData( request, dataManager );
+				} catch ( DaoException e ) {
+					throw new CommandException( "Exception in \"GetUserPageCommand\"", e );
+				}
 				page = JspPageName.OPERATOR_PAGE;
 				break;
 				
@@ -66,7 +79,7 @@ public class GetUserPageCommand implements ICommand{
 		return page;
 	}
 
-	private void loadUserData(int userId, HttpServletRequest request, IDataManager dataManager ){
+	private void loadUserData(int userId, HttpServletRequest request, IDataManager dataManager ) throws DaoException{
 		List<Address> addresses = dataManager.getUsersAddress( userId );
 		List<Claim> claims = dataManager.getUsersClaim( userId );
 		HttpSession session = request.getSession();
@@ -74,7 +87,7 @@ public class GetUserPageCommand implements ICommand{
 		session.setAttribute( "claims", claims );
 	}
 	
-	private void loadOperatorData( HttpServletRequest request, IDataManager dataManager ){
+	private void loadOperatorData( HttpServletRequest request, IDataManager dataManager ) throws DaoException{
 		List<Worker> workers = dataManager.getAllWorkers();
 		List<Assignation> assignations = dataManager.getAllAssignations();
 		HttpSession session = request.getSession();

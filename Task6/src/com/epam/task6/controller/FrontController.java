@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.epam.task6.dao.DaoException;
+import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandHelper;
 import com.epam.task6.logic.ICommand;
 
@@ -45,17 +47,23 @@ public class FrontController extends HttpServlet {
 
 	private void handleCommand( HttpServletRequest request,
 			HttpServletResponse response ) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute( "currentPage" ));
+
+		// HttpSession session = request.getSession();
+		// System.out.println(session.getAttribute( "currentPage" ));
+		
+		String page = JspPageName.ERROR_PAGE;
 		ICommand command = CommandHelper.getInstance().getCommand(
 				request.getParameter( "command" ) );
-		String page = null;
-		if ( null != command ) {
+
+		try {
 			page = command.execute( request, response );
-		} else {
-			page = JspPageName.ERROR_PAGE;
+		} catch ( CommandException e ) {
+
 		}
-		System.out.println(session.getAttribute( "currentPage" ));
+
+		// System.out.println(session.getAttribute( "currentPage" ));
+
+		response.setHeader( "Cache-control", "no-cache" );
 		RequestDispatcher dispatcher = request.getRequestDispatcher( page );
 		dispatcher.forward( request, response );
 	}

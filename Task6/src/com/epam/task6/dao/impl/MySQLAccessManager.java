@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.IAccessManager;
 import com.epam.task6.dao.impl.connectionpool.ConnectionPool;
 import com.epam.task6.entity.User;
@@ -27,7 +28,7 @@ public class MySQLAccessManager implements IAccessManager {
 	}
 
 	@Override
-	public User signIn( final String login, final String password ) {
+	public User signIn( final String login, final String password ) throws DaoException {
 		User user = null;
 		connection = connectionPool.getConnection();
 		try {
@@ -51,7 +52,7 @@ public class MySQLAccessManager implements IAccessManager {
 			connectionPool.releaseConnection( connection );
 			connection.close();
 		} catch ( SQLException e ) {
-			e.printStackTrace();
+			throw new DaoException( "Exception in \"signIn\" method" , e );  
 		}
 		
 		return user;

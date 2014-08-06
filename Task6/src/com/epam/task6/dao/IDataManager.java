@@ -13,80 +13,80 @@ import com.epam.task6.entity.Worker;
 
 public interface IDataManager {
 
-	public HashMap<String, String> query( String query );
+	public HashMap<String, String> query( String query ) throws DaoException;
 
-	public int addAddress( Address address );
+	public int addAddress( Address address ) throws DaoException;
 
-	public boolean updateAddress( Address address );
+	public boolean updateAddress( Address address ) throws DaoException;
 
-	public boolean deleteAddress( int addressId );
+	public boolean deleteAddress( int addressId ) throws DaoException;
 
-	public List<Address> getAddress( int... addressId );
+	public List<Address> getAddress( int... addressId ) throws DaoException;
 	
-	public List<Address> getAllAddresses();
+	public List<Address> getAllAddresses() throws DaoException;
 
-	public List<Address> getUsersAddress( int... userId );
+	public List<Address> getUsersAddress( int... userId ) throws DaoException;
 
-	public int addClaim( Claim claim );
+	public int addClaim( Claim claim ) throws DaoException;
 
-	public boolean updateClaim( Claim claim );
+	public boolean updateClaim( Claim claim ) throws DaoException;
 
-	public boolean deleteClaim( int claimId );
+	public boolean deleteClaim( int claimId ) throws DaoException;
 
-	public List<Claim> getClaim( int... claimId );
+	public List<Claim> getClaim( int... claimId ) throws DaoException;
 	
-	public List<Claim> getAllClaims( );
+	public List<Claim> getAllClaims( ) throws DaoException;
 
-	public List<Claim> getUsersClaim( int... userId );
+	public List<Claim> getUsersClaim( int... userId ) throws DaoException;
 
-	public int addUser( User user );
+	public int addUser( User user ) throws DaoException;
 
-	public boolean updateUser( User user );
+	public boolean updateUser( User user ) throws DaoException;
 
-	public boolean deleteUser( int userId );
+	public boolean deleteUser( int userId ) throws DaoException;
 
-	public List<User> getUser( int... userId );
+	public List<User> getUser( int... userId ) throws DaoException;
 	
-	public List<User> getAllUsers();
+	public List<User> getAllUsers() throws DaoException;
 
-	public int addWorker( Worker worker );
+	public int addWorker( Worker worker ) throws DaoException;
 
-	public boolean updateWorker( Worker worker );
+	public boolean updateWorker( Worker worker ) throws DaoException;
 
-	public boolean deleteWorker( int workerId );
+	public boolean deleteWorker( int workerId ) throws DaoException;
 
-	public List<Worker> getWorker( int... workerId );
+	public List<Worker> getWorker( int... workerId ) throws DaoException;
 	
-	public List<Worker> getAllWorkers();
+	public List<Worker> getAllWorkers() throws DaoException;
 
-	public int addAssignation( Assignation assignation );
+	public int addAssignation( Assignation assignation ) throws DaoException;
 
-	public boolean updateAssignation( Assignation assignation );
+	public boolean updateAssignation( Assignation assignation ) throws DaoException;
 
-	public boolean deleteAssignation( int assignationId );
+	public boolean deleteAssignation( int assignationId ) throws DaoException;
 
-	public List<Assignation> getAssignation( int... assignationId );
+	public List<Assignation> getAssignation( int... assignationId ) throws DaoException;
 	
-	public List<Assignation> getAllAssignations();
+	public List<Assignation> getAllAssignations() throws DaoException;
 
-	public int addProfession( Profession profession );
+	public int addProfession( Profession profession ) throws DaoException;
 
-	public boolean updateProfession( Profession profession );
+	public boolean updateProfession( Profession profession ) throws DaoException;
 
-	public boolean deleteProfession( int professionId );
+	public boolean deleteProfession( int professionId ) throws DaoException;
 
-	public List<Profession> getProfession( int... professionId );
+	public List<Profession> getProfession( int... professionId ) throws DaoException;
 	
-	public List<Profession> getAllProfessions();
+	public List<Profession> getAllProfessions() throws DaoException;
 
-	public int addClaimStatus( ClaimStatus claimStatus );
+	public int addClaimStatus( ClaimStatus claimStatus ) throws DaoException;
 
-	public boolean updateClaimStatus( ClaimStatus claimStatus );
+	public boolean updateClaimStatus( ClaimStatus claimStatus ) throws DaoException;
 
-	public boolean deleteClaimStatus( ClaimStatus claimStatus );
+	public boolean deleteClaimStatus( ClaimStatus claimStatus ) throws DaoException;
 
-	public List<ClaimStatus> getClaimStatus( int... claimId );
+	public List<ClaimStatus> getClaimStatus( int... claimId ) throws DaoException;
 	
-	public List<ClaimStatus> getAllClaimStatuses();
+	public List<ClaimStatus> getAllClaimStatuses() throws DaoException;
 
 }

@@ -8,13 +8,14 @@ import org.apache.catalina.filters.AddDefaultCharsetFilter;
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
 import com.epam.task6.entity.Address;
+import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
 
 public class CreateClaimCommand implements ICommand {
 
 	@Override
 	public String execute( HttpServletRequest request,
-			HttpServletResponse response ) {
+			HttpServletResponse response ) throws CommandException {
 		Address address = new Address();
 		address.setAddressId( Integer.valueOf( request
 				.getParameter( RequestParameterName.ADDRESS_ID ) ) );

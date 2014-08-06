@@ -6,12 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
 
 public class ChangeLanguageCommand implements ICommand{
 
 	@Override
-	public String execute( HttpServletRequest request, HttpServletResponse response ) {
+	public String execute( HttpServletRequest request, HttpServletResponse response ) throws CommandException {
 		HttpSession session = request.getSession();
 		
 		if(request.getParameter ( "lang" ).equals( "ru" )){
