@@ -12,7 +12,7 @@
 <title>${ register }</title>
 </head> 
 <myTag:basepage>
-	<section>
+	<section id="regiastrationForm">
 		<form action="controller" method="post">
 			<input type="hidden" name="command" value="register_new_user_command"/>
 			<p><fmt:message key="label.name"/>:<br>

@@ -59,6 +59,7 @@ body {
 #pageBody{
 	width:75%;
 	float: right;
+	padding-top: 10px;
 }
 .headerSectionStyle{
 	text-align: right;
@@ -75,10 +76,6 @@ body {
 	padding: 10px;
 }
 
-.loginButtonsStyle form{
-	display: inline;
-}
-
 .mainContent{
 	height:100%;
 }
@@ -88,4 +85,5 @@ body {
 	height:5%;
 }
 
-
+#loginForm{
+}
