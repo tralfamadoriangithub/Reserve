@@ -93,6 +93,7 @@ public class MySQLDataManager implements IDataManager {
 				address.setHouseNumber( rs.getInt( "house" ) );
 				address.setBlockNumber( rs.getInt( "block" ) );
 				address.setFlatNumber( rs.getInt( "flat" ) );
+				address.setPhone( rs.getString( "phone" ) );
 				address.setUserId( rs.getInt( "user_id" ) );
 				addresses.add( address );
 			}
@@ -174,6 +175,7 @@ public class MySQLDataManager implements IDataManager {
 					address.setHouseNumber( rs.getInt( "house" ) );
 					address.setBlockNumber( rs.getInt( "block" ) );
 					address.setFlatNumber( rs.getInt( "flat" ) );
+					address.setPhone( rs.getString( "phone" ) );
 					address.setUserId( rs.getInt( "user_id" ) );
 					
 					claim.setAddress( address );
@@ -352,6 +354,7 @@ public class MySQLDataManager implements IDataManager {
 				address.setHouseNumber( rs.getInt( "house" ) );
 				address.setBlockNumber( rs.getInt( "block" ) );
 				address.setFlatNumber( rs.getInt( "flat" ) );
+				address.setPhone( rs.getString( "phone" ) );
 				address.setUserId( rs.getInt( "user_id" ) );
 				addresses.add( address );
 			}

@@ -20,7 +20,9 @@ public class WorkersTableTag extends TagSupport{
 		try {
 			out.write( "<table border='1'>" );
 			for(Worker worker: workers){
+				out.write( "<tr>" );
 				printWorkerRow( worker, out );
+				out.write( "</tr>" );
 			}
 			out.write( "</table>" );
 		} catch ( IOException e ) {
@@ -30,7 +32,7 @@ public class WorkersTableTag extends TagSupport{
 	}
 	
 	private void printWorkerRow( Worker worker, JspWriter out ) throws IOException{
-		out.write( "<tr><td>" );
+		out.write( "<td>" );
 		out.write( worker.getName() );
 		out.write( "</td><td>" );
 		out.write( worker.getSurname() );
@@ -43,7 +45,7 @@ public class WorkersTableTag extends TagSupport{
 				+ "<input type='hidden' name='command' value='edit_claim_command'/>"
 				+ "<input type='hidden' name='address' value='" + worker
 				+ "'/>" + "<input type='submit' value='Change Status'/>" + "</form>" );
-		out.write( "</td></tr>" );
+		out.write( "</td>" );
 	}
 
 	public List<Worker> getWorkers() {

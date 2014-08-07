@@ -19,7 +19,7 @@ public class AddressesTableTag extends TagSupport {
 		JspWriter out = pageContext.getOut();
 		try {
 			out.write( "<table border='1'>" );
-			out.write( "<th>Street</th><th>House</th><th>Block</th><th>Flat</th>" );
+			out.write( "<th>Street</th><th>House</th><th>Block</th><th>Flat</th><th>Phone</th>" );
 			for ( Address address : addresses ) {
 				printAddressRow( address, out );
 			}
@@ -40,6 +40,7 @@ public class AddressesTableTag extends TagSupport {
 		String block = String.valueOf( address.getBlockNumber() );
 		String flat = String.valueOf( address.getFlatNumber() );
 		String userId = String.valueOf( address.getUserId() );
+		String phone = address.getPhone();
 		out.write( "<tr><td>" );
 		out.write( street );
 		out.write( "</td><td>" );
@@ -48,6 +49,8 @@ public class AddressesTableTag extends TagSupport {
 		out.write( block );
 		out.write( "</td><td>" );
 		out.write( flat );
+		out.write( "</td><td>" );
+		out.write( phone );
 		out.write( "</td><td>" );
 		out.write( "<form action='controller' method='post'>"
 				+ "<input type='hidden' name='command' value='create_claim_command'/>"

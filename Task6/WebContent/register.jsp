@@ -19,8 +19,6 @@
 			<input type="text" placeholder="<fmt:message key="label.name"/>" name="name" required/>
 			<p><fmt:message key="label.surname"/>:<br>
 			<input type="text" placeholder="<fmt:message key="label.surname"/>" name="surname" required/>
-			<p><fmt:message key="label.phone"/>:<br>
-			<input type="text" placeholder="<fmt:message key="label.phone"/>" name="phone" required/>
 			<p><fmt:message key="label.login"/>:<br>
 			<input type="text" placeholder="<fmt:message key="label.login"/>" name="login" required/>
 			<p><fmt:message key="label.password"/>:<br>

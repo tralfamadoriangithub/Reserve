@@ -11,6 +11,7 @@ public class Address implements Serializable{
 	private int houseNumber;
 	private int blockNumber;
 	private int flatNumber;
+	private String phone;
 	private int userId;
 	
 	public Address(){}
@@ -62,6 +63,16 @@ public class Address implements Serializable{
 	public void setUserId( int userId ) {
 		this.userId = userId;
 	}
+	
+	
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone( String phone ) {
+		this.phone = phone;
+	}
 
 	@Override
 	public int hashCode() {
@@ -71,7 +82,8 @@ public class Address implements Serializable{
 		result = prime * result + blockNumber;
 		result = prime * result + flatNumber;
 		result = prime * result + houseNumber;
-		result = prime * result + ( ( street == null ) ? 0 : street.hashCode() );
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
 		result = prime * result + userId;
 		return result;
 	}
@@ -93,6 +105,11 @@ public class Address implements Serializable{
 			return false;
 		if ( houseNumber != other.houseNumber )
 			return false;
+		if ( phone == null ) {
+			if ( other.phone != null )
+				return false;
+		} else if ( !phone.equals( other.phone ) )
+			return false;
 		if ( street == null ) {
 			if ( other.street != null )
 				return false;
@@ -105,10 +122,11 @@ public class Address implements Serializable{
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [addressId=" + addressId
-				+ ", street=" + street + ", houseNumber=" + houseNumber
-				+ ", blockNumber=" + blockNumber + ", flatNumber=" + flatNumber
-				+ ", userId=" + userId + "]";
+		return getClass().getSimpleName() + " [addressId=" + addressId + ", street=" + street
+				+ ", houseNumber=" + houseNumber + ", blockNumber="
+				+ blockNumber + ", flatNumber=" + flatNumber + ", phone="
+				+ phone + ", userId=" + userId + "]";
 	}
 
+	
 }

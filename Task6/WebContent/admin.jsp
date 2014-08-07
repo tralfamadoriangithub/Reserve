@@ -7,6 +7,12 @@
 </head>
 <myTag:basepage>
 
-
+	<form action="controller" name="delete_database">
+		<input type="submit" value="Delete DB" />
+	</form>
+	
+	<form action="controller" name="create_database">
+		<input type="submit" value="Create DB"  />
+	</form>
 
 </myTag:basepage>

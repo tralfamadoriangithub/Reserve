@@ -16,6 +16,6 @@
 <title>Assignation</title>
 </head>
 <myTag:basepage>
-	
+	<tabletag:workerstable workers="${ sessionScope.workers }"/>
 
 </myTag:basepage>
