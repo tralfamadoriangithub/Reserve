@@ -20,6 +20,7 @@ import com.epam.task6.entity.User;
 import com.epam.task6.entity.Worker;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
+import com.epam.task6.tableentity.ClaimTableEntity;
 
 public class GetUserPageCommand implements ICommand{
 
@@ -40,12 +41,11 @@ public class GetUserPageCommand implements ICommand{
 		
 		if(user != null){
 			IDataManager dataManager = daoFactory.getDataManager();
-			int userId = user.getUserId();
 			switch ( user.getStatus() ) {
 			
 			case 1:
 				try {
-					loadUserData(userId, request, dataManager );
+					loadUserData(user, request, dataManager );
 				} catch ( DaoException e ) {
 					throw new CommandException( "Exception in \"GetUserPageCommand\"", e );
 				}
@@ -79,9 +79,9 @@ public class GetUserPageCommand implements ICommand{
 		return page;
 	}
 
-	private void loadUserData(int userId, HttpServletRequest request, IDataManager dataManager ) throws DaoException{
-		List<Address> addresses = dataManager.getUsersAddress( userId );
-		List<Claim> claims = dataManager.getUsersClaim( userId );
+	private void loadUserData(User user, HttpServletRequest request, IDataManager dataManager ) throws DaoException{
+		List<Address> addresses = dataManager.getUsersAddress( user.getUserId() );
+		List<ClaimTableEntity> claims = dataManager.getUsersClaim( user );
 		HttpSession session = request.getSession();
 		session.setAttribute( "addresses", addresses );
 		session.setAttribute( "claims", claims );
@@ -90,7 +90,10 @@ public class GetUserPageCommand implements ICommand{
 	private void loadOperatorData( HttpServletRequest request, IDataManager dataManager ) throws DaoException{
 		List<Worker> workers = dataManager.getAllWorkers();
 		List<Assignation> assignations = dataManager.getAllAssignations();
+		List<ClaimTableEntity> claims = dataManager.getAllClaims();
+		
 		HttpSession session = request.getSession();
+		session.setAttribute( "claims", claims );
 		session.setAttribute( "workers", workers );
 		session.setAttribute( "assignations", assignations );
 	}

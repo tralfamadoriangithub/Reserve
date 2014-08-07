@@ -1,6 +1,10 @@
 package com.epam.task6.entity;
 
-public class Profession {
+import java.io.Serializable;
+
+public class Profession implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private int professionId;
 	private String professionName;

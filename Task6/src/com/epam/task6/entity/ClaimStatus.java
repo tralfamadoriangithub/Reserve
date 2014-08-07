@@ -1,6 +1,10 @@
 package com.epam.task6.entity;
 
-public class ClaimStatus {
+import java.io.Serializable;
+
+public class ClaimStatus implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private int claimStatusId;
 	private String statusValue;

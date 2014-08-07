@@ -1,19 +1,20 @@
-package com.epam.task6.entity;
+package com.epam.task6.tableentity;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Assignation implements Serializable{
-	
+import com.epam.task6.entity.Claim;
+
+public class AssignationTableEntity implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
 	private int assignationId;
-	private int claimId;
+	private ClaimTableEntity claim;
 	private Date beginWork;
 	private Date endWork;
-	
-	public Assignation(){
-		
+
+	public AssignationTableEntity() {
 	}
 
 	public int getAssignationId() {
@@ -24,12 +25,12 @@ public class Assignation implements Serializable{
 		this.assignationId = assignationId;
 	}
 
-	public int getClaimId() {
-		return claimId;
+	public ClaimTableEntity getClaim() {
+		return claim;
 	}
 
-	public void setClaimId( int claimId ) {
-		this.claimId = claimId;
+	public void setClaim( ClaimTableEntity claim ) {
+		this.claim = claim;
 	}
 
 	public Date getBeginWork() {
@@ -54,10 +55,9 @@ public class Assignation implements Serializable{
 		int result = 1;
 		result = prime * result + assignationId;
 		result = prime * result
-				+ ( ( beginWork == null ) ? 0 : beginWork.hashCode() );
-		result = prime * result + claimId;
-		result = prime * result
-				+ ( ( endWork == null ) ? 0 : endWork.hashCode() );
+				+ ((beginWork == null) ? 0 : beginWork.hashCode());
+		result = prime * result + ((claim == null) ? 0 : claim.hashCode());
+		result = prime * result + ((endWork == null) ? 0 : endWork.hashCode());
 		return result;
 	}
 
@@ -69,7 +69,7 @@ public class Assignation implements Serializable{
 			return false;
 		if ( getClass() != obj.getClass() )
 			return false;
-		Assignation other = (Assignation) obj;
+		AssignationTableEntity other = (AssignationTableEntity) obj;
 		if ( assignationId != other.assignationId )
 			return false;
 		if ( beginWork == null ) {
@@ -77,7 +77,10 @@ public class Assignation implements Serializable{
 				return false;
 		} else if ( !beginWork.equals( other.beginWork ) )
 			return false;
-		if ( claimId != other.claimId )
+		if ( claim == null ) {
+			if ( other.claim != null )
+				return false;
+		} else if ( !claim.equals( other.claim ) )
 			return false;
 		if ( endWork == null ) {
 			if ( other.endWork != null )
@@ -89,10 +92,9 @@ public class Assignation implements Serializable{
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [assignationId=" + assignationId + ", claimId="
-				+ claimId + ", beginWork=" + beginWork
+		return getClass().getSimpleName() + " [assignationId=" + assignationId
+				+ ", claim=" + claim + ", beginWork=" + beginWork
 				+ ", endWork=" + endWork + "]";
 	}
-	
-	
+
 }

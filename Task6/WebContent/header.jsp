@@ -30,7 +30,7 @@
 			
 			<c:otherwise>
 				<section id="signOutButton">
-					<a href="logout.jsp"><fmt:message key="button.sign_out"/></a>
+					<a href="/Task6/controller?command=sign_out_command"><fmt:message key="button.sign_out"/></a>
 				</section>
 			</c:otherwise>
 		</c:choose>
@@ -38,7 +38,7 @@
 	<section id="languageSelect" class="languageSelectStyle">
 		<c:choose>
 			<c:when test="${ language eq 'en_US' }">
-				<a href="/Task6/controller?lang=ru&command=change_language_command"><img
+				<a href="/Task6/controller?command=change_language_command&lang=ru"><img
 					src="resources/img/ru.png"></a>
 			</c:when>
 			<c:otherwise>

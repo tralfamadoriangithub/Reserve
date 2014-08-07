@@ -10,6 +10,7 @@ import com.epam.task6.entity.ClaimStatus;
 import com.epam.task6.entity.Profession;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.Worker;
+import com.epam.task6.tableentity.ClaimTableEntity;
 
 public interface IDataManager {
 
@@ -35,9 +36,9 @@ public interface IDataManager {
 
 	public List<Claim> getClaim( int... claimId ) throws DaoException;
 	
-	public List<Claim> getAllClaims( ) throws DaoException;
+	public List<ClaimTableEntity> getAllClaims( ) throws DaoException;
 
-	public List<Claim> getUsersClaim( int... userId ) throws DaoException;
+	public List<ClaimTableEntity> getUsersClaim( User... user ) throws DaoException;
 
 	public int addUser( User user ) throws DaoException;
 

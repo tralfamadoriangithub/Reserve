@@ -12,6 +12,7 @@ import com.epam.task6.entity.ClaimStatus;
 import com.epam.task6.entity.Profession;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.Worker;
+import com.epam.task6.tableentity.ClaimTableEntity;
 
 public class XmlDataManager implements IDataManager {
 
@@ -209,7 +210,7 @@ public class XmlDataManager implements IDataManager {
 	}
 
 	@Override
-	public List<Claim> getUsersClaim( int... userId ) throws DaoException {
+	public List<ClaimTableEntity> getUsersClaim( User... user ) throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -221,7 +222,7 @@ public class XmlDataManager implements IDataManager {
 	}
 
 	@Override
-	public List<Claim> getAllClaims() throws DaoException {
+	public List<ClaimTableEntity> getAllClaims() throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}

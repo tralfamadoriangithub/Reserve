@@ -11,6 +11,7 @@ import com.epam.task6.logic.impl.GetUserPageCommand;
 import com.epam.task6.logic.impl.RegisterNewUser;
 import com.epam.task6.logic.impl.SendClaimCommand;
 import com.epam.task6.logic.impl.SignInCommand;
+import com.epam.task6.logic.impl.SignOutCommand;
 
 public class CommandHelper {
 	
@@ -27,6 +28,7 @@ public class CommandHelper {
 		commands.put( CommandName.REGISTER_NEW_USER_COMMAND, new RegisterNewUser() );
 		commands.put( CommandName.GET_USER_PAGE_COMMAND, new GetUserPageCommand() );
 		commands.put( CommandName.SIGN_IN_COMMAND, new SignInCommand() );
+		commands.put( CommandName.SIGN_OUT_COMMAND, new SignOutCommand() );
 		commands.put( CommandName.CHANGE_LANGUAGE_COMMAND, new ChangeLanguageCommand() );
 		commands.put( CommandName.CREATE_CLAIM_COMMAND, new CreateClaimCommand() );
 		commands.put( CommandName.SEND_CLAIM_COMMAND, new SendClaimCommand() );

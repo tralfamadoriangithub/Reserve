@@ -20,6 +20,7 @@
 <myTag:basepage>
 
 	<table:addressestable addresses="${ sessionScope.addresses }" />
+	<br><br>
 	<table:claimstable claims="${ sessionScope.claims }"/>
 
 </myTag:basepage>

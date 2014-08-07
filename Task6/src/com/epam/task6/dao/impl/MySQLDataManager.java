@@ -1,7 +1,6 @@
 package com.epam.task6.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,6 +14,7 @@ import com.epam.task6.entity.ClaimStatus;
 import com.epam.task6.entity.Profession;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.Worker;
+import com.epam.task6.tableentity.ClaimTableEntity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -86,7 +86,7 @@ public class MySQLDataManager implements IDataManager {
 					.prepareStatement( "SELECT * FROM address WHERE user_id = ?" );
 			preparedStatement.setInt( 1, userId[0] );
 			ResultSet rs = preparedStatement.executeQuery();
-			while(rs.next()){
+			while ( rs.next() ) {
 				Address address = new Address();
 				address.setAddressId( rs.getInt( "address_id" ) );
 				address.setStreet( rs.getString( "street" ) );
@@ -121,7 +121,7 @@ public class MySQLDataManager implements IDataManager {
 			ResultSet resultSet = preparedStatement.getGeneratedKeys();
 			if ( resultSet.next() ) {
 				claim.setClaimId( resultSet.getInt( 1 ) );
-				//newUserId = resultSet.getInt( 1 );
+				// newUserId = resultSet.getInt( 1 );
 			}
 			preparedStatement.close();
 			releaseConnection( connection );
@@ -139,7 +139,7 @@ public class MySQLDataManager implements IDataManager {
 
 	@Override
 	public boolean deleteClaim( int claimId ) throws DaoException {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -150,24 +150,37 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public List<Claim> getUsersClaim( int... userId ) throws DaoException {
+	public List<ClaimTableEntity> getUsersClaim( User... users )
+			throws DaoException {
 		connection = getConnection();
-		List<Claim> claims = new ArrayList<Claim>();
+		List<ClaimTableEntity> claims = new ArrayList<ClaimTableEntity>();
+
 		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement( "SELECT * FROM claim WHERE user_id = ?" );
-			preparedStatement.setInt( 1, userId[0] );
-			ResultSet rs = preparedStatement.executeQuery();
-			while(rs.next()){
-				Claim claim = new Claim();
-				claim.setClaimId( rs.getInt( "claim_id" ) );
-				claim.setProblemDescription( rs.getString( "problem" ) );
-				claim.setAddressId( rs.getInt( "address_id" ) );
-				claim.setUserId( rs.getInt( "user_id" ) );
-				claim.setClaimStatusId( rs.getInt( "claim_status_id" ) );
-				claims.add( claim );
+			for ( User user : users ) {
+				PreparedStatement preparedStatement = connection
+						.prepareStatement( "SELECT c.*, a.*, s.value FROM claim c JOIN address a ON c.address_id = a.address_id JOIN status s ON c.status_id = s.status_id WHERE a.user_id = ?" );
+				preparedStatement.setInt( 1, user.getUserId() );
+				ResultSet rs = preparedStatement.executeQuery();
+				while ( rs.next() ) {
+					ClaimTableEntity claim = new ClaimTableEntity();
+					Address address = new Address();
+					
+					claim.setClaimId( rs.getInt( "claim_id" ) );
+					claim.setProblemDescription( rs.getString( "problem" ) );
+					claim.setClaimStatus( rs.getString( "value" ) );
+					
+					address.setAddressId( rs.getInt( "address_id" ) );
+					address.setStreet( rs.getString( "street" ) );
+					address.setHouseNumber( rs.getInt( "house" ) );
+					address.setBlockNumber( rs.getInt( "block" ) );
+					address.setFlatNumber( rs.getInt( "flat" ) );
+					address.setUserId( rs.getInt( "user_id" ) );
+					
+					claim.setAddress( address );
+					claims.add( claim );
+				}
+				preparedStatement.close();
 			}
-			preparedStatement.close();
 			releaseConnection( connection );
 		} catch ( SQLException e ) {
 			e.printStackTrace();
@@ -251,7 +264,8 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public boolean updateAssignation( Assignation assignation ) throws DaoException {
+	public boolean updateAssignation( Assignation assignation )
+			throws DaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -263,7 +277,8 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public List<Assignation> getAssignation( int... assignationId ) throws DaoException {
+	public List<Assignation> getAssignation( int... assignationId )
+			throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -275,7 +290,8 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public boolean updateProfession( Profession profession ) throws DaoException {
+	public boolean updateProfession( Profession profession )
+			throws DaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -287,7 +303,8 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public List<Profession> getProfession( int... professionId ) throws DaoException {
+	public List<Profession> getProfession( int... professionId )
+			throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -299,33 +316,36 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public boolean updateClaimStatus( ClaimStatus claimStatus ) throws DaoException {
+	public boolean updateClaimStatus( ClaimStatus claimStatus )
+			throws DaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean deleteClaimStatus( ClaimStatus claimStatus ) throws DaoException {
+	public boolean deleteClaimStatus( ClaimStatus claimStatus )
+			throws DaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<ClaimStatus> getClaimStatus( int... claimId ) throws DaoException {
+	public List<ClaimStatus> getClaimStatus( int... claimId )
+			throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Address> getAllAddresses() throws DaoException {
-		
+
 		connection = getConnection();
 		List<Address> addresses = new ArrayList<>();
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM address");
+			ResultSet rs = statement.executeQuery( "SELECT * FROM address" );
 			Address address;
-			while(rs.next()){
+			while ( rs.next() ) {
 				address = new Address();
 				address.setAddressId( rs.getInt( "address_id" ) );
 				address.setStreet( rs.getString( "street" ) );
@@ -344,21 +364,30 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public List<Claim> getAllClaims() throws DaoException {
-		
+	public List<ClaimTableEntity> getAllClaims() throws DaoException {
+
 		connection = getConnection();
-		List<Claim> claims = new ArrayList<>();
+		List<ClaimTableEntity> claims = new ArrayList<>();
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM claim");
-			Claim claim;
-			while(rs.next()){
-				claim = new Claim();
+			ResultSet rs = statement.executeQuery( "SELECT c.*, a.*, s.value FROM claim c JOIN address a ON c.address_id = a.address_id JOIN status s ON c.status_id = s.status_id" );
+			ClaimTableEntity claim;
+			while ( rs.next() ) {
+				 claim = new ClaimTableEntity();
+				Address address = new Address();
+				
 				claim.setClaimId( rs.getInt( "claim_id" ) );
 				claim.setProblemDescription( rs.getString( "problem" ) );
-				claim.setAddressId( rs.getInt( "address_id" ) );
-				claim.setUserId( rs.getInt( "user_id" ) );
-				claim.setClaimStatusId( rs.getInt( "claim_status_id" ) );
+				claim.setClaimStatus( rs.getString( "value" ) );
+				
+				address.setAddressId( rs.getInt( "address_id" ) );
+				address.setStreet( rs.getString( "street" ) );
+				address.setHouseNumber( rs.getInt( "house" ) );
+				address.setBlockNumber( rs.getInt( "block" ) );
+				address.setFlatNumber( rs.getInt( "flat" ) );
+				address.setUserId( rs.getInt( "user_id" ) );
+				
+				claim.setAddress( address );
 				claims.add( claim );
 			}
 			statement.close();
@@ -372,20 +401,20 @@ public class MySQLDataManager implements IDataManager {
 	@Override
 	public List<User> getAllUsers() throws DaoException {
 		List<User> users = new ArrayList<>();
-		
+
 		return users;
 	}
 
 	@Override
 	public List<Worker> getAllWorkers() throws DaoException {
-		
+
 		connection = getConnection();
 		List<Worker> workers = new ArrayList<>();
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM worker");
+			ResultSet rs = statement.executeQuery( "SELECT * FROM worker" );
 			Worker worker;
-			while(rs.next()){
+			while ( rs.next() ) {
 				worker = new Worker();
 				worker.setWorkerId( rs.getInt( "worker_id" ) );
 				worker.setName( rs.getString( "name" ) );
@@ -405,14 +434,14 @@ public class MySQLDataManager implements IDataManager {
 
 	@Override
 	public List<Assignation> getAllAssignations() throws DaoException {
-		
+
 		connection = getConnection();
 		List<Assignation> assignations = new ArrayList<>();
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM assignation");
+			ResultSet rs = statement.executeQuery( "SELECT * FROM assignation" );
 			Assignation assignation;
-			while(rs.next()){
+			while ( rs.next() ) {
 				assignation = new Assignation();
 				assignation.setAssignationId( rs.getInt( "assignation_id" ) );
 				assignation.setClaimId( rs.getInt( "claim_id" ) );
@@ -431,14 +460,14 @@ public class MySQLDataManager implements IDataManager {
 	@Override
 	public List<Profession> getAllProfessions() throws DaoException {
 		List<Profession> professions = new ArrayList<>();
-		
+
 		return professions;
 	}
 
 	@Override
 	public List<ClaimStatus> getAllClaimStatuses() throws DaoException {
 		List<ClaimStatus> claimStatuses = new ArrayList<>();
-		
+
 		return claimStatuses;
 	}
 }

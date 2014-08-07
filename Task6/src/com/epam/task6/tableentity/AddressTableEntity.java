@@ -1,8 +1,10 @@
-package com.epam.task6.entity;
+package com.epam.task6.tableentity;
 
 import java.io.Serializable;
 
-public class Address implements Serializable{
+import com.epam.task6.entity.User;
+
+public class AddressTableEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -11,9 +13,9 @@ public class Address implements Serializable{
 	private int houseNumber;
 	private int blockNumber;
 	private int flatNumber;
-	private int userId;
+	private User user;
 	
-	public Address(){}
+	public AddressTableEntity(){}
 
 	public int getAddressId() {
 		return addressId;
@@ -55,12 +57,12 @@ public class Address implements Serializable{
 		this.flatNumber = flatNumber;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId( int userId ) {
-		this.userId = userId;
+	public void setUser( User user ) {
+		this.user = user;
 	}
 
 	@Override
@@ -71,8 +73,8 @@ public class Address implements Serializable{
 		result = prime * result + blockNumber;
 		result = prime * result + flatNumber;
 		result = prime * result + houseNumber;
-		result = prime * result + ( ( street == null ) ? 0 : street.hashCode() );
-		result = prime * result + userId;
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -84,7 +86,7 @@ public class Address implements Serializable{
 			return false;
 		if ( getClass() != obj.getClass() )
 			return false;
-		Address other = (Address) obj;
+		AddressTableEntity other = (AddressTableEntity) obj;
 		if ( addressId != other.addressId )
 			return false;
 		if ( blockNumber != other.blockNumber )
@@ -98,7 +100,10 @@ public class Address implements Serializable{
 				return false;
 		} else if ( !street.equals( other.street ) )
 			return false;
-		if ( userId != other.userId )
+		if ( user == null ) {
+			if ( other.user != null )
+				return false;
+		} else if ( !user.equals( other.user ) )
 			return false;
 		return true;
 	}
@@ -108,7 +113,7 @@ public class Address implements Serializable{
 		return getClass().getSimpleName() + " [addressId=" + addressId
 				+ ", street=" + street + ", houseNumber=" + houseNumber
 				+ ", blockNumber=" + blockNumber + ", flatNumber=" + flatNumber
-				+ ", userId=" + userId + "]";
+				+ ", user=" + user + "]";
 	}
 
 }

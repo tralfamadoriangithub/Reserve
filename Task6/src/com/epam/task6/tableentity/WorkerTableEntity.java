@@ -1,19 +1,22 @@
-package com.epam.task6.entity;
+package com.epam.task6.tableentity;
 
 import java.io.Serializable;
 
-public class Worker implements Serializable{
-	
+import com.epam.task6.entity.Assignation;
+import com.epam.task6.entity.Profession;
+
+public class WorkerTableEntity implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 	
 	private int workerId;
 	private String name;
 	private String surname;
-	private int professionId;
+	private Profession profession;
 	private int qualification;
-	private int assignationId;
+	private Assignation assignation;
 	
-	public Worker(){}
+	public WorkerTableEntity(){}
 
 	public int getWorkerId() {
 		return workerId;
@@ -39,12 +42,12 @@ public class Worker implements Serializable{
 		this.surname = surname;
 	}
 
-	public int getProfessionId() {
-		return professionId;
+	public Profession getProfession() {
+		return profession;
 	}
 
-	public void setProfessionId( int professionId ) {
-		this.professionId = professionId;
+	public void setProfession( Profession profession ) {
+		this.profession = profession;
 	}
 
 	public int getQualification() {
@@ -54,25 +57,26 @@ public class Worker implements Serializable{
 	public void setQualification( int qualification ) {
 		this.qualification = qualification;
 	}
-	
-	public int getAssignationId() {
-		return assignationId;
+
+	public Assignation getAssignation() {
+		return assignation;
 	}
 
-	public void setAssignationId( int assignationId ) {
-		this.assignationId = assignationId;
+	public void setAssignation( Assignation assignation ) {
+		this.assignation = assignation;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + assignationId;
-		result = prime * result + ( ( name == null ) ? 0 : name.hashCode() );
-		result = prime * result + professionId;
-		result = prime * result + qualification;
 		result = prime * result
-				+ ( ( surname == null ) ? 0 : surname.hashCode() );
+				+ ((assignation == null) ? 0 : assignation.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((profession == null) ? 0 : profession.hashCode());
+		result = prime * result + qualification;
+		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
 		result = prime * result + workerId;
 		return result;
 	}
@@ -85,15 +89,21 @@ public class Worker implements Serializable{
 			return false;
 		if ( getClass() != obj.getClass() )
 			return false;
-		Worker other = (Worker) obj;
-		if ( assignationId != other.assignationId )
+		WorkerTableEntity other = (WorkerTableEntity) obj;
+		if ( assignation == null ) {
+			if ( other.assignation != null )
+				return false;
+		} else if ( !assignation.equals( other.assignation ) )
 			return false;
 		if ( name == null ) {
 			if ( other.name != null )
 				return false;
 		} else if ( !name.equals( other.name ) )
 			return false;
-		if ( professionId != other.professionId )
+		if ( profession == null ) {
+			if ( other.profession != null )
+				return false;
+		} else if ( !profession.equals( other.profession ) )
 			return false;
 		if ( qualification != other.qualification )
 			return false;
@@ -109,12 +119,11 @@ public class Worker implements Serializable{
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [workerId=" + workerId + ", name=" + name + ", surname="
-				+ surname + ", professionId=" + professionId
-				+ ", qualification=" + qualification + ", assignationId="
-				+ assignationId + "]";
+		return getClass().getSimpleName() + " [workerId=" + workerId + ", name=" + name
+				+ ", surname=" + surname + ", profession=" + profession
+				+ ", qualification=" + qualification + ", assignation="
+				+ assignation + "]";
 	}
-
 	
-
+	
 }

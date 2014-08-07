@@ -22,7 +22,7 @@ public class SignOutCommand implements ICommand{
 		while(attributes.hasMoreElements()){
 			session.removeAttribute( attributes.nextElement() );
 		}
-		request.getSession().invalidate();
+		session.invalidate();
 		
 		return JspPageName.INDEX_PAGE;
 	}

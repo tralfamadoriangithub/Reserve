@@ -9,8 +9,16 @@
 <title>OPERATOR</title>
 </head>
 <myTag:basepage>
+
 	<h1>Operator</h1>
+	
+	<tabletag:operatorclaimstable claims="${ sessionScope.claims }"/>
+	<br>
+	
 	<tabletag:assignationstable
 		assignations="${ sessionScope.assignations }" />
+	<br>
+	
 	<tabletag:workerstable workers="${ sessionScope.workers }" />
+	
 </myTag:basepage>

@@ -8,54 +8,65 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import com.epam.task6.entity.Claim;
+import com.epam.task6.tableentity.ClaimTableEntity;
 
 public class ClaimsTableTag extends TagSupport{
 
 	private static final long serialVersionUID = 1L;
-	private List<Claim> claims;
+	private List<ClaimTableEntity> claims;
 	
 	@Override
 	public int doStartTag() throws JspException {
 		JspWriter out = pageContext.getOut();
 		try {
 			out.write( "<table border='1'>" );
-			for(Claim claim: claims){
+			out.write( "<th>Problem</th><th>Street</th><th>Houce</th><th>Block</th><th>Flat</th><th>Status</th>" );
+			for(ClaimTableEntity claim: claims){
+				out.write( "<tr>" );
 				printClaim( claim, out );
+				out.write( "</tr>" );
 			}
 			out.write( "</table>" );
 		} catch ( IOException e ) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return SKIP_BODY;
 	}
 	
-	private void printClaim(Claim claim, JspWriter out) throws IOException{
-		out.write( "<tr><td>" );
+	protected void printClaim(ClaimTableEntity claim, JspWriter out) throws IOException{
+		out.write( "<td>" );
 		out.write( claim.getProblemDescription() );
 		out.write( "</td><td>" );
-		out.write( String.valueOf( claim.getClaimStatusId()) );
+		out.write( claim.getAddress().getStreet() );
+		out.write( "</td><td>" );
+		out.write( String.valueOf( claim.getAddress().getHouseNumber()) );
+		out.write( "</td><td>" );
+		out.write( String.valueOf( claim.getAddress().getBlockNumber()) );
+		out.write( "</td><td>" );
+		out.write( String.valueOf( claim.getAddress().getFlatNumber()) );
+		out.write( "</td><td>" );
+		out.write( claim.getClaimStatus() );
 		out.write( "</td><td>" );
 		out.write( "<form action='controller' method='post'>"
 				+ "<input type='hidden' name='command' value='edit_claim_command'/>"
-				+ "<input type='hidden' name='address' value='" + claim
+				+ "<input type='hidden' name='claim' value='" + claim
 				+ "'/>" + "<input type='submit' value='Edit'/>" + "</form>" );
-		out.write( "</td></tr>" );
+		out.write( "</td>" );
 	}
 	
-	public void setClaims(List<Claim> claims){
+	public void setClaims(List<ClaimTableEntity> claims){
 		this.claims = claims;
 	}
 	
-	public void setClaims( Claim claim ){
+	public void setClaims( ClaimTableEntity claim ){
 		claims.add( claim );
 	}
 	
-	public List<Claim> getClaims(){
+	public List<ClaimTableEntity> getClaims(){
 		return claims;
 	}
 	
-	public Claim getClaims(int index){
+	public ClaimTableEntity getClaims(int index){
 		return claims.get( index );
 	}
 	

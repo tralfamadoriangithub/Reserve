@@ -16,32 +16,44 @@ import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.IDataManager;
 import com.epam.task6.entity.Address;
 import com.epam.task6.entity.Claim;
+import com.epam.task6.entity.User;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
+import com.epam.task6.tableentity.ClaimTableEntity;
 
 public class SendClaimCommand implements ICommand{
 
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException {
+		
 		HttpSession session = request.getSession();
-		Claim claim = new Claim();
+		ClaimTableEntity claimTable = new ClaimTableEntity();
+		Claim newClaim = new Claim();
+		
 		Address address = (Address) session.getAttribute( "claimAddress" );
-		claim.setAddressId( address.getAddressId() );
-		claim.setUserId( address.getUserId() );
-		claim.setProblemDescription( request.getParameter( RequestParameterName.PROBLEM_DESCRIPTION ) );
+		User user = (User) session.getAttribute( "user" );
+		
+		claimTable.setAddress( address );
+		claimTable.setProblemDescription( request.getParameter( RequestParameterName.PROBLEM_DESCRIPTION ) );
 		request.getSession().removeAttribute( "claimAddress" );
+		
+		newClaim.setAddressId( address.getAddressId() );
+		newClaim.setUserId( user.getUserId() );
+		newClaim.setProblemDescription( claimTable.getProblemDescription() );
+		
 		IDataManager dataManager = DaoFactory.getInstance().getDataManager();
 		
 		try {
-			dataManager.addClaim( claim );
+			dataManager.addClaim( newClaim );
+			claimTable.setClaimStatus( "Sended" );
 		} catch ( DaoException e ) {
 			throw new CommandException( "Exception in \"SendClaimCommand\"", e );
 		}
 		
-		List<Claim> claims = (List<Claim>) session.getAttribute( "claims" );
-		claims.add( claim );
-		System.out.println(claim.getClaimId());
+		List<ClaimTableEntity> claims = (List<ClaimTableEntity>) session.getAttribute( "claims" );
+		claims.add( claimTable );
+		System.out.println(claimTable.getClaimId());
 		session.setAttribute( "claims", claims );
 		return JspPageName.USER_PAGE;
 	}
