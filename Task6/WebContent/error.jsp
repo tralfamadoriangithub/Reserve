@@ -12,7 +12,7 @@
 </head>
 <myTag:basepage>
 	<section id="errorMessage">
-		<h1>Ooops!...</h1>
+		<h2>Ooops!...</h2>
 		<br>
 		<h3><fmt:message key="str.error_message"/> :(</h3>
 		<br>
