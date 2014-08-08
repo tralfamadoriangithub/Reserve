@@ -14,7 +14,7 @@ public class WorkerTableEntity implements Serializable{
 	private String surname;
 	private Profession profession;
 	private int qualification;
-	private Assignation assignation;
+	private int assignationId;
 	
 	public WorkerTableEntity(){}
 
@@ -58,25 +58,25 @@ public class WorkerTableEntity implements Serializable{
 		this.qualification = qualification;
 	}
 
-	public Assignation getAssignation() {
-		return assignation;
+	public int getAssignationId() {
+		return assignationId;
 	}
 
-	public void setAssignation( Assignation assignation ) {
-		this.assignation = assignation;
+	public void setAssignationId( int assignationId ) {
+		this.assignationId = assignationId;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + assignationId;
+		result = prime * result + ( ( name == null ) ? 0 : name.hashCode() );
 		result = prime * result
-				+ ((assignation == null) ? 0 : assignation.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((profession == null) ? 0 : profession.hashCode());
+				+ ( ( profession == null ) ? 0 : profession.hashCode() );
 		result = prime * result + qualification;
-		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
+		result = prime * result
+				+ ( ( surname == null ) ? 0 : surname.hashCode() );
 		result = prime * result + workerId;
 		return result;
 	}
@@ -90,10 +90,7 @@ public class WorkerTableEntity implements Serializable{
 		if ( getClass() != obj.getClass() )
 			return false;
 		WorkerTableEntity other = (WorkerTableEntity) obj;
-		if ( assignation == null ) {
-			if ( other.assignation != null )
-				return false;
-		} else if ( !assignation.equals( other.assignation ) )
+		if ( assignationId != other.assignationId )
 			return false;
 		if ( name == null ) {
 			if ( other.name != null )
@@ -122,8 +119,9 @@ public class WorkerTableEntity implements Serializable{
 		return getClass().getSimpleName() + " [workerId=" + workerId + ", name=" + name
 				+ ", surname=" + surname + ", profession=" + profession
 				+ ", qualification=" + qualification + ", assignation="
-				+ assignation + "]";
+				+ assignationId + "]";
 	}
+
 	
 	
 }

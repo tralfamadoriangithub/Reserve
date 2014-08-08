@@ -27,8 +27,8 @@ public class RegisterNewUser implements ICommand {
 		if ( newUser.getUserId() == -1 ) {
 			return JspPageName.ERROR_PAGE;
 		} else {
-			request.setAttribute( "user", newUser );
-			request.setAttribute( "login", true );
+			request.getSession().setAttribute( "user", newUser );
+			request.getSession().setAttribute( "login", true );
 			return JspPageName.USER_PAGE;
 		}
 	}

@@ -11,26 +11,30 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UserRequestFilter implements Filter{
-	
+public class UserRequestFilter implements Filter {
+
 	private FilterConfig filterConfig = null;
+
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void doFilter( ServletRequest request, ServletResponse response,
 			FilterChain chain ) throws IOException, ServletException {
-		System.out.println("Filter");
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-		
+
+		httpRequest.setCharacterEncoding( "UTF-8" );
+		httpResponse.setCharacterEncoding( "UTF-8" );
+		httpResponse.setContentType( "text/html; charset=UTF-8" );
+
 		httpResponse.setHeader( "Cache-Control", "no-cache" );
-		httpResponse.setHeader("Pragma", "no-cache"); 
-		httpResponse.setDateHeader("Expires", 0);	
-		
+		httpResponse.setHeader( "Pragma", "no-cache" );
+		httpResponse.setDateHeader( "Expires", 0 );
+
 		chain.doFilter( request, response );
 	}
 

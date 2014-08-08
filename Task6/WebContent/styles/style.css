@@ -9,13 +9,25 @@ body {
 	background: linear-gradient(to bottom right, #cccccc, #ffffff);
 }
 
+table{
+	width: 70%;
+	border: 1px solid #aaaaaa;
+	border-spacing: 0px;
+	margin: auto;
+}
+td{
+	border-top: 1px solid #aaaaaa;
+	text-align: center;
+}
+
 #headerButtons a{
 	text-decoration: none;
 	color: #000000;
+	transition: color 0.5s;
 }
 
-#headerButtona a:hover{
-	color: #ffffff;
+#headerButtons a:hover{
+	color: #222222;
 }
 
 #headerButtons section{
@@ -23,13 +35,15 @@ body {
 	height: 50px;
 	border-radius: 7px;
 	border-color: 1px solid #000000;
-	background: #bbbbbb;
+	background: #dddddd;
 	margin-right: 4px;
-	transition: background 0.5s;
+	box-shadow: 0 0 2px rgba(0,0,0,0.2);
+	transition: background 0.5s, box-shadow 0.5s;
 }
 
 #headerButtons section:hover{
-	background: #555555;
+	background: #aaaaaa;
+	box-shadow: 0 0 3px rgba(0,0,0,0.5);
 }
 
 # languageSelect{
@@ -56,8 +70,23 @@ body {
 	margin: 10px;
 	list-style: none;
 }
+
+#pageAside ul li a{
+	color: #333333;
+	text-decoration: none;
+	font-size: large;
+	transition: color 0.3s, margin-left 0.3s;
+}
+
+#pageAside ul li a:hover{
+	color: #777777;
+	margin-left: 10px;
+}
+
 #pageBody{
-	width:75%;
+	
+	width:74%;
+	height: 100%;
 	float: right;
 	padding-top: 10px;
 }

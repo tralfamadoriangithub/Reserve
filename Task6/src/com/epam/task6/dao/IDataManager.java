@@ -11,6 +11,7 @@ import com.epam.task6.entity.Profession;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.Worker;
 import com.epam.task6.tableentity.ClaimTableEntity;
+import com.epam.task6.tableentity.WorkerTableEntity;
 
 public interface IDataManager {
 
@@ -58,7 +59,7 @@ public interface IDataManager {
 
 	public List<Worker> getWorker( int... workerId ) throws DaoException;
 	
-	public List<Worker> getAllWorkers() throws DaoException;
+	public List<WorkerTableEntity> getAllWorkers() throws DaoException;
 
 	public int addAssignation( Assignation assignation ) throws DaoException;
 

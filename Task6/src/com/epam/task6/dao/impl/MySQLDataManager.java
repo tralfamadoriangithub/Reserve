@@ -15,6 +15,7 @@ import com.epam.task6.entity.Profession;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.Worker;
 import com.epam.task6.tableentity.ClaimTableEntity;
+import com.epam.task6.tableentity.WorkerTableEntity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,12 +40,13 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	private Connection getConnection() {
-		return connectionPool.getConnection();
+		Connection conn = connectionPool.getConnection();
+		return conn;
 	}
 
 	private void releaseConnection( Connection connection ) throws SQLException {
 		connectionPool.releaseConnection( connection );
-		connection.close();
+		//connection.close();
 	}
 
 	@Override
@@ -100,7 +102,7 @@ public class MySQLDataManager implements IDataManager {
 			preparedStatement.close();
 			releaseConnection( connection );
 		} catch ( SQLException e ) {
-			e.printStackTrace();
+			throw new DaoException( "Exception in \"getUsersAddress\"", e );
 		}
 		return addresses;
 	}
@@ -112,7 +114,7 @@ public class MySQLDataManager implements IDataManager {
 		try {
 			preparedStatement = connection
 					.prepareStatement(
-							"INSERT INTO claim (problem, address_id, user_id, status_id) VALUES (?,?,?,?)",
+							"INSERT INTO claim (problem, address_id, user_id, claim_status_id) VALUES (?,?,?,?)",
 							Statement.RETURN_GENERATED_KEYS );
 			preparedStatement.setString( 1, claim.getProblemDescription() );
 			preparedStatement.setInt( 2, claim.getAddressId() );
@@ -127,7 +129,7 @@ public class MySQLDataManager implements IDataManager {
 			preparedStatement.close();
 			releaseConnection( connection );
 		} catch ( SQLException e ) {
-			System.out.println( "addNewUser PrparedStatement exception " + e );
+			throw new DaoException( "Exception in \"addClaim\"", e );
 		}
 		return claim.getClaimId();
 	}
@@ -159,7 +161,7 @@ public class MySQLDataManager implements IDataManager {
 		try {
 			for ( User user : users ) {
 				PreparedStatement preparedStatement = connection
-						.prepareStatement( "SELECT c.*, a.*, s.value FROM claim c JOIN address a ON c.address_id = a.address_id JOIN status s ON c.status_id = s.status_id WHERE a.user_id = ?" );
+						.prepareStatement( "SELECT c.*, a.*, s.value FROM claim c JOIN address a ON c.address_id = a.address_id JOIN claim_status s ON c.claim_status_id = s.claim_status_id WHERE a.user_id = ?" );
 				preparedStatement.setInt( 1, user.getUserId() );
 				ResultSet rs = preparedStatement.executeQuery();
 				while ( rs.next() ) {
@@ -185,7 +187,7 @@ public class MySQLDataManager implements IDataManager {
 			}
 			releaseConnection( connection );
 		} catch ( SQLException e ) {
-			e.printStackTrace();
+			throw new DaoException( "Exception in \"getUserClaims\"", e );
 		}
 		return claims;
 	}
@@ -212,7 +214,7 @@ public class MySQLDataManager implements IDataManager {
 			preparedStatement.close();
 			releaseConnection( connection );
 		} catch ( SQLException e ) {
-			System.out.println( "addNewUser PrparedStatement exception " + e );
+			throw new DaoException( "Exception in \"addUser\"", e );
 		}
 		return 0;
 	}
@@ -361,7 +363,7 @@ public class MySQLDataManager implements IDataManager {
 			statement.close();
 			releaseConnection( connection );
 		} catch ( SQLException e ) {
-			e.printStackTrace();
+			throw new DaoException( "Exception in \"getAllAddresses\"", e );
 		}
 		return addresses;
 	}
@@ -373,7 +375,7 @@ public class MySQLDataManager implements IDataManager {
 		List<ClaimTableEntity> claims = new ArrayList<>();
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery( "SELECT c.*, a.*, s.value FROM claim c JOIN address a ON c.address_id = a.address_id JOIN status s ON c.status_id = s.status_id" );
+			ResultSet rs = statement.executeQuery( "SELECT c.*, a.*, s.value FROM claim c JOIN address a ON c.address_id = a.address_id JOIN claim_status s ON c.claim_status_id = s.claim_status_id" );
 			ClaimTableEntity claim;
 			while ( rs.next() ) {
 				 claim = new ClaimTableEntity();
@@ -396,7 +398,7 @@ public class MySQLDataManager implements IDataManager {
 			statement.close();
 			releaseConnection( connection );
 		} catch ( SQLException e ) {
-			e.printStackTrace();
+			throw new DaoException( "Exception in \"getAllClaims\"", e );
 		}
 		return claims;
 	}
@@ -409,28 +411,37 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public List<Worker> getAllWorkers() throws DaoException {
+	public List<WorkerTableEntity> getAllWorkers() throws DaoException {
 
 		connection = getConnection();
-		List<Worker> workers = new ArrayList<>();
+		List<WorkerTableEntity> workers = new ArrayList<>();
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery( "SELECT * FROM worker" );
-			Worker worker;
+			ResultSet rs = statement.executeQuery( "SELECT w.*, p.* FROM worker w JOIN profession p ON w.profession_id = p.profession_id" );
+			
+			WorkerTableEntity worker;
+			Profession profession;
+			Assignation assignation;
+			
 			while ( rs.next() ) {
-				worker = new Worker();
+				worker = new WorkerTableEntity();
+				profession = new Profession();
+				
+				profession.setProfessionId( rs.getInt( "profession_id" ) );
+				profession.setProfessionName( rs.getString( "profession" ) );
+				
 				worker.setWorkerId( rs.getInt( "worker_id" ) );
 				worker.setName( rs.getString( "name" ) );
 				worker.setSurname( rs.getString( "surname" ) );
-				worker.setProfessionId( rs.getInt( "profession_id" ) );
 				worker.setQualification( rs.getInt( "qualification" ) );
 				worker.setAssignationId( rs.getInt( "assignation_id" ) );
+				worker.setProfession( profession );
 				workers.add( worker );
 			}
 			statement.close();
 			releaseConnection( connection );
 		} catch ( SQLException e ) {
-			e.printStackTrace();
+			throw new DaoException( "Exception in \"getAllWorkers\"", e );
 		}
 		return workers;
 	}
@@ -455,7 +466,7 @@ public class MySQLDataManager implements IDataManager {
 			statement.close();
 			releaseConnection( connection );
 		} catch ( SQLException e ) {
-			e.printStackTrace();
+			throw new DaoException( "Exception in \"getAllAssignations\"", e );
 		}
 		return assignations;
 	}

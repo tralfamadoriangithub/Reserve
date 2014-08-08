@@ -49,10 +49,11 @@ public class MySQLAccessManager implements IAccessManager {
 				}
 			}
 			resultSet.close();
-			connectionPool.releaseConnection( connection );
-			connection.close();
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"signIn\" method" , e );  
+		}finally{
+			connectionPool.releaseConnection( connection );
 		}
 		
 		return user;

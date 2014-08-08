@@ -19,7 +19,7 @@ public class AssignationsTableTag extends TagSupport{
 	public int doStartTag() throws JspException {
 		JspWriter out = pageContext.getOut();
 		try {
-			out.write( "<table border='1'>" );
+			out.write( "<table>" );
 			for(Assignation assignation: assignations){
 				System.out.println(assignation);
 				printAssignationRow( assignation, out );

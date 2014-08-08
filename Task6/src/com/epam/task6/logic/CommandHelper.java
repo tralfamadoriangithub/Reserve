@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.epam.task6.logic.impl.ChangeLanguageCommand;
 import com.epam.task6.logic.impl.CreateClaimCommand;
+import com.epam.task6.logic.impl.CreateDatabaseCommand;
+import com.epam.task6.logic.impl.DeleteDatabaseCommand;
 import com.epam.task6.logic.impl.NoSuchCommand;
 import com.epam.task6.logic.impl.RegisterCommand;
 import com.epam.task6.logic.impl.GetUserPageCommand;
@@ -24,6 +26,8 @@ public class CommandHelper {
 	
 	private CommandHelper(){
 		commands = new HashMap<CommandName, ICommand>();
+		commands.put( CommandName.CREATE_DATABASE_COMMAND, new CreateDatabaseCommand() );
+		commands.put( CommandName.DELETE_DATABASE_COMMAND, new DeleteDatabaseCommand() );
 		commands.put( CommandName.REGISTER_COMMAND, new RegisterCommand() );
 		commands.put( CommandName.REGISTER_NEW_USER_COMMAND, new RegisterNewUser() );
 		commands.put( CommandName.GET_USER_PAGE_COMMAND, new GetUserPageCommand() );

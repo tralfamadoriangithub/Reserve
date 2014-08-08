@@ -16,6 +16,6 @@
 		<br>
 		<h3><fmt:message key="str.error_message"/> :(</h3>
 		<br>
-		<a href="/Task6">Main page</a>
+		<a href="/Task6">Home page</a>
 	</section>
 </myTag:basepage>

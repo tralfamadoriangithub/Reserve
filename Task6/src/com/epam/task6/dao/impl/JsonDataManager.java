@@ -13,6 +13,7 @@ import com.epam.task6.entity.Profession;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.Worker;
 import com.epam.task6.tableentity.ClaimTableEntity;
+import com.epam.task6.tableentity.WorkerTableEntity;
 
 public class JsonDataManager implements IDataManager {
 
@@ -234,7 +235,7 @@ public class JsonDataManager implements IDataManager {
 	}
 
 	@Override
-	public List<Worker> getAllWorkers() throws DaoException {
+	public List<WorkerTableEntity> getAllWorkers() throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}

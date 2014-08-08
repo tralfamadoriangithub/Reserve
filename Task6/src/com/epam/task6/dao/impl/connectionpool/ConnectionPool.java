@@ -46,13 +46,12 @@ public class ConnectionPool {
 		System.out.println( "Init connection pool" );
 		try {
 			Class.forName( DRIVER );
-
+			System.out.println( "Trying create connection pool" );
 			while ( freeConnections.remainingCapacity() > 0 ) {
 				try {
-					System.out.println( "Trying create pool" );
+					
 					Connection conn = DriverManager.getConnection( CONNECTION,
 							USER, PASSWORD );
-					System.out.println( conn );
 					freeConnections.add( conn );
 
 				} catch ( SQLException e ) {
@@ -63,6 +62,7 @@ public class ConnectionPool {
 		} catch ( ClassNotFoundException e ) {
 			e.printStackTrace();
 		}
+		System.out.println( "Connection pool created" );
 	}
 
 	private int getPoolSize() {
@@ -80,23 +80,23 @@ public class ConnectionPool {
 
 	public Connection getConnection() {
 		Connection connection = null;
-		System.out.println( "getConnection" );
+		System.out.println( "getConnection ");
 		try {
 			connection = freeConnections.take();
+			buisyCoonnections.add( connection );
 		} catch ( InterruptedException e ) {
-			e.printStackTrace();
+			System.out.println("Get exception");
 		}
-		buisyCoonnections.add( connection );
-		System.out.println( "returnConnection" );
 		return connection;
 	}
 
 	public void releaseConnection( Connection conn ) {
 		if ( buisyCoonnections.contains( conn ) ) {
-			buisyCoonnections.remove( conn );
+			System.out.println( "returnConnection" );
 			freeConnections.add( conn );
+			buisyCoonnections.remove( conn );
 		} else {
-			//TODO Throw exception
+			System.out.println("Release exception");
 		}
 	}
 

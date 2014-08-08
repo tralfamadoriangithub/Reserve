@@ -18,7 +18,7 @@ public class AddressesTableTag extends TagSupport {
 	public int doStartTag() throws JspException {
 		JspWriter out = pageContext.getOut();
 		try {
-			out.write( "<table border='1'>" );
+			out.write( "<table>" );
 			out.write( "<th>Street</th><th>House</th><th>Block</th><th>Flat</th><th>Phone</th>" );
 			for ( Address address : addresses ) {
 				printAddressRow( address, out );

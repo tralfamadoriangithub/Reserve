@@ -19,8 +19,8 @@ public class ClaimsTableTag extends TagSupport{
 	public int doStartTag() throws JspException {
 		JspWriter out = pageContext.getOut();
 		try {
-			out.write( "<table border='1'>" );
-			out.write( "<th>Problem</th><th>Street</th><th>Houce</th><th>Block</th><th>Flat</th><th>Status</th>" );
+			out.write( "<table>" );
+			out.write( "<th>Problem</th><th>Street</th><th>House</th><th>Block</th><th>Flat</th><th>Status</th>" );
 			for(ClaimTableEntity claim: claims){
 				out.write( "<tr>" );
 				printClaim( claim, out );

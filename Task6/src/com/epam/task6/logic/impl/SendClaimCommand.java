@@ -48,7 +48,8 @@ public class SendClaimCommand implements ICommand{
 			dataManager.addClaim( newClaim );
 			claimTable.setClaimStatus( "Sended" );
 		} catch ( DaoException e ) {
-			throw new CommandException( "Exception in \"SendClaimCommand\"", e );
+			System.out.println("Exception");
+			throw new CommandException( "Exception in \"SendClaimCommand\"", e );	
 		}
 		
 		List<ClaimTableEntity> claims = (List<ClaimTableEntity>) session.getAttribute( "claims" );

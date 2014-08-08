@@ -10,20 +10,23 @@ import com.epam.task6.controller.JspPageName;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
 
-public class SignOutCommand implements ICommand{
+public class SignOutCommand implements ICommand {
 
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException {
-		
+
 		HttpSession session = request.getSession();
-		
 		Enumeration<String> attributes = session.getAttributeNames();
-		while(attributes.hasMoreElements()){
-			session.removeAttribute( attributes.nextElement() );
-		}
-		session.invalidate();
 		
+		while ( attributes.hasMoreElements() ) {
+			String attribute = attributes.nextElement();
+			if ( !attribute.equals( "language" ) ) {
+				session.removeAttribute( attribute );
+			}
+		}
+		// session.invalidate();
+
 		return JspPageName.INDEX_PAGE;
 	}
 
