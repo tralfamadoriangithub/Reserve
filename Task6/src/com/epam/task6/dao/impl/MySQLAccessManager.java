@@ -20,7 +20,7 @@ public class MySQLAccessManager implements IAccessManager {
 		
 	}
 	
-	public static MySQLAccessManager getInstance(){
+	public static synchronized MySQLAccessManager getInstance(){
 		if(instance == null){
 			instance = new MySQLAccessManager();
 		}

@@ -6,12 +6,9 @@
 <c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="string"/>
+<fmt:message var="title" key="label.claim"/>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><fmt:message key="label.claim"/></title>
-</head>
-<myTag:basepage>
+<myTag:basepage title="${ title }">
 	<section id="claimForm">
 		<h3><fmt:message key="label.claim"/>:</h3>
 		<br>

@@ -10,12 +10,9 @@
 	scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="string" />
+<fmt:message var="title" key="label.assignation"/>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Assignation</title>
-</head>
-<myTag:basepage>
+<myTag:basepage title="${ title }">
 	<tabletag:workerstable workers="${ sessionScope.workers }"/>
 
 </myTag:basepage>

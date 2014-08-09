@@ -8,16 +8,14 @@ import javax.servlet.http.HttpSession;
 
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
+import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
-import com.epam.task6.dao.DataType;
 import com.epam.task6.dao.IAccessManager;
 import com.epam.task6.dao.IDataManager;
 import com.epam.task6.entity.Address;
 import com.epam.task6.entity.Assignation;
-import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.User;
-import com.epam.task6.entity.Worker;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.ClaimTableEntity;
@@ -32,7 +30,12 @@ public class GetUserPageCommand implements ICommand {
 		User user = null;
 		String login = request.getParameter( RequestParameterName.LOGIN );
 		String password = request.getParameter( RequestParameterName.PASSWORD );
-		if ( !login.equals( "admin" ) && !password.equals( "admin" ) ) {
+		
+////////////////////////////		DELETE THIS		/////////////////////////////////////
+		
+		if ( login.equals( "admin" ) && password.equals( "admin" ) ) { return JspPageName.ADMIN_PAGE;}
+		
+/////////////////////////////////////////////////////////////////////////////////////////		
 
 			DaoFactory daoFactory = DaoFactory.getInstance();
 			IAccessManager accessManager = daoFactory.getAccessManager();
@@ -78,14 +81,12 @@ public class GetUserPageCommand implements ICommand {
 					page = JspPageName.LOGIN_PAGE;
 					break;
 				}
-				request.getSession().setAttribute( "login", true );
-				request.getSession().setAttribute( "user", user );
+				request.getSession().setAttribute( SessionParameterName.IS_LOGIN, true );
+				request.getSession().setAttribute( SessionParameterName.USER, user );
 			} else {
 				page = JspPageName.LOGIN_PAGE;
 			}
-		}else{
-			page = JspPageName.ADMIN_PAGE;
-		}
+		
 		return page;
 	}
 
@@ -95,20 +96,21 @@ public class GetUserPageCommand implements ICommand {
 				.getUsersAddress( user.getUserId() );
 		List<ClaimTableEntity> claims = dataManager.getUsersClaim( user );
 		HttpSession session = request.getSession();
-		session.setAttribute( "addresses", addresses );
-		session.setAttribute( "claims", claims );
+		session.setAttribute( SessionParameterName.ADDRESSES, addresses );
+		session.setAttribute( SessionParameterName.CLAIMS, claims );
 	}
 
 	private void loadOperatorData( HttpServletRequest request,
 			IDataManager dataManager ) throws DaoException {
+		
 		List<WorkerTableEntity> workers = dataManager.getAllWorkers();
 		List<Assignation> assignations = dataManager.getAllAssignations();
 		List<ClaimTableEntity> claims = dataManager.getAllClaims();
 
 		HttpSession session = request.getSession();
-		session.setAttribute( "claims", claims );
-		session.setAttribute( "workers", workers );
-		session.setAttribute( "assignations", assignations );
+		session.setAttribute( SessionParameterName.CLAIMS, claims );
+		session.setAttribute( SessionParameterName.WORKERS, workers );
+		session.setAttribute( SessionParameterName.ASSIGNATIONS, assignations );
 	}
 
 	private void loadAdminData( HttpServletRequest request,

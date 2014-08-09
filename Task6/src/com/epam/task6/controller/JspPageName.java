@@ -1,6 +1,7 @@
 package com.epam.task6.controller;
 
-public class JspPageName {
+public final class JspPageName {
+	
 	public static final String INDEX_PAGE = "index.jsp";
 	public static final String REGISTER_PAGE = "register.jsp";
 	public static final String LOGIN_PAGE = "login.jsp";
@@ -9,4 +10,5 @@ public class JspPageName {
 	public static final String ADMIN_PAGE = "admin.jsp";
 	public static final String CLAIM_PAGE = "claim.jsp";
 	public static final String ERROR_PAGE = "error.jsp";
+	
 }

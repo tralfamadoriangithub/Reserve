@@ -10,13 +10,9 @@
 	scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="string" />
+<fmt:message var="title" key="label.operator"/>
 
-
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><fmt:message key="label.operator" /></title>
-</head>
-<myTag:basepage>
+<myTag:basepage title="${ title }">
 
 	<h3>
 		<fmt:message key="label.claims" />

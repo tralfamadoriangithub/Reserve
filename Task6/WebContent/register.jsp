@@ -7,11 +7,8 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="string"/>
 <fmt:message var="register" key="label.registration"/>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${ register }</title>
-</head> 
-<myTag:basepage>
+
+<myTag:basepage title="${ register }">
 	<section id="regiastrationForm">
 		<form action="controller" method="post">
 			<input type="hidden" name="command" value="register_new_user_command"/>

@@ -1,9 +1,11 @@
 <%@ tag description="Base layout tag" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ attribute name="title" required="true"%>
 
 <html>
 <head>
 <link href="styles/style.css" rel="stylesheet" type="text/css" />
+<title><c:out value="${ title }" /></title>
 </head>
 <body>
 	<section class="mainWrapper">

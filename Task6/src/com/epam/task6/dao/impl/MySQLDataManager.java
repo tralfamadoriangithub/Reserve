@@ -32,7 +32,7 @@ public class MySQLDataManager implements IDataManager {
 	private MySQLDataManager() {
 	}
 
-	public static MySQLDataManager getInstance() {
+	public static synchronized MySQLDataManager getInstance() {
 		if ( null == instance ) {
 			instance = new MySQLDataManager();
 		}
@@ -46,7 +46,6 @@ public class MySQLDataManager implements IDataManager {
 
 	private void releaseConnection( Connection connection ) throws SQLException {
 		connectionPool.releaseConnection( connection );
-		//connection.close();
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public int addAddress( Address address ) throws DaoException {
+	public synchronized int addAddress( Address address ) throws DaoException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -108,7 +107,7 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public int addClaim( Claim claim ) throws DaoException {
+	public synchronized int addClaim( Claim claim ) throws DaoException {
 		connection = getConnection();
 		PreparedStatement preparedStatement;
 		try {
@@ -124,7 +123,6 @@ public class MySQLDataManager implements IDataManager {
 			ResultSet resultSet = preparedStatement.getGeneratedKeys();
 			if ( resultSet.next() ) {
 				claim.setClaimId( resultSet.getInt( 1 ) );
-				// newUserId = resultSet.getInt( 1 );
 			}
 			preparedStatement.close();
 			releaseConnection( connection );
@@ -193,7 +191,7 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public int addUser( User user ) throws DaoException {
+	public synchronized int addUser( User user ) throws DaoException {
 		connection = getConnection();
 		PreparedStatement preparedStatement;
 		try {
@@ -238,7 +236,7 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public int addWorker( Worker worker ) throws DaoException {
+	public synchronized int addWorker( Worker worker ) throws DaoException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -262,7 +260,7 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public int addAssignation( Assignation assignation ) throws DaoException {
+	public synchronized int addAssignation( Assignation assignation ) throws DaoException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -288,7 +286,7 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public int addProfession( Profession profession ) throws DaoException {
+	public synchronized int addProfession( Profession profession ) throws DaoException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -314,7 +312,7 @@ public class MySQLDataManager implements IDataManager {
 	}
 
 	@Override
-	public int addClaimStatus( ClaimStatus claimStatus ) throws DaoException {
+	public synchronized int addClaimStatus( ClaimStatus claimStatus ) throws DaoException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -329,7 +327,7 @@ public class MySQLDataManager implements IDataManager {
 	@Override
 	public boolean deleteClaimStatus( ClaimStatus claimStatus )
 			throws DaoException {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

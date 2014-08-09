@@ -10,7 +10,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class ConnectionPool {
 
 	private static ConnectionPool connectionPool;
-	private int defaultPoolSize;
 	private ArrayBlockingQueue<Connection> freeConnections;
 	private ArrayBlockingQueue<Connection> buisyCoonnections;
 	
@@ -26,16 +25,13 @@ public class ConnectionPool {
 	private ConnectionPool() {
 
 		int poolSize = getPoolSize();
-		if ( poolSize < 1 ) {
-			poolSize = defaultPoolSize;
-		}
 		freeConnections = new ArrayBlockingQueue<>( poolSize );
 		buisyCoonnections = new ArrayBlockingQueue<>( poolSize );
 		initializeConnectionPool();
 
 	}
 
-	public static ConnectionPool getInstance() {
+	public static synchronized ConnectionPool getInstance() {
 		if ( null == connectionPool ) {
 			connectionPool = new ConnectionPool();
 		}

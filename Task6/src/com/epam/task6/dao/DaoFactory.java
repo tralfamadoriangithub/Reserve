@@ -2,14 +2,8 @@ package com.epam.task6.dao;
 
 import java.util.ResourceBundle;
 
-import com.epam.task6.dao.impl.JsonAccessManager;
-import com.epam.task6.dao.impl.JsonDataManager;
 import com.epam.task6.dao.impl.MySQLAccessManager;
 import com.epam.task6.dao.impl.MySQLDataManager;
-import com.epam.task6.dao.impl.OracleAccessManager;
-import com.epam.task6.dao.impl.OracleDataManager;
-import com.epam.task6.dao.impl.XmlAccessManager;
-import com.epam.task6.dao.impl.XmlDataManager;
 
 public class DaoFactory implements IDao {
 
@@ -26,27 +20,13 @@ public class DaoFactory implements IDao {
 	@Override
 	public IDataManager getDataManager( DataType dataType ) {
 
-		IDataManager dataManager;
+		IDataManager dataManager = null;
 
 		switch ( dataType ) {
-		case JSON:
-			dataManager = JsonDataManager.getInstance();
-			break;
-
-		case XML:
-			dataManager = XmlDataManager.getInstance();
-			break;
-
 		case MYSQL:
 			dataManager = MySQLDataManager.getInstance();
 			break;
-
-		case ORACLE:
-			dataManager = OracleDataManager.getInstance();
-			break;
-
 		default:
-			dataManager = null;
 			break;
 		}
 		return dataManager;
@@ -71,17 +51,8 @@ public class DaoFactory implements IDao {
 
 		IAccessManager accessManager = null;
 		switch ( dataType ) {
-		case JSON:
-			accessManager = JsonAccessManager.getInstance();
-			break;
 		case MYSQL:
 			accessManager = MySQLAccessManager.getInstance();
-			break;
-		case XML:
-			accessManager = XmlAccessManager.getInstance();
-			break;
-		case ORACLE:
-			accessManager = OracleAccessManager.getInstance();
 			break;
 		default:
 			break;

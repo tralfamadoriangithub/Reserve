@@ -17,8 +17,6 @@ public class UserRequestFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -34,6 +32,8 @@ public class UserRequestFilter implements Filter {
 		httpResponse.setHeader( "Cache-Control", "no-cache" );
 		httpResponse.setHeader( "Pragma", "no-cache" );
 		httpResponse.setDateHeader( "Expires", 0 );
+		
+		
 
 		chain.doFilter( request, response );
 	}

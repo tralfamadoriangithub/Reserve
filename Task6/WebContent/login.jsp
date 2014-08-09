@@ -8,13 +8,9 @@
 	scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="string" />
+<fmt:message key="label.login" var="title"/>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><fmt:message key="label.login" /></title>
-</head>
-
-<myTag:basepage>
+<myTag:basepage title="${ title }">
 	<section id="loginForm">
 		<form action="controller" method="post">
 			<input type="hidden" name="command" value="get_user_page_command" />

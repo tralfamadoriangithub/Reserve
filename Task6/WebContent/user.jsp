@@ -11,20 +11,12 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="string" />
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<c:if test="${ not sessionScope.login }">
+<c:if test="${ not sessionScope.is_login }">
 	<c:redirect url="login.jsp"></c:redirect>
 </c:if>
-<jsp:useBean id="user" class="com.epam.task6.entity.User"
-	scope="session"></jsp:useBean>
-<jsp:setProperty property="*" name="user" />
-
-<title><jsp:getProperty property="name" name="user" /></title>
-</head>
 
 
-<myTag:basepage>
+<myTag:basepage title="${ sessionScope.user.name }">
 	<h3><fmt:message key="label.addresses"/></h3>
 	<table:addressestable addresses="${ sessionScope.addresses }" />
 	<br>
