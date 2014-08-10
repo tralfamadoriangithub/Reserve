@@ -27,7 +27,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
-	
+
 	<tag>
 		<name>operatorclaimstable</name>
 		<tag-class>com.epam.task6.tag.OperatorClaimsTableTag</tag-class>
@@ -38,7 +38,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
-	
+
 	<tag>
 		<name>workerstable</name>
 		<tag-class>com.epam.task6.tag.WorkersTableTag</tag-class>
@@ -49,7 +49,33 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+
+	<tag>
+		<name>operatorworkerstable</name>
+		<tag-class>com.epam.task6.tag.OperatorWorkersTableTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>workers</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>filter</name>
+			<required>true</required>
+		</attribute>
+	</tag>
 	
+	<tag>
+		<name>freeworkerstable</name>
+		<tag-class>com.epam.task6.tag.FreeWorkersTableTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>workers</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
 	<tag>
 		<name>assignationstable</name>
 		<tag-class>com.epam.task6.tag.AssignationsTableTag</tag-class>

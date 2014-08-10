@@ -8,7 +8,7 @@ import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
-import com.epam.task6.dao.IDataManager;
+import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.User;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
@@ -20,7 +20,7 @@ public class RegisterNewUser implements ICommand {
 			HttpServletResponse response ) throws CommandException {
 
 		User newUser = createUser( request );
-		IDataManager dataManager = DaoFactory.getInstance().getDataManager();
+		IDataDao dataManager = DaoFactory.getInstance().getDataDao();
 		try {
 			dataManager.addUser( newUser );
 		} catch ( DaoException e ) {

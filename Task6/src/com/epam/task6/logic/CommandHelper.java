@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.epam.task6.logic.impl.ChangeLanguageCommand;
+import com.epam.task6.logic.impl.RegisterAssignationCommand;
 import com.epam.task6.logic.impl.CreateClaimCommand;
 import com.epam.task6.logic.impl.CreateDatabaseCommand;
 import com.epam.task6.logic.impl.DeleteDatabaseCommand;
+import com.epam.task6.logic.impl.CreateAssignationCommand;
 import com.epam.task6.logic.impl.NoSuchCommand;
 import com.epam.task6.logic.impl.RegisterCommand;
 import com.epam.task6.logic.impl.GetUserPageCommand;
@@ -36,6 +38,8 @@ public class CommandHelper {
 		commands.put( CommandName.CHANGE_LANGUAGE_COMMAND, new ChangeLanguageCommand() );
 		commands.put( CommandName.CREATE_CLAIM_COMMAND, new CreateClaimCommand() );
 		commands.put( CommandName.SEND_CLAIM_COMMAND, new SendClaimCommand() );
+		commands.put( CommandName.CREATE_ASSIGNATION_COMMAND, new CreateAssignationCommand() );
+		commands.put( CommandName.REGISTER_ASSIGNATION_COMMAND, new RegisterAssignationCommand() );
 		commands.put( CommandName.NO_SUCH_COMMAND, new NoSuchCommand() );
 	}
 	

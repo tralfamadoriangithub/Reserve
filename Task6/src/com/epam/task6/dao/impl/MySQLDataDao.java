@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.epam.task6.dao.impl.connectionpool.ConnectionPool;
 import com.epam.task6.dao.DaoException;
-import com.epam.task6.dao.IDataManager;
+import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.Address;
 import com.epam.task6.entity.Assignation;
 import com.epam.task6.entity.Claim;
@@ -23,18 +23,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MySQLDataManager implements IDataManager {
+public class MySQLDataDao implements IDataDao {
 
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
 	private Connection connection;
-	private static MySQLDataManager instance;
+	private static MySQLDataDao instance;
 
-	private MySQLDataManager() {
+	private MySQLDataDao() {
 	}
 
-	public static synchronized MySQLDataManager getInstance() {
+	public static synchronized MySQLDataDao getInstance() {
 		if ( null == instance ) {
-			instance = new MySQLDataManager();
+			instance = new MySQLDataDao();
 		}
 		return instance;
 	}

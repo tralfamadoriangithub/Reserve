@@ -5,24 +5,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.epam.task6.dao.DaoException;
-import com.epam.task6.dao.IAccessManager;
+import com.epam.task6.dao.IAccessDao;
 import com.epam.task6.dao.impl.connectionpool.ConnectionPool;
 import com.epam.task6.entity.User;
 import com.mysql.jdbc.PreparedStatement;
 
-public class MySQLAccessManager implements IAccessManager {
+public class MySQLAccessDao implements IAccessDao {
 
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
 	private Connection connection;
-	private static MySQLAccessManager instance;
+	private static MySQLAccessDao instance;
 	
-	private MySQLAccessManager() {
+	private MySQLAccessDao() {
 		
 	}
 	
-	public static synchronized MySQLAccessManager getInstance(){
+	public static synchronized MySQLAccessDao getInstance(){
 		if(instance == null){
-			instance = new MySQLAccessManager();
+			instance = new MySQLAccessDao();
 		}
 		return instance;
 	}

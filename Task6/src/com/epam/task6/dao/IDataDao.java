@@ -13,7 +13,7 @@ import com.epam.task6.entity.Worker;
 import com.epam.task6.tableentity.ClaimTableEntity;
 import com.epam.task6.tableentity.WorkerTableEntity;
 
-public interface IDataManager {
+public interface IDataDao {
 
 	public HashMap<String, String> query( String query ) throws DaoException;
 

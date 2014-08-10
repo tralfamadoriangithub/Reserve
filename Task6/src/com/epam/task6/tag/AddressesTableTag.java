@@ -54,7 +54,6 @@ public class AddressesTableTag extends TagSupport {
 		out.write( "</td><td>" );
 		out.write( "<form action='controller' method='post'>"
 				+ "<input type='hidden' name='command' value='create_claim_command'/>"
-//				+ "<input type='hidden' name='address' value='" + address + "'/>" 
 				+ "<input type='hidden' name='address_id' value='" + addressId + "'/>" 
 				+ "<input type='hidden' name='street' value='" + street + "'/>"
 				+ "<input type='hidden' name='house' value='" + house + "'/>"

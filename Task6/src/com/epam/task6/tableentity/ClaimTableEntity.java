@@ -3,8 +3,6 @@ package com.epam.task6.tableentity;
 import java.io.Serializable;
 
 import com.epam.task6.entity.Address;
-import com.epam.task6.entity.ClaimStatus;
-import com.epam.task6.entity.User;
 
 public class ClaimTableEntity implements Serializable{
 
@@ -13,7 +11,6 @@ public class ClaimTableEntity implements Serializable{
 	private int claimId;
 	private String problemDescription;
 	private Address address;
-	//private User user;
 	private String claimStatus;
 	
 	public ClaimTableEntity(){}
@@ -41,15 +38,7 @@ public class ClaimTableEntity implements Serializable{
 	public void setAddress( Address address ) {
 		this.address = address;
 	}
-
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser( User user ) {
-//		this.user = user;
-//	}
-
+	
 	public String getClaimStatus() {
 		return claimStatus;
 	}

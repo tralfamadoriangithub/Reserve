@@ -2,8 +2,8 @@ package com.epam.task6.dao;
 
 import java.util.ResourceBundle;
 
-import com.epam.task6.dao.impl.MySQLAccessManager;
-import com.epam.task6.dao.impl.MySQLDataManager;
+import com.epam.task6.dao.impl.MySQLAccessDao;
+import com.epam.task6.dao.impl.MySQLDataDao;
 
 public class DaoFactory implements IDao {
 
@@ -18,13 +18,13 @@ public class DaoFactory implements IDao {
 	}
 
 	@Override
-	public IDataManager getDataManager( DataType dataType ) {
+	public IDataDao getDataDao( DataType dataType ) {
 
-		IDataManager dataManager = null;
+		IDataDao dataManager = null;
 
 		switch ( dataType ) {
 		case MYSQL:
-			dataManager = MySQLDataManager.getInstance();
+			dataManager = MySQLDataDao.getInstance();
 			break;
 		default:
 			break;
@@ -33,13 +33,13 @@ public class DaoFactory implements IDao {
 	}
 
 	@Override
-	public IDataManager getDataManager() {
-		IDataManager dataManager;
+	public IDataDao getDataDao() {
+		IDataDao dataManager;
 		ResourceBundle bundle = ResourceBundle.getBundle( "project_properties" );
 		DataType dataType = DataType.valueOf( bundle.getString( "data_type" )
 				.toUpperCase() );
 		if ( null != dataType ) {
-			dataManager = getDataManager( dataType );
+			dataManager = getDataDao( dataType );
 		} else {
 			dataManager = null;
 		}
@@ -47,12 +47,12 @@ public class DaoFactory implements IDao {
 	}
 
 	@Override
-	public IAccessManager getAccessManager( DataType dataType ) {
+	public IAccessDao getAccessDao( DataType dataType ) {
 
-		IAccessManager accessManager = null;
+		IAccessDao accessManager = null;
 		switch ( dataType ) {
 		case MYSQL:
-			accessManager = MySQLAccessManager.getInstance();
+			accessManager = MySQLAccessDao.getInstance();
 			break;
 		default:
 			break;
@@ -61,13 +61,13 @@ public class DaoFactory implements IDao {
 	}
 
 	@Override
-	public IAccessManager getAccessManager() {
-		IAccessManager accessManager;
+	public IAccessDao getAccessDao() {
+		IAccessDao accessManager;
 		ResourceBundle bundle = ResourceBundle.getBundle( "project_properties" );
 		DataType dataType = DataType.valueOf( bundle.getString( "data_type" )
 				.toUpperCase() );
 		if ( null != dataType ) {
-			accessManager = getAccessManager( dataType );
+			accessManager = getAccessDao( dataType );
 		} else {
 			accessManager = null;
 		}

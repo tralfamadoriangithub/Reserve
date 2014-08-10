@@ -11,8 +11,8 @@ import com.epam.task6.controller.RequestParameterName;
 import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
-import com.epam.task6.dao.IAccessManager;
-import com.epam.task6.dao.IDataManager;
+import com.epam.task6.dao.IAccessDao;
+import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.Address;
 import com.epam.task6.entity.Assignation;
 import com.epam.task6.entity.User;
@@ -38,7 +38,7 @@ public class GetUserPageCommand implements ICommand {
 /////////////////////////////////////////////////////////////////////////////////////////		
 
 			DaoFactory daoFactory = DaoFactory.getInstance();
-			IAccessManager accessManager = daoFactory.getAccessManager();
+			IAccessDao accessManager = daoFactory.getAccessDao();
 			
 			try {
 				user = accessManager.signIn( login, password );
@@ -48,7 +48,7 @@ public class GetUserPageCommand implements ICommand {
 			}
 
 			if ( user != null ) {
-				IDataManager dataManager = daoFactory.getDataManager();
+				IDataDao dataManager = daoFactory.getDataDao();
 				
 				switch ( user.getStatus() ) {
 
@@ -91,7 +91,7 @@ public class GetUserPageCommand implements ICommand {
 	}
 
 	private void loadUserData( User user, HttpServletRequest request,
-			IDataManager dataManager ) throws DaoException {
+			IDataDao dataManager ) throws DaoException {
 		List<Address> addresses = dataManager
 				.getUsersAddress( user.getUserId() );
 		List<ClaimTableEntity> claims = dataManager.getUsersClaim( user );
@@ -101,7 +101,7 @@ public class GetUserPageCommand implements ICommand {
 	}
 
 	private void loadOperatorData( HttpServletRequest request,
-			IDataManager dataManager ) throws DaoException {
+			IDataDao dataManager ) throws DaoException {
 		
 		List<WorkerTableEntity> workers = dataManager.getAllWorkers();
 		List<Assignation> assignations = dataManager.getAllAssignations();
@@ -114,7 +114,7 @@ public class GetUserPageCommand implements ICommand {
 	}
 
 	private void loadAdminData( HttpServletRequest request,
-			IDataManager dataManager ) {
+			IDataDao dataManager ) {
 
 	}
 }

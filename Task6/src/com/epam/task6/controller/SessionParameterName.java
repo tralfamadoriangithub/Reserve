@@ -12,5 +12,6 @@ public final class SessionParameterName {
 	public static final String ASSIGNATIONS = "assignations";
 	public static final String PROFESSIONS = "professions";
 	public static final String CLAIM_STATUSES = "claim_statuses";
+	public static final String CLAIM_FOR_ASSIGNATION = "claim_for_assignation";
 	
 }

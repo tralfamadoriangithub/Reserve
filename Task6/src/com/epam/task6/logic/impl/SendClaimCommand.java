@@ -13,7 +13,7 @@ import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
-import com.epam.task6.dao.IDataManager;
+import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.Address;
 import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.User;
@@ -42,7 +42,7 @@ public class SendClaimCommand implements ICommand{
 		newClaim.setUserId( user.getUserId() );
 		newClaim.setProblemDescription( claimTable.getProblemDescription() );
 		
-		IDataManager dataManager = DaoFactory.getInstance().getDataManager();
+		IDataDao dataManager = DaoFactory.getInstance().getDataDao();
 		
 		try {
 			dataManager.addClaim( newClaim );
