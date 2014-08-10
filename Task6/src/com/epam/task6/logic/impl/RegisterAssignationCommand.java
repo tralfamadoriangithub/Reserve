@@ -28,12 +28,16 @@ public class RegisterAssignationCommand implements ICommand{
 		HttpSession session = request.getSession();
 		ClaimTableEntity claim = (ClaimTableEntity) session.getAttribute( SessionParameterName.CLAIM_FOR_ASSIGNATION );
 		String [] workersId = request.getParameterValues( RequestParameterName.SELECTED_WORKER );
-		String dateB = request.getParameter( RequestParameterName.BEGIN_WORK_DATE );
-		String dateE = request.getParameter( RequestParameterName.END_WORK_DATE );
-		
-		System.out.println(dateE);
+		String beginWorkDate = request.getParameter( RequestParameterName.BEGIN_WORK_DATE );
+		String beginWorkTime = request.getParameter( RequestParameterName.BEGIN_WORK_TIME );
+		String endWorkDate = request.getParameter( RequestParameterName.END_WORK_DATE );
+		String endWorkTime = request.getParameter( RequestParameterName.END_WORK_TIME );
+				System.out.println(beginWorkDate);
+				System.out.println(beginWorkTime);
 		Assignation assignation = new Assignation();
 		assignation.setClaimId( claim.getClaimId() );
+//		Timestamp timestamp = Timestamp.valueOf( beginWorkDate + " " + beginWorkTime );
+//		System.out.println(timestamp.toString());
 	
 //		IDataDao dataDao = DaoFactory.getInstance().getDataDao();
 //		try {
