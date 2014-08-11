@@ -32,8 +32,6 @@ public class UserRequestFilter implements Filter {
 		httpResponse.setHeader( "Cache-Control", "no-cache" );
 		httpResponse.setHeader( "Pragma", "no-cache" );
 		httpResponse.setDateHeader( "Expires", 0 );
-		
-		
 
 		chain.doFilter( request, response );
 	}

@@ -36,8 +36,7 @@ public class AddressesTableTag extends TagSupport {
 			}
 			out.write( "</table>" );
 		} catch ( IOException e ) {
-
-			e.printStackTrace();
+			throw new JspException();
 		}
 
 		return SKIP_BODY;

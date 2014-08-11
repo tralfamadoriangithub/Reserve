@@ -29,8 +29,7 @@ public class OperatorWorkersTableTag extends TagSupport {
 			}
 			out.write( "</table>" );
 		} catch ( IOException e ) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new JspException();
 		}
 		return SKIP_BODY;
 	}

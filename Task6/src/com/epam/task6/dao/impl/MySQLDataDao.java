@@ -52,8 +52,10 @@ public class MySQLDataDao implements IDataDao {
 
 	@Override
 	public synchronized void addUser( User user ) throws DaoException {
+		
 		connection = getConnection();
 		PreparedStatement preparedStatement;
+		
 		try {
 			preparedStatement = connection
 					.prepareStatement(
@@ -71,6 +73,7 @@ public class MySQLDataDao implements IDataDao {
 			}
 			preparedStatement.close();
 			releaseConnection( connection );
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"addUser\"", e );
 		}
@@ -78,8 +81,10 @@ public class MySQLDataDao implements IDataDao {
 
 	@Override
 	public List<Address> getUsersAddress( int... userId ) throws DaoException {
+		
 		connection = getConnection();
 		List<Address> addresses = new ArrayList<Address>();
+		
 		try {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement( "SELECT * FROM address WHERE user_id = ?" );
@@ -101,6 +106,7 @@ public class MySQLDataDao implements IDataDao {
 			}
 			preparedStatement.close();
 			releaseConnection( connection );
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getUsersAddress\"", e );
 		}
@@ -109,8 +115,10 @@ public class MySQLDataDao implements IDataDao {
 
 	@Override
 	public synchronized void addClaim( Claim claim ) throws DaoException {
+		
 		connection = getConnection();
 		PreparedStatement preparedStatement;
+		
 		try {
 			preparedStatement = connection
 					.prepareStatement(
@@ -127,6 +135,7 @@ public class MySQLDataDao implements IDataDao {
 			}
 			preparedStatement.close();
 			releaseConnection( connection );
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"addClaim\"", e );
 		}
@@ -135,6 +144,7 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public List<ClaimTableEntity> getUsersClaim( User... users )
 			throws DaoException {
+		
 		connection = getConnection();
 		List<ClaimTableEntity> claims = new ArrayList<ClaimTableEntity>();
 
@@ -172,6 +182,7 @@ public class MySQLDataDao implements IDataDao {
 				preparedStatement.close();
 			}
 			releaseConnection( connection );
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getUserClaims\"", e );
 		}
@@ -183,6 +194,7 @@ public class MySQLDataDao implements IDataDao {
 
 		connection = getConnection();
 		List<Address> addresses = new ArrayList<>();
+		
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery( "SELECT * FROM address" );
@@ -200,6 +212,7 @@ public class MySQLDataDao implements IDataDao {
 			}
 			statement.close();
 			releaseConnection( connection );
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getAllAddresses\"", e );
 		}
@@ -211,6 +224,7 @@ public class MySQLDataDao implements IDataDao {
 
 		connection = getConnection();
 		List<ClaimTableEntity> claims = new ArrayList<>();
+		
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement
@@ -240,6 +254,7 @@ public class MySQLDataDao implements IDataDao {
 			}
 			statement.close();
 			releaseConnection( connection );
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getAllClaims\"", e );
 		}
@@ -247,17 +262,11 @@ public class MySQLDataDao implements IDataDao {
 	}
 
 	@Override
-	public List<User> getAllUsers() throws DaoException {
-		List<User> users = new ArrayList<>();
-
-		return users;
-	}
-
-	@Override
 	public List<WorkerTableEntity> getAllWorkers() throws DaoException {
 
 		connection = getConnection();
 		List<WorkerTableEntity> workers = new ArrayList<>();
+		
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement
@@ -283,6 +292,7 @@ public class MySQLDataDao implements IDataDao {
 			}
 			statement.close();
 			releaseConnection( connection );
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getAllWorkers\"", e );
 		}
@@ -295,6 +305,7 @@ public class MySQLDataDao implements IDataDao {
 
 		connection = getConnection();
 		List<AssignationTableEntity> assignations = new ArrayList<>();
+		
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement
@@ -332,6 +343,7 @@ public class MySQLDataDao implements IDataDao {
 			}
 			statement.close();
 			releaseConnection( connection );
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getAllAssignations\"", e );
 		}
@@ -341,8 +353,10 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public void registerNewAssignation( Assignation assignation,
 			int... workersId ) throws DaoException {
+		
 		connection = getConnection();
 		PreparedStatement preparedStatement;
+		
 		try {
 			preparedStatement = connection
 					.prepareStatement(
@@ -371,9 +385,17 @@ public class MySQLDataDao implements IDataDao {
 			preparedStatement.executeBatch();
 			preparedStatement.close();
 			releaseConnection( connection );
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"addClaim\"", e );
 		}
+	}
+	
+	@Override
+	public List<User> getAllUsers() throws DaoException {
+		List<User> users = new ArrayList<>();
+
+		return users;
 	}
 
 	@Override

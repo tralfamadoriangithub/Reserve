@@ -25,7 +25,7 @@ public interface IDataDao {
 	public boolean deleteAddress( int addressId ) throws DaoException;
 
 	public List<Address> getAddress( int... addressId ) throws DaoException;
-	
+
 	public List<Address> getAllAddresses() throws DaoException;
 
 	public List<Address> getUsersAddress( int... userId ) throws DaoException;
@@ -37,10 +37,11 @@ public interface IDataDao {
 	public boolean deleteClaim( int claimId ) throws DaoException;
 
 	public List<Claim> getClaim( int... claimId ) throws DaoException;
-	
-	public List<ClaimTableEntity> getAllClaims( ) throws DaoException;
 
-	public List<ClaimTableEntity> getUsersClaim( User... user ) throws DaoException;
+	public List<ClaimTableEntity> getAllClaims() throws DaoException;
+
+	public List<ClaimTableEntity> getUsersClaim( User... user )
+			throws DaoException;
 
 	public void addUser( User user ) throws DaoException;
 
@@ -49,7 +50,7 @@ public interface IDataDao {
 	public boolean deleteUser( int userId ) throws DaoException;
 
 	public List<User> getUser( int... userId ) throws DaoException;
-	
+
 	public List<User> getAllUsers() throws DaoException;
 
 	public void addWorker( Worker worker ) throws DaoException;
@@ -59,39 +60,48 @@ public interface IDataDao {
 	public boolean deleteWorker( int workerId ) throws DaoException;
 
 	public List<Worker> getWorker( int... workerId ) throws DaoException;
-	
+
 	public List<WorkerTableEntity> getAllWorkers() throws DaoException;
 
 	public void addAssignation( Assignation assignation ) throws DaoException;
 
-	public boolean updateAssignation( Assignation assignation ) throws DaoException;
+	public boolean updateAssignation( Assignation assignation )
+			throws DaoException;
 
 	public boolean deleteAssignation( int assignationId ) throws DaoException;
 
-	public List<Assignation> getAssignation( int... assignationId ) throws DaoException;
-	
-	public List<AssignationTableEntity> getAllAssignations() throws DaoException;
+	public List<Assignation> getAssignation( int... assignationId )
+			throws DaoException;
+
+	public List<AssignationTableEntity> getAllAssignations()
+			throws DaoException;
 
 	public void addProfession( Profession profession ) throws DaoException;
 
-	public boolean updateProfession( Profession profession ) throws DaoException;
+	public boolean updateProfession( Profession profession )
+			throws DaoException;
 
 	public boolean deleteProfession( int professionId ) throws DaoException;
 
-	public List<Profession> getProfession( int... professionId ) throws DaoException;
-	
+	public List<Profession> getProfession( int... professionId )
+			throws DaoException;
+
 	public List<Profession> getAllProfessions() throws DaoException;
 
 	public void addClaimStatus( ClaimStatus claimStatus ) throws DaoException;
 
-	public boolean updateClaimStatus( ClaimStatus claimStatus ) throws DaoException;
+	public boolean updateClaimStatus( ClaimStatus claimStatus )
+			throws DaoException;
 
-	public boolean deleteClaimStatus( ClaimStatus claimStatus ) throws DaoException;
+	public boolean deleteClaimStatus( ClaimStatus claimStatus )
+			throws DaoException;
 
-	public List<ClaimStatus> getClaimStatus( int... claimId ) throws DaoException;
-	
+	public List<ClaimStatus> getClaimStatus( int... claimId )
+			throws DaoException;
+
 	public List<ClaimStatus> getAllClaimStatuses() throws DaoException;
-	
-	public void registerNewAssignation( Assignation assignation, int ... workersId ) throws DaoException;
+
+	public void registerNewAssignation( Assignation assignation,
+			int... workersId ) throws DaoException;
 
 }

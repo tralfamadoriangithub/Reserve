@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.epam.task6.dao.DBField;
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.IAccessDao;
 import com.epam.task6.dao.DataNotFoundException;
@@ -39,14 +40,14 @@ public class MySQLAccessDao implements IAccessDao {
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if ( resultSet.next() ) {
-				if ( resultSet.getString( "password" ).equals( password ) ) {
+				if ( resultSet.getString( DBField.PASSWORD ).equals( password ) ) {
 					user = new User();
 					user.setLogin( login );
 					user.setPassword( password );
-					user.setName( resultSet.getString( "name" ) );
-					user.setSurname( resultSet.getString( "surname" ) );
-					user.setUserId( resultSet.getInt( "user_id" ) );
-					user.setStatus( resultSet.getInt( "status" ) );
+					user.setName( resultSet.getString( DBField.NAME ) );
+					user.setSurname( resultSet.getString( DBField.SURNAME ) );
+					user.setUserId( resultSet.getInt( DBField.USER_ID ) );
+					user.setStatus( resultSet.getInt( DBField.USER_STATUS ) );
 					resultSet.close();
 				}else{
 					throw new DataNotFoundException( "Wrong login or password" );

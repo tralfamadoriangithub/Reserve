@@ -23,7 +23,6 @@ public class AssignationsTableTag extends TagSupport{
 		try {
 			out.write( "<table>" );
 			for(AssignationTableEntity assignation: assignations){
-				System.out.println(assignation);
 				printAssignationRow( assignation, out );
 			}
 			out.write( "</table>" );

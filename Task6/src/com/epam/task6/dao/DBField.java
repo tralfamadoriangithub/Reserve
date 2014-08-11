@@ -9,7 +9,7 @@ public final class DBField {
 	public static final String PASSWORD = "password";
 	public static final String NAME = "name";
 	public static final String SURNAME = "surname";
-	public static final String USER_STATUS = "user_status";
+	public static final String USER_STATUS = "status";
 	
 //		ADDRESS TABLE	
 	
