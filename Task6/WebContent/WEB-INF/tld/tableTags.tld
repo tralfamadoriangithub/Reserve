@@ -18,8 +18,8 @@
 	</tag>
 
 	<tag>
-		<name>claimstable</name>
-		<tag-class>com.epam.task6.tag.ClaimsTableTag</tag-class>
+		<name>userclaimstable</name>
+		<tag-class>com.epam.task6.tag.UserClaimsTableTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>claims</name>
@@ -60,22 +60,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>filter</name>
+			<name>workers</name>
 			<required>true</required>
 		</attribute>
 	</tag>
 	
-	<tag>
-		<name>freeworkerstable</name>
-		<tag-class>com.epam.task6.tag.FreeWorkersTableTag</tag-class>
-		<body-content>empty</body-content>
-		<attribute>
-			<name>workers</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
 	<tag>
 		<name>assignationstable</name>
 		<tag-class>com.epam.task6.tag.AssignationsTableTag</tag-class>

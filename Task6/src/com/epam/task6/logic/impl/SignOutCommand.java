@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.epam.task6.controller.JspPageName;
+import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
 
@@ -21,7 +22,7 @@ public class SignOutCommand implements ICommand {
 		
 		while ( attributes.hasMoreElements() ) {
 			String attribute = attributes.nextElement();
-			if ( !attribute.equals( "language" ) ) {
+			if ( !attribute.equals( SessionParameterName.LANGUAGE ) ) {
 				session.removeAttribute( attribute );
 			}
 		}

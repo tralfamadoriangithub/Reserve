@@ -21,10 +21,12 @@ public class ChangeLanguageCommand implements ICommand {
 		String selectedLanguage = request
 				.getParameter( RequestParameterName.LANGUAGE );
 		
-		if ( selectedLanguage.equals( "ru" ) ) {
-			request.setAttribute( RequestParameterName.LANGUAGE, "ru" );
-		} else if ( selectedLanguage.equals( "en" ) ) {
-			request.setAttribute( RequestParameterName.LANGUAGE, "en" );
+		if ( selectedLanguage.equals( "ru_RU" ) ) {
+			session.setAttribute( SessionParameterName.LANGUAGE, new Locale( "ru", "RU" ) );
+			Locale.setDefault( new Locale( "ru", "RU" ) );
+		} else if ( selectedLanguage.equals( "en_US" ) ) {
+			session.setAttribute( SessionParameterName.LANGUAGE, new Locale( "ru", "RU" ) );
+			Locale.setDefault( new Locale( "en", "US" ) );
 		}
 		String page = (String) session.getAttribute( SessionParameterName.CURRENT_PAGE );
 		return page.replace( "/Task6", "" );

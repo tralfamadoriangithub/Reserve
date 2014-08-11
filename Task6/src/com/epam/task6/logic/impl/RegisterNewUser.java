@@ -10,6 +10,7 @@ import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.User;
+import com.epam.task6.entity.UserStatus;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
 
@@ -40,7 +41,7 @@ public class RegisterNewUser implements ICommand {
 		user.setPassword( request.getParameter( RequestParameterName.PASSWORD ) );
 		user.setName( request.getParameter( RequestParameterName.NAME ) );
 		user.setSurname( request.getParameter( RequestParameterName.SURNAME ) );
-		user.setStatus( 1 );
+		user.setStatus( UserStatus.REGULAR_USER );
 
 		return user;
 	}

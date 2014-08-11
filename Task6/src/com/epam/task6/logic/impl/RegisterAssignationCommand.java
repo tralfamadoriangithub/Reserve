@@ -1,9 +1,7 @@
 package com.epam.task6.logic.impl;
 
-
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,34 +16,69 @@ import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.Assignation;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.ICommand;
+import com.epam.task6.tableentity.AssignationTableEntity;
 import com.epam.task6.tableentity.ClaimTableEntity;
 
-public class RegisterAssignationCommand implements ICommand{
+public class RegisterAssignationCommand implements ICommand {
 
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException {
 		HttpSession session = request.getSession();
-		ClaimTableEntity claim = (ClaimTableEntity) session.getAttribute( SessionParameterName.CLAIM_FOR_ASSIGNATION );
-		String [] workersId = request.getParameterValues( RequestParameterName.SELECTED_WORKER );
-		String beginWorkDate = request.getParameter( RequestParameterName.BEGIN_WORK_DATE );
-		String beginWorkTime = request.getParameter( RequestParameterName.BEGIN_WORK_TIME );
-		String endWorkDate = request.getParameter( RequestParameterName.END_WORK_DATE );
-		String endWorkTime = request.getParameter( RequestParameterName.END_WORK_TIME );
-				System.out.println(beginWorkDate);
-				System.out.println(beginWorkTime);
+		ClaimTableEntity claim = (ClaimTableEntity) session
+				.getAttribute( SessionParameterName.CLAIM_FOR_ASSIGNATION );
+
+		int[] workersId = getWorkersId( request
+				.getParameterValues( RequestParameterName.SELECTED_WORKER ) );
+
+		Timestamp beginWork = createTimestamp(
+				request.getParameter( RequestParameterName.BEGIN_WORK_DATE ),
+				request.getParameter( RequestParameterName.BEGIN_WORK_TIME ) );
+		Timestamp endWork = createTimestamp(
+				request.getParameter( RequestParameterName.END_WORK_DATE ),
+				request.getParameter( RequestParameterName.END_WORK_TIME ) );
+
 		Assignation assignation = new Assignation();
 		assignation.setClaimId( claim.getClaimId() );
-//		Timestamp timestamp = Timestamp.valueOf( beginWorkDate + " " + beginWorkTime );
-//		System.out.println(timestamp.toString());
-	
-//		IDataDao dataDao = DaoFactory.getInstance().getDataDao();
-//		try {
-//			dataDao.addAssignation( assignation );
-//		} catch ( DaoException e ) {
-//			throw new CommandException( "Exception in \"RegisterAssignationCommand\"", e );
-//		}
+		assignation.setBeginWork( beginWork );
+		assignation.setEndWork( endWork );
+
+		IDataDao dataDao = DaoFactory.getInstance().getDataDao();
+		try {
+			dataDao.registerNewAssignation( assignation, workersId );
+		} catch ( DaoException e ) {
+			throw new CommandException(
+					"Exception in \"RegisterAssignationCommand\"", e );
+		}
+		AssignationTableEntity assignationTableEntity = new AssignationTableEntity();
+		assignationTableEntity
+				.setAssignationId( assignation.getAssignationId() );
+		assignationTableEntity.setBeginWork( beginWork );
+		assignationTableEntity.setEndWork( endWork );
+		assignationTableEntity.setClaim( claim );
+		
+		List<AssignationTableEntity> assignations = (List<AssignationTableEntity>) session.getAttribute( SessionParameterName.ASSIGNATIONS );
+		assignations.add( assignationTableEntity );
+		session.setAttribute( SessionParameterName.ASSIGNATIONS, assignations );
+		session.removeAttribute( SessionParameterName.CLAIM_FOR_ASSIGNATION );
+		
 		return JspPageName.OPERATOR_PAGE;
 	}
 
+	private Timestamp createTimestamp( String date, String time ) {
+		StringBuilder dateTime = new StringBuilder();
+		dateTime.append( date ).append( " " ).append( time ).append( ":00" );
+		Timestamp timestamp = Timestamp.valueOf( dateTime.toString() );
+		return timestamp;
+	}
+
+	private int[] getWorkersId( String[] strWorkersId ) {
+		
+		int[] intWorkersId = new int[strWorkersId.length];
+
+		for ( int i = 0; i < strWorkersId.length; i++ ) {
+			intWorkersId[i] = Integer.parseInt( strWorkersId[i] );
+		}
+		return intWorkersId;
+	}
 }

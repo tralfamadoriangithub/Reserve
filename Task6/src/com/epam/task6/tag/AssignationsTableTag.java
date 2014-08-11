@@ -9,18 +9,20 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import com.epam.task6.entity.Assignation;
 import com.epam.task6.entity.Claim;
+import com.epam.task6.tableentity.AssignationTableEntity;
 
 public class AssignationsTableTag extends TagSupport{
 
 	private static final long serialVersionUID = 1L;
-	private List<Assignation> assignations;
+	private List<AssignationTableEntity> assignations;
 	
 	@Override
 	public int doStartTag() throws JspException {
 		JspWriter out = pageContext.getOut();
+	
 		try {
 			out.write( "<table>" );
-			for(Assignation assignation: assignations){
+			for(AssignationTableEntity assignation: assignations){
 				System.out.println(assignation);
 				printAssignationRow( assignation, out );
 			}
@@ -31,34 +33,41 @@ public class AssignationsTableTag extends TagSupport{
 		return SKIP_BODY;
 	}
 	
-	private void printAssignationRow( Assignation assignation, JspWriter out ) throws IOException{
+	private void printAssignationRow( AssignationTableEntity assignation, JspWriter out ) throws IOException{
 		out.write( "<tr><td>" );
-		out.write( String.valueOf( assignation.getAssignationId() ) );
+		out.write( String.valueOf( assignation.getClaim().getProblemDescription() ) );
 		out.write( "</td><td>" );
 		out.write( String.valueOf( assignation.getBeginWork() ) );
 		out.write( "</td><td>" );
 		out.write( String.valueOf( assignation.getEndWork() ) );
 		out.write( "</td><td>" );
+		out.write( String.valueOf( assignation.getClaim().getClaimStatus() ) );
+		out.write( "</td><td>" );
 		out.write( "<form action='controller' method='post'>"
 				+ "<input type='hidden' name='command' value='edit_claim_command'/>"
-				+ "<input type='hidden' name='address' value='" + assignation
-				+ "'/>" + "<input type='submit' value='Change Status'/>" + "</form>" );
+				+ "<input type='hidden' name='assignation_id' value='" + assignation.getAssignationId()
+				+ "'/>" + "<input type='submit' value='Delete'/>" + "</form>" );
+		out.write( "</td><td>" );
+		out.write( "<form action='controller' method='post'>"
+				+ "<input type='hidden' name='command' value='edit_claim_command'/>"
+				+ "<input type='hidden' name='assignation_id' value='" + assignation.getAssignationId()
+				+ "'/>" + "<input type='submit' value='Edit'/>" + "</form>" );
 		out.write( "</td></tr>" );
 	}
 
-	public List<Assignation> getAssignations() {
+	public List<AssignationTableEntity> getAssignations() {
 		return assignations;
 	}
 	
-	public Assignation getAssignations( int index ){
+	public AssignationTableEntity getAssignations( int index ){
 		return assignations.get( index );
 	}
 
-	public void setAssignations( List<Assignation> assignations ) {
+	public void setAssignations( List<AssignationTableEntity> assignations ) {
 		this.assignations = assignations;
 	}
 	
-	public void setAssignations( Assignation assignation ){
+	public void setAssignations( AssignationTableEntity assignation ){
 		assignations.add( assignation );
 	}
 }

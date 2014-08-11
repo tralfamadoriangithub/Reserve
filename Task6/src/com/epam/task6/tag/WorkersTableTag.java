@@ -20,7 +20,7 @@ public class WorkersTableTag extends TagSupport {
 		JspWriter out = pageContext.getOut();
 		try {
 			out.write( "<table>" );
-			out.write( "<th>Name</th><th>Surname</th><th>Profession</th><th>Assignation</th>" );
+			out.write( "<th>Name</th><th>Surname</th><th>Profession</th>" );
 			for ( WorkerTableEntity worker : workers ) {
 				out.write( "<tr>" );
 				printWorkerRow( worker, out );
@@ -41,8 +41,6 @@ public class WorkersTableTag extends TagSupport {
 		out.write( worker.getSurname() );
 		out.write( "</td><td>" );
 		out.write( String.valueOf( worker.getProfession().getProfessionName() ) );
-		out.write( "</td><td>" );
-		out.write( String.valueOf( worker.getAssignationId() ) );
 		out.write( "</td><td>" );
 		out.write( "<form action='controller' method='post'>"
 				+ "<input type='hidden' name='command' value='edit_worker_command'/>"

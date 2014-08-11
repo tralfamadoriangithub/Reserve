@@ -29,7 +29,7 @@
 				<input type="time" name="end_work_time" />
 			</section>
 			
-			<table:freeworkerstable workers="${ sessionScope.workers }" />
+			<table:operatorworkerstable workers="${ sessionScope.workers }" />
 			
 			<fmt:message var="assign_squad" key="button.assign_squsd"/>
 			<input type="submit" value="Create Squad" />

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.IAccessDao;
+import com.epam.task6.dao.DataNotFoundException;
 import com.epam.task6.dao.impl.connectionpool.ConnectionPool;
 import com.epam.task6.entity.User;
 import com.mysql.jdbc.PreparedStatement;
@@ -28,7 +29,7 @@ public class MySQLAccessDao implements IAccessDao {
 	}
 
 	@Override
-	public User signIn( final String login, final String password ) throws DaoException {
+	public User signIn( final String login, final String password ) throws DaoException, DataNotFoundException {
 		User user = null;
 		connection = connectionPool.getConnection();
 		try {
@@ -46,9 +47,15 @@ public class MySQLAccessDao implements IAccessDao {
 					user.setSurname( resultSet.getString( "surname" ) );
 					user.setUserId( resultSet.getInt( "user_id" ) );
 					user.setStatus( resultSet.getInt( "status" ) );
+					resultSet.close();
+				}else{
+					throw new DataNotFoundException( "Wrong login or password" );
 				}
+			}else{
+				throw new DataNotFoundException( "No such user" );
 			}
-			resultSet.close();
+			
+			
 			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"signIn\" method" , e );  
@@ -58,23 +65,4 @@ public class MySQLAccessDao implements IAccessDao {
 		
 		return user;
 	}
-
-	@Override
-	public void signOut() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void register( String user, String password ) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public User register( User newUser ) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

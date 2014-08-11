@@ -38,14 +38,14 @@
 	</section>
 	<section id="languageSelect" class="languageSelectStyle">
 		<c:choose>
-			<c:when test="${ language eq 'en' }">
+			<c:when test="${ language eq 'en_US' }">
 				<a
-					href="/Task6/controller?command=change_language_command&language=ru"><img
+					href="/Task6/controller?command=change_language_command&language=ru_RU"><img
 					src="resources/img/ru.png"></a>
 			</c:when>
 			<c:otherwise>
 				<a
-					href="/Task6/controller?command=change_language_command&language=en"><img
+					href="/Task6/controller?command=change_language_command&language=en_US"><img
 					src="resources/img/uk.png"></a>
 			</c:otherwise>
 		</c:choose>

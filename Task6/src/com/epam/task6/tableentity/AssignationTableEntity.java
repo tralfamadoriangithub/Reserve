@@ -1,18 +1,16 @@
 package com.epam.task6.tableentity;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import com.epam.task6.entity.Claim;
+import java.sql.Timestamp;
 
 public class AssignationTableEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int assignationId;
 	private ClaimTableEntity claim;
-	private Date beginWork;
-	private Date endWork;
+	private Timestamp beginWork;
+	private Timestamp endWork;
 
 	public AssignationTableEntity() {
 	}
@@ -33,19 +31,19 @@ public class AssignationTableEntity implements Serializable {
 		this.claim = claim;
 	}
 
-	public Date getBeginWork() {
+	public Timestamp getBeginWork() {
 		return beginWork;
 	}
 
-	public void setBeginWork( Date beginWork ) {
+	public void setBeginWork( Timestamp beginWork ) {
 		this.beginWork = beginWork;
 	}
 
-	public Date getEndWork() {
+	public Timestamp getEndWork() {
 		return endWork;
 	}
 
-	public void setEndWork( Date endWork ) {
+	public void setEndWork( Timestamp endWork ) {
 		this.endWork = endWork;
 	}
 
@@ -55,9 +53,10 @@ public class AssignationTableEntity implements Serializable {
 		int result = 1;
 		result = prime * result + assignationId;
 		result = prime * result
-				+ ((beginWork == null) ? 0 : beginWork.hashCode());
-		result = prime * result + ((claim == null) ? 0 : claim.hashCode());
-		result = prime * result + ((endWork == null) ? 0 : endWork.hashCode());
+				+ ( ( beginWork == null ) ? 0 : beginWork.hashCode() );
+		result = prime * result + ( ( claim == null ) ? 0 : claim.hashCode() );
+		result = prime * result
+				+ ( ( endWork == null ) ? 0 : endWork.hashCode() );
 		return result;
 	}
 

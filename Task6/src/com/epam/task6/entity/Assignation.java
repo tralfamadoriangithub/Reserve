@@ -1,7 +1,7 @@
 package com.epam.task6.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Assignation implements Serializable{
 	
@@ -9,8 +9,8 @@ public class Assignation implements Serializable{
 	
 	private int assignationId;
 	private int claimId;
-	private Date beginWork;
-	private Date endWork;
+	private Timestamp beginWork;
+	private Timestamp endWork;
 	
 	public Assignation(){
 		
@@ -32,19 +32,19 @@ public class Assignation implements Serializable{
 		this.claimId = claimId;
 	}
 
-	public Date getBeginWork() {
+	public Timestamp getBeginWork() {
 		return beginWork;
 	}
 
-	public void setBeginWork( Date beginWork ) {
+	public void setBeginWork( Timestamp beginWork ) {
 		this.beginWork = beginWork;
 	}
 
-	public Date getEndWork() {
+	public Timestamp getEndWork() {
 		return endWork;
 	}
 
-	public void setEndWork( Date endWork ) {
+	public void setEndWork( Timestamp endWork ) {
 		this.endWork = endWork;
 	}
 

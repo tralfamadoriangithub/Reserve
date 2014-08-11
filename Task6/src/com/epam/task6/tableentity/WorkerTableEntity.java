@@ -14,7 +14,6 @@ public class WorkerTableEntity implements Serializable{
 	private String surname;
 	private Profession profession;
 	private int qualification;
-	private int assignationId;
 	
 	public WorkerTableEntity(){}
 
@@ -57,20 +56,11 @@ public class WorkerTableEntity implements Serializable{
 	public void setQualification( int qualification ) {
 		this.qualification = qualification;
 	}
-
-	public int getAssignationId() {
-		return assignationId;
-	}
-
-	public void setAssignationId( int assignationId ) {
-		this.assignationId = assignationId;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + assignationId;
 		result = prime * result + ( ( name == null ) ? 0 : name.hashCode() );
 		result = prime * result
 				+ ( ( profession == null ) ? 0 : profession.hashCode() );
@@ -90,8 +80,6 @@ public class WorkerTableEntity implements Serializable{
 		if ( getClass() != obj.getClass() )
 			return false;
 		WorkerTableEntity other = (WorkerTableEntity) obj;
-		if ( assignationId != other.assignationId )
-			return false;
 		if ( name == null ) {
 			if ( other.name != null )
 				return false;
@@ -118,8 +106,7 @@ public class WorkerTableEntity implements Serializable{
 	public String toString() {
 		return getClass().getSimpleName() + " [workerId=" + workerId + ", name=" + name
 				+ ", surname=" + surname + ", profession=" + profession
-				+ ", qualification=" + qualification + ", assignation="
-				+ assignationId + "]";
+				+ ", qualification=" + qualification + "]";
 	}
 
 	

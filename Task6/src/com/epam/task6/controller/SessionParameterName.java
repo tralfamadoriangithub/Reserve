@@ -3,6 +3,8 @@ package com.epam.task6.controller;
 public final class SessionParameterName {
 	
 	public static final String CURRENT_PAGE = "current_page";
+	public static final String USER_PAGE = "user_page";
+	public static final String LANGUAGE = "language";
 	public static final String IS_LOGIN = "is_login";
 	public static final String USER = "user";
 	public static final String USERS = "users";

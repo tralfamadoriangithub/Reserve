@@ -54,11 +54,12 @@ public final class DatabaseHelper {
 				}
 
 				if ( !databaseExists ) {
-					statement.executeUpdate( "CREATE DATABASE zkh  CHARACTER SET utf8 COLLATE utf8_unicode_ci" );
+					statement
+							.executeUpdate( "CREATE DATABASE zkh  CHARACTER SET utf8 COLLATE utf8_unicode_ci" );
 					resultSet.close();
 					statement.close();
 					connection.close();
-					System.out.println("Database created");
+					System.out.println( "Database created" );
 				}
 			} catch ( SQLException e ) {
 				throw new DaoException( "Create DB exception", e );
@@ -82,7 +83,7 @@ public final class DatabaseHelper {
 					statement.executeUpdate( "DROP DATABASE zkh" );
 					statement.close();
 					connection.close();
-					System.out.println("Database deleted");
+					System.out.println( "Database deleted" );
 				} catch ( SQLException e ) {
 					throw new DaoException( "Can not create statement ", e );
 				}
@@ -102,7 +103,7 @@ public final class DatabaseHelper {
 			try {
 				connection = DriverManager.getConnection(
 						"jdbc:mysql://localhost/zkh", User, Password );
-				//connection.setAutoCommit( false );
+				// connection.setAutoCommit( false );
 				try {
 					statement = connection.createStatement();
 					createTables( statement );
@@ -128,15 +129,17 @@ public final class DatabaseHelper {
 		statement
 				.addBatch( "CREATE TABLE address (address_id INT PRIMARY KEY AUTO_INCREMENT, street VARCHAR(25) NOT NULL, house INT, block INT DEFAULT 0, flat INT, phone INT, user_id INT)" );
 		statement
-				.addBatch( "CREATE TABLE claim_status (claim_status_id INT PRIMARY KEY, value VARCHAR(25) NOT NULL)" );
+				.addBatch( "CREATE TABLE claim_status (claim_status_id INT PRIMARY KEY, claim_status_value VARCHAR(25) NOT NULL)" );
 		statement
-				.addBatch( "CREATE TABLE claim (claim_id INT PRIMARY KEY AUTO_INCREMENT, problem VARCHAR(250) NOT NULL, address_id INT, user_id INT, claim_status_id INT DEFAULT 0)" );
+				.addBatch( "CREATE TABLE claim (claim_id INT PRIMARY KEY AUTO_INCREMENT, problem_description VARCHAR(250) NOT NULL, address_id INT, user_id INT, claim_status_id INT DEFAULT 0)" );
 		statement
-				.addBatch( "CREATE TABLE worker (worker_id INT PRIMARY KEY AUTO_INCREMENT, name CHAR(25) NOT NULL, surname CHAR(25) NOT NULL, profession_id INT, qualification INT, assignation_id INT DEFAULT 0)" );
+				.addBatch( "CREATE TABLE worker (worker_id INT PRIMARY KEY AUTO_INCREMENT, worker_name CHAR(25) NOT NULL, worker_surname CHAR(25) NOT NULL, profession_id INT, qualification INT)" );
 		statement
 				.addBatch( "CREATE TABLE profession (profession_id INT PRIMARY KEY AUTO_INCREMENT, profession CHAR(25) NOT NULL)" );
 		statement
 				.addBatch( "CREATE TABLE assignation (assignation_id INT PRIMARY KEY AUTO_INCREMENT, begin_work DATETIME, end_work DATETIME, claim_id INT DEFAULT 0)" );
+		statement
+				.addBatch( "CREATE TABLE worker_assignation( worker_assignation_id INT PRIMARY KEY AUTO_INCREMENT, worker_id INT NOT NULL, assignation_id INT NOT NULL )" );
 		statement.executeBatch();
 	}
 
@@ -174,17 +177,17 @@ public final class DatabaseHelper {
 		statement.addBatch( "INSERT INTO profession VALUES (4, 'маляр')" );
 
 		statement
-				.addBatch( "INSERT INTO worker VALUES (1, 'Петр', 'Петров', 1, 5, 0)" );
+				.addBatch( "INSERT INTO worker VALUES (1, 'Петр', 'Петров', 1, 5)" );
 		statement
-				.addBatch( "INSERT INTO worker VALUES (2, 'Иван', 'Иванов', 2, 3, 0)" );
+				.addBatch( "INSERT INTO worker VALUES (2, 'Иван', 'Иванов', 2, 3)" );
 		statement
-				.addBatch( "INSERT INTO worker VALUES (3, 'Федор', 'Федоров', 2, 4, 0)" );
+				.addBatch( "INSERT INTO worker VALUES (3, 'Федор', 'Федоров', 2, 4)" );
 		statement
-				.addBatch( "INSERT INTO worker VALUES (4, 'Сидор', 'Сидоров', 3, 5, 0)" );
+				.addBatch( "INSERT INTO worker VALUES (4, 'Сидор', 'Сидоров', 3, 5)" );
 		statement
-				.addBatch( "INSERT INTO worker VALUES (5, 'Барак', 'Обама', 1, 3, 0)" );
+				.addBatch( "INSERT INTO worker VALUES (5, 'Барак', 'Обама', 1, 3)" );
 		statement
-				.addBatch( "INSERT INTO worker VALUES (6, 'Билл', 'Гейтс', 4, 3, 0)" );
+				.addBatch( "INSERT INTO worker VALUES (6, 'Билл', 'Гейтс', 4, 3)" );
 		int[] batch2 = statement.executeBatch();
 		for ( int i : batch2 ) {
 			System.out.println( "Batch 2 " + batch2[i] );
@@ -204,13 +207,13 @@ public final class DatabaseHelper {
 					statement = connection.createStatement();
 
 					statement
-							.addBatch( "CREATE TABLE user (user_id INT PRIMARY KEY AUTO_INCREMENT, login VARCHAR(25) NOT NULL, password VARCHAR(25) NOT NULL, name CHAR(25) NOT NULL, surname CHAR(25) NOT NULL, status INT)" );
+							.addBatch( "CREATE TABLE user (user_id INT PRIMARY KEY AUTO_INCREMENT, login VARCHAR(25) NOT NULL, password VARCHAR(25) NOT NULL, name CHAR(25) NOT NULL, surname CHAR(25) NOT NULL, user_status INT)" );
 					statement
 							.addBatch( "CREATE TABLE address (address_id INT PRIMARY KEY AUTO_INCREMENT, street VARCHAR(25) NOT NULL, house INT, block INT DEFAULT 0, flat INT, phone INT, user_id INT)" );
 					statement
-							.addBatch( "CREATE TABLE claim_status (claim_status_id INT PRIMARY KEY, value VARCHAR(25) NOT NULL)" );
+							.addBatch( "CREATE TABLE claim_status (claim_status_id INT PRIMARY KEY, claim_status_value VARCHAR(25) NOT NULL)" );
 					statement
-							.addBatch( "CREATE TABLE claim (claim_id INT PRIMARY KEY AUTO_INCREMENT, problem VARCHAR(250) NOT NULL, address_id INT, user_id INT, claim_status_id INT DEFAULT 0)" );
+							.addBatch( "CREATE TABLE claim (claim_id INT PRIMARY KEY AUTO_INCREMENT, problem_description VARCHAR(250) NOT NULL, address_id INT, user_id INT, claim_status_id INT DEFAULT 0)" );
 					statement
 							.addBatch( "CREATE TABLE worker (worker_id INT PRIMARY KEY AUTO_INCREMENT, name CHAR(25) NOT NULL, surname CHAR(25) NOT NULL, profession_id INT, qualification INT, assignation_id INT DEFAULT 0)" );
 					statement

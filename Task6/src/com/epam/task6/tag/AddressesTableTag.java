@@ -2,24 +2,35 @@ package com.epam.task6.tag;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
+import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.entity.Address;
 
 public class AddressesTableTag extends TagSupport {
 
 	private static final long serialVersionUID = 1L;
 	private List<Address> addresses;
+	private ResourceBundle bundle = ResourceBundle.getBundle( "string" );
 
 	@Override
 	public int doStartTag() throws JspException {
 		JspWriter out = pageContext.getOut();
 		try {
 			out.write( "<table>" );
-			out.write( "<th>Street</th><th>House</th><th>Block</th><th>Flat</th><th>Phone</th>" );
+			StringBuilder tableHeader = new StringBuilder();
+			tableHeader.append( "<th>" ).append( bundle.getString( "label.street" ) )
+				.append( "</th><th>" ).append( bundle.getString( "label.house" ) )
+				.append( "</th><th>" ).append( bundle.getString( "label.block" ) )
+				.append( "</th><th>" ).append( bundle.getString( "label.flat" ) )
+				.append( "</th><th>" ).append( bundle.getString( "label.phone" ) )
+				.append( "</th>" );
+			out.write( tableHeader.toString() );
 			for ( Address address : addresses ) {
 				printAddressRow( address, out );
 			}

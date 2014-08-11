@@ -22,6 +22,6 @@
 	<br>
 	<br>
 	<h3><fmt:message key="label.claims"/></h3>
-	<table:claimstable claims="${ sessionScope.claims }" />
+	<table:userclaimstable claims="${ sessionScope.claims }" />
 
 </myTag:basepage>

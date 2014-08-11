@@ -7,102 +7,90 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import com.epam.task6.dao.DaoException;
+
 public class ConnectionPool {
 
 	private static ConnectionPool connectionPool;
 	private ArrayBlockingQueue<Connection> freeConnections;
 	private ArrayBlockingQueue<Connection> buisyCoonnections;
-	
-	//TODO 
-	
-	private final String DRIVER = "com.mysql.jdbc.Driver";
-	private final String CONNECTION = "jdbc:mysql://localhost/zkh";
-	private final String USER = "root";
-	private final String PASSWORD = "928851";
 
-	//
-	
 	private ConnectionPool() {
-
 		int poolSize = getPoolSize();
 		freeConnections = new ArrayBlockingQueue<>( poolSize );
 		buisyCoonnections = new ArrayBlockingQueue<>( poolSize );
-		initializeConnectionPool();
-
 	}
 
 	public static synchronized ConnectionPool getInstance() {
 		if ( null == connectionPool ) {
 			connectionPool = new ConnectionPool();
+			connectionPool.initializeConnectionPool();
 		}
 		return connectionPool;
 	}
 
 	private void initializeConnectionPool() {
-		System.out.println( "Init connection pool" );
+
+		ResourceBundle bundle = ResourceBundle.getBundle( "project_properties" );
+		String DRIVER = bundle.getString( "driver" );
+		String CONNECTION = bundle.getString( "database_name" );
+		String USER = bundle.getString( "user" );
+		String PASSWORD = bundle.getString( "password" );
 		try {
 			Class.forName( DRIVER );
-			System.out.println( "Trying create connection pool" );
 			while ( freeConnections.remainingCapacity() > 0 ) {
 				try {
-					
+
 					Connection conn = DriverManager.getConnection( CONNECTION,
 							USER, PASSWORD );
 					freeConnections.add( conn );
 
 				} catch ( SQLException e ) {
-					e.printStackTrace();
+					new DaoException(
+							"Exception in \"initializeConnectionPool\"", e );
 				}
 			}
 
 		} catch ( ClassNotFoundException e ) {
-			e.printStackTrace();
+			new DaoException( "Exception in \"initializeConnectionPool\"", e );
 		}
-		System.out.println( "Connection pool created" );
 	}
 
 	private int getPoolSize() {
 
-		int poolSize = -1;
 		ResourceBundle bundle = ResourceBundle.getBundle( "project_properties" );
-		try {
-			poolSize = Integer
-					.valueOf( bundle.getString( "connections_limit" ) );
-		} catch ( MissingResourceException e ) {
+		int poolSize = Integer
+				.valueOf( bundle.getString( "connections_limit" ) );
 
-		}
 		return poolSize;
 	}
 
-	public Connection getConnection() {
+	public Connection getConnection() throws DaoException {
 		Connection connection = null;
-		System.out.println( "getConnection ");
 		try {
 			connection = freeConnections.take();
 			buisyCoonnections.add( connection );
 		} catch ( InterruptedException e ) {
-			System.out.println("Get exception");
+			throw new DaoException( "Exception in \"getConnection\"", e );
 		}
 		return connection;
 	}
 
-	public void releaseConnection( Connection conn ) {
+	public void releaseConnection( Connection conn ) throws DaoException {
 		if ( buisyCoonnections.contains( conn ) ) {
-			System.out.println( "returnConnection" );
 			freeConnections.add( conn );
 			buisyCoonnections.remove( conn );
 		} else {
-			System.out.println("Release exception");
+			throw new DaoException( "Exception in \"releaseConnection\"" );
 		}
 	}
 
-	private void closeConnections() {
+	private void closeConnections() throws DaoException {
 		freeConnections.forEach( conn -> {
 			try {
 				conn.close();
 			} catch ( SQLException e ) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new DaoException( "Exception in \"closeConnections\"", e );
 			}
 		} );
 
@@ -110,8 +98,7 @@ public class ConnectionPool {
 			try {
 				conn.close();
 			} catch ( SQLException e ) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new DaoException( "Exception in \"closeConnections\"", e );
 			}
 		} );
 	}

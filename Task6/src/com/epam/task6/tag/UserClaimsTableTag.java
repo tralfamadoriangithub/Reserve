@@ -10,7 +10,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import com.epam.task6.entity.Claim;
 import com.epam.task6.tableentity.ClaimTableEntity;
 
-public class ClaimsTableTag extends TagSupport{
+public class UserClaimsTableTag extends TagSupport{
 
 	private static final long serialVersionUID = 1L;
 	private List<ClaimTableEntity> claims;
@@ -49,7 +49,7 @@ public class ClaimsTableTag extends TagSupport{
 		out.write( "</td><td>" );
 		out.write( "<form action='controller' method='post'>"
 				+ "<input type='hidden' name='command' value='edit_claim_command'/>"
-				+ "<input type='hidden' name='claim' value='" + claim
+				+ "<input type='hidden' name='claim_id' value='" + claim.getClaimId()
 				+ "'/>" + "<input type='submit' value='Edit'/>" + "</form>" );
 		out.write( "</td>" );
 	}

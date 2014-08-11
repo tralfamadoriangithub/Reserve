@@ -6,7 +6,7 @@ import javax.servlet.jsp.JspWriter;
 
 import com.epam.task6.tableentity.ClaimTableEntity;
 
-public class OperatorClaimsTableTag extends ClaimsTableTag{
+public class OperatorClaimsTableTag extends UserClaimsTableTag{
 
 	private static final long serialVersionUID = 1L;
 
