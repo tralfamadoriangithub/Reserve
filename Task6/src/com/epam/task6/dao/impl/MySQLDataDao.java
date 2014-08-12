@@ -3,6 +3,7 @@ package com.epam.task6.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.epam.task6.dao.impl.connectionpool.ConnectionPool;
 import com.epam.task6.dao.DBField;
@@ -334,8 +335,9 @@ public class MySQLDataDao implements IDataDao {
 				claim.setProblemDescription( rs
 						.getString( DBField.PROBLEM_DESCRIPTION ) );
 
+				int assignation_id = rs.getInt( DBField.ASSIGNATION_ID );
 				assignation.setClaim( claim );
-				assignation.setAssignationId( rs.getInt( DBField.ASSIGNATION_ID ) );
+				assignation.setAssignationId( assignation_id );
 				assignation.setBeginWork( rs.getTimestamp( DBField.BEGIN_WORK ) );
 				assignation.setEndWork( rs.getTimestamp( DBField.END_WORK ) );
 
@@ -392,6 +394,30 @@ public class MySQLDataDao implements IDataDao {
 	}
 	
 	@Override
+	public void deleteAssignation( int assignationId ) throws DaoException {
+		
+		connection = getConnection();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection
+					.prepareStatement(
+							"DELETE FROM assignation WHERE assignation_id = ?");
+			preparedStatement.setInt( 1, assignationId );
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			preparedStatement = connection
+					.prepareStatement(
+							"DELETE FROM worker_assignation WHERE assignation_id = ?");
+			preparedStatement.setInt( 1, assignationId );
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			releaseConnection( connection );
+		} catch ( SQLException e ) {
+			throw new DaoException( "Exception in \"deleteAssignation\"", e );
+		}
+	}
+	
+	@Override
 	public List<User> getAllUsers() throws DaoException {
 		List<User> users = new ArrayList<>();
 
@@ -410,15 +436,13 @@ public class MySQLDataDao implements IDataDao {
 	}
 
 	@Override
-	public boolean updateAddress( Address address ) throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+	public void updateAddress( Address address ) throws DaoException {
+		
 	}
 
 	@Override
-	public boolean deleteAddress( int addressId ) throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+	public void deleteAddress( int addressId ) throws DaoException {
+		;
 	}
 
 	@Override
@@ -428,15 +452,13 @@ public class MySQLDataDao implements IDataDao {
 	}
 
 	@Override
-	public boolean updateClaim( Claim claim ) throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+	public void updateClaim( Claim claim ) throws DaoException {
+		
 	}
 
 	@Override
-	public boolean deleteClaim( int claimId ) throws DaoException {
+	public void deleteClaim( int claimId ) throws DaoException {
 
-		return false;
 	}
 
 	@Override
@@ -446,15 +468,13 @@ public class MySQLDataDao implements IDataDao {
 	}
 
 	@Override
-	public boolean updateUser( User user ) throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+	public void updateUser( User user ) throws DaoException {
+		
 	}
 
 	@Override
-	public boolean deleteUser( int userId ) throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+	public void deleteUser( int userId ) throws DaoException {
+		
 	}
 
 	@Override
@@ -469,15 +489,13 @@ public class MySQLDataDao implements IDataDao {
 	}
 
 	@Override
-	public boolean updateWorker( Worker worker ) throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+	public void updateWorker( Worker worker ) throws DaoException {
+		
 	}
 
 	@Override
-	public boolean deleteWorker( int workerId ) throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+	public void deleteWorker( int workerId ) throws DaoException {
+		;
 	}
 
 	@Override
@@ -494,16 +512,9 @@ public class MySQLDataDao implements IDataDao {
 	}
 
 	@Override
-	public boolean updateAssignation( Assignation assignation )
+	public void updateAssignation( Assignation assignation )
 			throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteAssignation( int assignationId ) throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
@@ -520,16 +531,14 @@ public class MySQLDataDao implements IDataDao {
 	}
 
 	@Override
-	public boolean updateProfession( Profession profession )
+	public void updateProfession( Profession profession )
 			throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
-	public boolean deleteProfession( int professionId ) throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+	public void deleteProfession( int professionId ) throws DaoException {
+	
 	}
 
 	@Override
@@ -546,17 +555,15 @@ public class MySQLDataDao implements IDataDao {
 	}
 
 	@Override
-	public boolean updateClaimStatus( ClaimStatus claimStatus )
+	public void updateClaimStatus( ClaimStatus claimStatus )
 			throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
-	public boolean deleteClaimStatus( ClaimStatus claimStatus )
+	public void deleteClaimStatus( ClaimStatus claimStatus )
 			throws DaoException {
 
-		return false;
 	}
 
 	@Override

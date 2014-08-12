@@ -20,9 +20,9 @@ public interface IDataDao {
 
 	public void addAddress( Address address ) throws DaoException;
 
-	public boolean updateAddress( Address address ) throws DaoException;
+	public void updateAddress( Address address ) throws DaoException;
 
-	public boolean deleteAddress( int addressId ) throws DaoException;
+	public void deleteAddress( int addressId ) throws DaoException;
 
 	public List<Address> getAddress( int... addressId ) throws DaoException;
 
@@ -32,9 +32,9 @@ public interface IDataDao {
 
 	public void addClaim( Claim claim ) throws DaoException;
 
-	public boolean updateClaim( Claim claim ) throws DaoException;
+	public void updateClaim( Claim claim ) throws DaoException;
 
-	public boolean deleteClaim( int claimId ) throws DaoException;
+	public void deleteClaim( int claimId ) throws DaoException;
 
 	public List<Claim> getClaim( int... claimId ) throws DaoException;
 
@@ -45,9 +45,9 @@ public interface IDataDao {
 
 	public void addUser( User user ) throws DaoException;
 
-	public boolean updateUser( User user ) throws DaoException;
+	public void updateUser( User user ) throws DaoException;
 
-	public boolean deleteUser( int userId ) throws DaoException;
+	public void deleteUser( int userId ) throws DaoException;
 
 	public List<User> getUser( int... userId ) throws DaoException;
 
@@ -55,9 +55,9 @@ public interface IDataDao {
 
 	public void addWorker( Worker worker ) throws DaoException;
 
-	public boolean updateWorker( Worker worker ) throws DaoException;
+	public void updateWorker( Worker worker ) throws DaoException;
 
-	public boolean deleteWorker( int workerId ) throws DaoException;
+	public void deleteWorker( int workerId ) throws DaoException;
 
 	public List<Worker> getWorker( int... workerId ) throws DaoException;
 
@@ -65,10 +65,10 @@ public interface IDataDao {
 
 	public void addAssignation( Assignation assignation ) throws DaoException;
 
-	public boolean updateAssignation( Assignation assignation )
+	public void updateAssignation( Assignation assignation )
 			throws DaoException;
 
-	public boolean deleteAssignation( int assignationId ) throws DaoException;
+	public void deleteAssignation( int assignationId ) throws DaoException;
 
 	public List<Assignation> getAssignation( int... assignationId )
 			throws DaoException;
@@ -78,10 +78,10 @@ public interface IDataDao {
 
 	public void addProfession( Profession profession ) throws DaoException;
 
-	public boolean updateProfession( Profession profession )
+	public void updateProfession( Profession profession )
 			throws DaoException;
 
-	public boolean deleteProfession( int professionId ) throws DaoException;
+	public void deleteProfession( int professionId ) throws DaoException;
 
 	public List<Profession> getProfession( int... professionId )
 			throws DaoException;
@@ -90,10 +90,10 @@ public interface IDataDao {
 
 	public void addClaimStatus( ClaimStatus claimStatus ) throws DaoException;
 
-	public boolean updateClaimStatus( ClaimStatus claimStatus )
+	public void updateClaimStatus( ClaimStatus claimStatus )
 			throws DaoException;
 
-	public boolean deleteClaimStatus( ClaimStatus claimStatus )
+	public void deleteClaimStatus( ClaimStatus claimStatus )
 			throws DaoException;
 
 	public List<ClaimStatus> getClaimStatus( int... claimId )

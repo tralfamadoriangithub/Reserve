@@ -7,7 +7,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import com.epam.task6.entity.Worker;
 import com.epam.task6.tableentity.WorkerTableEntity;
 
 public class WorkersTableTag extends TagSupport {

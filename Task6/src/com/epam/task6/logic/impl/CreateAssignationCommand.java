@@ -31,7 +31,6 @@ public class CreateAssignationCommand implements ICommand {
 		claim.setClaimId( Integer.parseInt( request.getParameter( RequestParameterName.CLAIM_ID ) ) );
 		claim.setProblemDescription( request.getParameter( RequestParameterName.PROBLEM_DESCRIPTION ) );
 		claim.setClaimStatus( request.getParameter( RequestParameterName.CLAIM_STATUS ) );
-		System.out.println(claim);
 		request.getSession().setAttribute( SessionParameterName.CLAIM_FOR_ASSIGNATION, claim );
 		return JspPageName.ASSIGNATION_PAGE;
 	}
