@@ -21,6 +21,7 @@ import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.UserStatus;
 import com.epam.task6.logic.CommandException;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.AssignationTableEntity;
 import com.epam.task6.tableentity.ClaimTableEntity;
@@ -30,7 +31,7 @@ public class GetUserPageCommand implements ICommand {
 
 	@Override
 	public String execute( HttpServletRequest request,
-			HttpServletResponse response ) throws CommandException {
+			HttpServletResponse response ) throws CommandException, CommandLogicException {
 		String page = null;
 		User user = null;
 		HttpSession session = request.getSession();

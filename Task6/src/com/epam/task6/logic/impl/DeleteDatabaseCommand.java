@@ -7,13 +7,14 @@ import com.epam.task6.controller.JspPageName;
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.databasehelper.DatabaseHelper;
 import com.epam.task6.logic.CommandException;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 
 public class DeleteDatabaseCommand implements ICommand{
 
 	@Override
 	public String execute( HttpServletRequest request,
-			HttpServletResponse response ) throws CommandException {
+			HttpServletResponse response ) throws CommandException, CommandLogicException {
 		try {
 			DatabaseHelper dbHelper = DatabaseHelper.getInstance();
 			dbHelper.deleteDatabase();

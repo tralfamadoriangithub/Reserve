@@ -15,6 +15,7 @@ import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.Assignation;
 import com.epam.task6.logic.CommandException;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.AssignationTableEntity;
 import com.epam.task6.tableentity.ClaimTableEntity;
@@ -23,13 +24,15 @@ public class RegisterAssignationCommand implements ICommand {
 
 	@Override
 	public String execute( HttpServletRequest request,
-			HttpServletResponse response ) throws CommandException {
+			HttpServletResponse response ) throws CommandException, CommandLogicException {
 		HttpSession session = request.getSession();
 		ClaimTableEntity claim = (ClaimTableEntity) session
 				.getAttribute( SessionParameterName.CLAIM_FOR_ASSIGNATION );
 
-		int[] workersId = getWorkersId( request
-				.getParameterValues( RequestParameterName.SELECTED_WORKER ) );
+		String[] strWorkerId = request
+				.getParameterValues( RequestParameterName.SELECTED_WORKER );
+		
+		int[] workersId = getWorkersId( strWorkerId );
 
 		Timestamp beginWork = createTimestamp(
 				request.getParameter( RequestParameterName.BEGIN_WORK_DATE ),
@@ -50,9 +53,9 @@ public class RegisterAssignationCommand implements ICommand {
 			throw new CommandException(
 					"Exception in \"RegisterAssignationCommand\"", e );
 		}
+		
 		AssignationTableEntity assignationTableEntity = new AssignationTableEntity();
-		assignationTableEntity
-				.setAssignationId( assignation.getAssignationId() );
+		assignationTableEntity.setAssignationId( assignation.getAssignationId() );
 		assignationTableEntity.setBeginWork( beginWork );
 		assignationTableEntity.setEndWork( endWork );
 		assignationTableEntity.setClaim( claim );

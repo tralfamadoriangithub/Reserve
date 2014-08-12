@@ -2,6 +2,8 @@ package com.epam.task6.exception;
 
 public class ProjectException extends Exception {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Exception hiddenException;
 
 	public ProjectException( String message ) {

@@ -5,12 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.logic.CommandException;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 
 public class NoSuchCommand implements ICommand{
 
 	@Override
-	public String execute( HttpServletRequest request, HttpServletResponse response ) throws CommandException {
+	public String execute( HttpServletRequest request, HttpServletResponse response ) throws CommandException, CommandLogicException {
 		return JspPageName.ERROR_PAGE;
 	}
 

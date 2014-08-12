@@ -4,13 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.task6.logic.CommandException;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 
 public class DeleteClaimCommand implements ICommand{
 
 	@Override
 	public String execute( HttpServletRequest request,
-			HttpServletResponse response ) throws CommandException {
+			HttpServletResponse response ) throws CommandException, CommandLogicException {
 		// TODO Auto-generated method stub
 		return null;
 	}

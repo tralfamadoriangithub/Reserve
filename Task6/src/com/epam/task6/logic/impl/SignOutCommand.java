@@ -9,13 +9,14 @@ import javax.servlet.http.HttpSession;
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.logic.CommandException;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 
 public class SignOutCommand implements ICommand {
 
 	@Override
 	public String execute( HttpServletRequest request,
-			HttpServletResponse response ) throws CommandException {
+			HttpServletResponse response ) throws CommandException, CommandLogicException {
 
 		HttpSession session = request.getSession();
 		Enumeration<String> attributes = session.getAttributeNames();

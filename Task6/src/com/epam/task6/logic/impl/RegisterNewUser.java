@@ -12,13 +12,14 @@ import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.UserStatus;
 import com.epam.task6.logic.CommandException;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 
 public class RegisterNewUser implements ICommand {
 
 	@Override
 	public String execute( HttpServletRequest request,
-			HttpServletResponse response ) throws CommandException {
+			HttpServletResponse response ) throws CommandException, CommandLogicException {
 
 		User newUser = createUser( request );
 		IDataDao dataManager = DaoFactory.getInstance().getDataDao();

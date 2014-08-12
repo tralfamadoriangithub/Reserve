@@ -18,6 +18,7 @@ import com.epam.task6.entity.Address;
 import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.User;
 import com.epam.task6.logic.CommandException;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.ClaimTableEntity;
 
@@ -25,7 +26,7 @@ public class SendClaimCommand implements ICommand{
 
 	@Override
 	public String execute( HttpServletRequest request,
-			HttpServletResponse response ) throws CommandException {
+			HttpServletResponse response ) throws CommandException, CommandLogicException {
 		
 		HttpSession session = request.getSession();
 		ClaimTableEntity claimTable = new ClaimTableEntity();

@@ -2,6 +2,7 @@ package com.epam.task6.logic.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.IDataDao;
 import com.epam.task6.logic.CommandException;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.AssignationTableEntity;
 
@@ -20,7 +22,7 @@ public class DeleteAssignationCommand implements ICommand {
 
 	@Override
 	public String execute( HttpServletRequest request,
-			HttpServletResponse response ) throws CommandException {
+			HttpServletResponse response ) throws CommandException, CommandLogicException {
 
 		HttpSession session = request.getSession();
 		int assignationId = Integer.valueOf( request.getParameter( DBField.ASSIGNATION_ID ) );

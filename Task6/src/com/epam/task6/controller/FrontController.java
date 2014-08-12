@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandHelper;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 
 /**
@@ -58,7 +59,10 @@ public class FrontController extends HttpServlet {
 		try {
 			page = command.execute( request, response );
 		} catch ( CommandException e ) {
-			log.error( "Error", e.getHiddenException() );
+			log.error( "Exception", e.getHiddenException() );
+			page = JspPageName.ERROR_PAGE;
+		}catch ( CommandLogicException e ) {
+			log.error( "Logic Exception", e.getHiddenException() );
 			page = JspPageName.ERROR_PAGE;
 		}
 		

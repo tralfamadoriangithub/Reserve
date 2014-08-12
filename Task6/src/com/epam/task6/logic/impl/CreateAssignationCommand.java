@@ -8,6 +8,7 @@ import com.epam.task6.controller.RequestParameterName;
 import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.entity.Address;
 import com.epam.task6.logic.CommandException;
+import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.ClaimTableEntity;
 
@@ -15,7 +16,7 @@ public class CreateAssignationCommand implements ICommand {
 
 	@Override
 	public String execute( HttpServletRequest request,
-			HttpServletResponse response ) throws CommandException {
+			HttpServletResponse response ) throws CommandException, CommandLogicException {
 		ClaimTableEntity claim = new ClaimTableEntity();
 		Address address = new Address();
 
