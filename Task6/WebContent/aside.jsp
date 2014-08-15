@@ -7,8 +7,8 @@
 <fmt:setBundle basename="string"/>
 
 <ul class="asideList">
-	<li><a href="/Task6"><fmt:message key="page.home_page"/></a></li>
-	<li><a href="${ sessionScope.user_page }"><fmt:message key="page.user_page"/></a></li>
+	<li><a href="/Task6"><fmt:message key="home_page"/></a></li>
+	<li><a href="${ sessionScope.user_page }"><fmt:message key="user_page"/></a></li>
 	<li><a>Item</a></li>
 	<li><a>Item</a></li>
 	<li><a>Item</a></li>

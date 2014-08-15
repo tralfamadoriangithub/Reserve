@@ -2,6 +2,8 @@ package com.epam.task6.dao;
 
 public final class DBTable{
 	
+	private DBTable(){}
+	
 	public static final String USER = "user";
 	public static final String ADDRESS = "address";
 	public static final String CLAIM = "claim";

@@ -18,20 +18,20 @@
 	<section id="headerButtons" class="headerButtonsStyle">
 
 		<section id="registerButton">
-			<a href="register.jsp"><fmt:message key="button.register" /></a>
+			<a href="register.jsp"><fmt:message key="register" /></a>
 		</section>
 
 		<c:choose>
 			<c:when test="${ not sessionScope.is_login }">
 				<section id="signInButton">
-					<a href="login.jsp"><fmt:message key="button.sign_in" /></a>
+					<a href="login.jsp"><fmt:message key="sign_in" /></a>
 				</section>
 			</c:when>
 
 			<c:otherwise>
 				<section id="signOutButton">
 					<a href="/Task6/controller?command=sign_out_command"><fmt:message
-							key="button.sign_out" /></a>
+							key="sign_out" /></a>
 				</section>
 			</c:otherwise>
 		</c:choose>

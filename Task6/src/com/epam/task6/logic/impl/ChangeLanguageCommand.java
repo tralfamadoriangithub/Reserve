@@ -26,7 +26,7 @@ public class ChangeLanguageCommand implements ICommand {
 			session.setAttribute( SessionParameterName.LANGUAGE, new Locale( "ru", "RU" ) );
 			Locale.setDefault( new Locale( "ru", "RU" ) );
 		} else if ( selectedLanguage.equals( "en_US" ) ) {
-			session.setAttribute( SessionParameterName.LANGUAGE, new Locale( "ru", "RU" ) );
+			session.setAttribute( SessionParameterName.LANGUAGE, new Locale( "en", "US" ) );
 			Locale.setDefault( new Locale( "en", "US" ) );
 		}
 		String page = (String) session.getAttribute( SessionParameterName.CURRENT_PAGE );

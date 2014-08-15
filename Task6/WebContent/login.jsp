@@ -8,7 +8,7 @@
 	scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="string" />
-<fmt:message key="label.login" var="title"/>
+<fmt:message key="login" var="title"/>
 
 <myTag:basepage title="${ title }">
 	<section id="loginForm">
@@ -16,14 +16,14 @@
 		<form action="controller" method="post">
 			<input type="hidden" name="command" value="get_user_page_command" />
 			<p>
-				<fmt:message key="label.login" />
+				<fmt:message key="login" />
 				:<br> <input type="text" placeholder="Login" name="login"
 					value="" required />
 			<p>
-				<fmt:message key="label.password" />
+				<fmt:message key="password" />
 				:<br> <input type="password" placeholder="Password"
 					name="password" value="" required /> <br> <br> <input
-					type="submit" value='<fmt:message key="button.sign_in"/>' />			
+					type="submit" value='<fmt:message key="sign_in"/>' />			
 		</form>
 		<br>
 		<c:out value="${ requestScope.message }"/>

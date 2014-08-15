@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import com.epam.task6.dao.DaoException;
+import com.epam.task6.propertylink.ProjectBundle;
+import com.epam.task6.propertylink.ProjectProperties;
 
 public class ConnectionPool {
 
@@ -31,11 +33,11 @@ public class ConnectionPool {
 
 	private void initializeConnectionPool() {
 
-		ResourceBundle bundle = ResourceBundle.getBundle( "project_properties" );
-		String DRIVER = bundle.getString( "driver" );
-		String CONNECTION = bundle.getString( "database_name" );
-		String USER = bundle.getString( "user" );
-		String PASSWORD = bundle.getString( "password" );
+		ResourceBundle bundle = ResourceBundle.getBundle( ProjectBundle.PROJECT_PROPERTIES );
+		String DRIVER = bundle.getString( ProjectProperties.DRIVER );
+		String CONNECTION = bundle.getString( ProjectProperties.DATABASE_NAME );
+		String USER = bundle.getString( ProjectProperties.DATABASE_USER );
+		String PASSWORD = bundle.getString( ProjectProperties.DATABASE_PASSWORD );
 		try {
 			Class.forName( DRIVER );
 			while ( freeConnections.remainingCapacity() > 0 ) {
@@ -58,9 +60,9 @@ public class ConnectionPool {
 
 	private int getPoolSize() {
 
-		ResourceBundle bundle = ResourceBundle.getBundle( "project_properties" );
+		ResourceBundle bundle = ResourceBundle.getBundle( ProjectBundle.PROJECT_PROPERTIES );
 		int poolSize = Integer
-				.valueOf( bundle.getString( "connections_limit" ) );
+				.valueOf( bundle.getString( ProjectProperties.CONNECTIONS_LIMIT ) );
 
 		return poolSize;
 	}

@@ -10,23 +10,23 @@
 	scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="string" />
-<fmt:message var="title" key="label.operator"/>
+<fmt:message var="title" key="operator"/>
 
 <myTag:basepage title="${ title }">
 
-	<h3>
-		<fmt:message key="label.claims" />
+	<h3 class = "tableLabel">
+		<fmt:message key="claims" />
 	</h3>
 	<tabletag:operatorclaimstable claims="${ sessionScope.claims }" />
 	<br>
-	<h3>
-		<fmt:message key="label.assignations" />
+	<h3 class = "tableLabel">
+		<fmt:message key="assignations" />
 	</h3>
 	<tabletag:assignationstable
 		assignations="${ sessionScope.assignations }" />
 	<br>
-	<h3>
-		<fmt:message key="label.workers" />
+	<h3 class = "tableLabel">
+		<fmt:message key="workers" />
 	</h3>
 	<tabletag:workerstable workers="${ sessionScope.workers }" />
 

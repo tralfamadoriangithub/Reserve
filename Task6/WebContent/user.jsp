@@ -17,11 +17,15 @@
 
 
 <myTag:basepage title="${ sessionScope.user.name }">
-	<h3><fmt:message key="label.addresses"/></h3>
+	<h3 class = "tableLabel"><fmt:message key="addresses"/></h3>
 	<table:addressestable addresses="${ sessionScope.addresses }" />
+	<a href="new_address.jsp" id="newAddressButton">Add address</a>
+	<c:url value="new_address.jsp" >
+	
+	</c:url>
 	<br>
 	<br>
-	<h3><fmt:message key="label.claims"/></h3>
+	<h3 class = "tableLabel"><fmt:message key="claims"/></h3>
 	<table:userclaimstable claims="${ sessionScope.claims }" />
 
 </myTag:basepage>

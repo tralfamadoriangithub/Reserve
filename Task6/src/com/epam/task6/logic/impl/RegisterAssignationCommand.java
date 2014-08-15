@@ -53,7 +53,9 @@ public class RegisterAssignationCommand implements ICommand {
 			throw new CommandException(
 					"Exception in \"RegisterAssignationCommand\"", e );
 		}
-		
+		/////////////////////////
+		claim.setClaimStatus( "Processed" );
+		/////////////////////////
 		AssignationTableEntity assignationTableEntity = new AssignationTableEntity();
 		assignationTableEntity.setAssignationId( assignation.getAssignationId() );
 		assignationTableEntity.setBeginWork( beginWork );

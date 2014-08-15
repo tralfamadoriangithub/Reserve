@@ -19,7 +19,7 @@ import com.epam.task6.entity.Address;
 import com.epam.task6.entity.Assignation;
 import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.User;
-import com.epam.task6.entity.UserStatus;
+import com.epam.task6.entity.UserStatusValues;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
@@ -74,15 +74,15 @@ public class GetUserPageCommand implements ICommand {
 
 		switch ( user.getStatus() ) {
 
-		case UserStatus.REGULAR_USER:
+		case UserStatusValues.REGULAR_USER:
 			page = JspPageName.USER_PAGE;
 			break;
 
-		case UserStatus.OPERATOR:
+		case UserStatusValues.OPERATOR:
 			page = JspPageName.OPERATOR_PAGE;
 			break;
 
-		case UserStatus.ADMINISTRATOR:
+		case UserStatusValues.ADMINISTRATOR:
 			page = JspPageName.ADMIN_PAGE;
 			break;
 
@@ -97,15 +97,15 @@ public class GetUserPageCommand implements ICommand {
 	private void loadUserData( User user, IDataDao dataDao, HttpSession session ) throws DaoException {
 		switch ( user.getStatus() ) {
 
-		case UserStatus.REGULAR_USER:
+		case UserStatusValues.REGULAR_USER:
 			loadRegularUserData( user, session, dataDao );
 			break;
 
-		case UserStatus.OPERATOR:
+		case UserStatusValues.OPERATOR:
 			loadOperatorData( session, dataDao );
 			break;
 
-		case UserStatus.ADMINISTRATOR:
+		case UserStatusValues.ADMINISTRATOR:
 			loadAdminData( session, dataDao );
 			break;
 

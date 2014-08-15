@@ -1,6 +1,8 @@
 package com.epam.task6.dao;
 
 public final class DBField {
+	
+	private DBField(){}
 
 //		USER TABLE	
 	

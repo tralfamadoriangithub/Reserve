@@ -2,7 +2,6 @@ package com.epam.task6.tableentity;
 
 import java.io.Serializable;
 
-import com.epam.task6.entity.Assignation;
 import com.epam.task6.entity.Profession;
 
 public class WorkerTableEntity implements Serializable{

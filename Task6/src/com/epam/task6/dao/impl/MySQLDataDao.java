@@ -13,6 +13,7 @@ import com.epam.task6.entity.Address;
 import com.epam.task6.entity.Assignation;
 import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.ClaimStatus;
+import com.epam.task6.entity.ClaimStatusValues;
 import com.epam.task6.entity.Profession;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.Worker;
@@ -385,6 +386,11 @@ public class MySQLDataDao implements IDataDao {
 				preparedStatement.addBatch();
 			}
 			preparedStatement.executeBatch();
+			preparedStatement.close();
+			preparedStatement = connection.prepareStatement( "UPDATE claim SET claim_status_id = ? WHERE claim_id = ? ");
+			preparedStatement.setInt( 1, ClaimStatusValues.PROCESSED );
+			preparedStatement.setInt( 2, assignation.getClaimId() );
+			preparedStatement.executeUpdate();
 			preparedStatement.close();
 			releaseConnection( connection );
 			
