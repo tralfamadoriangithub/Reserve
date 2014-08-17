@@ -23,8 +23,10 @@ td{
 input[type="submit"]{
 	min-width: 75px;
 	min-height: 25px;
+	padding-left: 4px;
+	padding-right: 4px;
 	background: #fff;
-	border: 1px solid rgba(0,0,0,0.1);
+	border: 1px solid rgba(0,0,0,0.3);
 	border-radius: 7px;
 	transition: background 0.5s;
 }
@@ -63,7 +65,7 @@ input[type="submit"]:hover{
 	box-shadow: 0 0 3px rgba(0,0,0,0.5);
 }
 
-# languageSelect{
+#languageSelect{
 	margin-top: 100px;
 }
 
@@ -134,3 +136,18 @@ input[type="submit"]:hover{
 
 #loginForm{
 }
+
+#claimFormAddress{
+	float:left;
+}
+
+#claimForm table{
+	width: 60%;
+	border: 0px;
+}
+
+#claimForm td{
+	border-top: 0px;
+}
+
+

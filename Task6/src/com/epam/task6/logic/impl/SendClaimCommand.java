@@ -47,7 +47,7 @@ public class SendClaimCommand implements ICommand{
 		
 		try {
 			dataManager.addClaim( newClaim );
-			claimTable.setClaimStatus( "Sended" );
+			claimTable.setClaimStatus( "Excepted" );
 		} catch ( DaoException e ) {
 			System.out.println("Exception");
 			throw new CommandException( "Exception in \"SendClaimCommand\"", e );	

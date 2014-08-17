@@ -78,7 +78,9 @@ public class UserClaimsTableTag extends TagSupport {
 			out.write( "<input type='hidden' name='claim_id' value='" );
 			out.write( claim.getClaimId() );
 			out.write( "'/>" );
-			out.write( "<input type='submit' value='Edit'/></form>" );
+			out.write( "<input type='submit' value='" );
+			out.write( bundle.getString( ProjectString.EDIT ) );
+			out.write( "'/></form>" );
 		}
 		out.write( "</td>" );
 	}

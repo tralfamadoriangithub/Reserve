@@ -438,7 +438,29 @@ public class MySQLDataDao implements IDataDao {
 
 	@Override
 	public synchronized void addAddress( Address address ) throws DaoException {
-
+		connection = getConnection();
+		
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection
+					.prepareStatement(
+							"INSERT INTO address (street, house, block, flat, phone, user_id) VALUES (?,?,?,?,?,?)",
+							Statement.RETURN_GENERATED_KEYS );
+			preparedStatement.setString( 1, address.getStreet() );
+			preparedStatement.setInt( 2, address.getHouseNumber() );
+			preparedStatement.setInt( 3, address.getBlockNumber() );
+			preparedStatement.setInt( 4, address.getFlatNumber() );
+			preparedStatement.setString( 5, address.getPhone() );
+			preparedStatement.setInt( 6, address.getUserId() );
+			preparedStatement.executeUpdate();
+			ResultSet resultSet = preparedStatement.getGeneratedKeys();
+			if ( resultSet.next() ) {
+				address.setAddressId( resultSet.getInt( 1 ) );
+			}
+			preparedStatement.close();
+		}catch( SQLException e){
+			throw new DaoException( "Exception in \"addAddress\"", e);
+		}	
 	}
 
 	@Override

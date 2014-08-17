@@ -14,6 +14,7 @@ import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.Assignation;
+import com.epam.task6.entity.Claim;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
@@ -53,6 +54,11 @@ public class RegisterAssignationCommand implements ICommand {
 			throw new CommandException(
 					"Exception in \"RegisterAssignationCommand\"", e );
 		}
+		
+		List<ClaimTableEntity> claimsList = (List<ClaimTableEntity>) session.getAttribute( SessionParameterName.CLAIMS );
+		claimsList.remove( claim );
+		session.setAttribute( SessionParameterName.CLAIMS, claimsList );
+		
 		/////////////////////////
 		claim.setClaimStatus( "Processed" );
 		/////////////////////////
@@ -65,6 +71,7 @@ public class RegisterAssignationCommand implements ICommand {
 		List<AssignationTableEntity> assignations = (List<AssignationTableEntity>) session.getAttribute( SessionParameterName.ASSIGNATIONS );
 		assignations.add( assignationTableEntity );
 		session.setAttribute( SessionParameterName.ASSIGNATIONS, assignations );
+
 		session.removeAttribute( SessionParameterName.CLAIM_FOR_ASSIGNATION );
 		
 		return JspPageName.OPERATOR_PAGE;

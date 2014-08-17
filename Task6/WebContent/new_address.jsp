@@ -7,13 +7,36 @@
 
 <myTag:basepage title="New address">
 	<form id="new_address_form" action="controller" method="post">
-		<label>Street</label> 
-		<input type="text" name="street" value="" required autofocus/>
-		<label>House</label>
-		<input type="text" name="house" value="" required/> <label>Block</label> <input
-			type="text" name="block" value="0" /> <label>Flat</label> <input
-			type="text" name="flat" value="" required/>
-			<input type="reset" value="Clear All"/>
-			<input type="submit" value="Add Address"/>
+		<table>
+			<tr>
+				<td>Street</td>
+				<td><input type="text" name="street" value="" required
+					autofocus /></td>
+			</tr>
+			<tr>
+				<td>House</td>
+				<td><input type="text" name="house" value="" required /></td>
+			</tr>
+			<tr>
+				<td>Block</td>
+				<td><input type="text" name="house" value="" required /></td>
+			</tr>
+			<tr>
+			<td>Flat</td><td><input type="text" name="flat" value="" required /></td>
+			</tr>
+		</table>
+		<section id="newaddressLabel">
+			<label>Street</label> <label>House</label> <label>Block</label> <label>Flat</label> <label>Phone</label>
+		</section>
+		<section id="newAddressField">
+			<input type="hidden" name="userId"
+				value="${ sessionScope.user.userId }" /> <input type="text"
+				name="street" value="" required autofocus /> <input type="text"
+				name="house" value="" required /> <input type="text" name="block"
+				value="" /> <input type="text" name="flat" value="" required />
+				<input type="text" name="phone" value="" required />
+		</section>
+		<input type="reset" value="Clear All" /> <input type="submit"
+			value="Add Address" />
 	</form>
 </myTag:basepage>
