@@ -14,25 +14,30 @@
 
 <myTag:basepage title="${ title }">
 	<section id="assignation_section">
-		
+
 		<br>
 		<form action="controller" method="post">
-			<input type="hidden" name="command" value="register_assignation_command" />
-			<section id="begin_work">
-			<label><fmt:message key="begin_work"/></label>
-				<input type="date" name="begin_work_date" /> 
-				<input type="time" name="begin_work_time" />
+			<input type="hidden" name="command"
+				value="register_assignation_command" />
+			<section id="assignation_date_time" style="margin-left:70px">
+				<section id="begin_work" style="float: left">
+					<label><strong><fmt:message key="begin_work" /></strong></label> <br> <input
+						type="date" name="begin_work_date" required /> <input type="time"
+						name="begin_work_time" required />
+				</section>
+				<section id="end_work">
+					<label><strong><fmt:message key="end_work" /></strong></label> <br> <input
+						type="date" name="end_work_date" required /> <input type="time"
+						name="end_work_time" required />
+				</section>
 			</section>
-			<section id="end_work">
-			<label><fmt:message key="end_work"/></label>
-				<input type="date" name="end_work_date" /> 
-				<input type="time" name="end_work_time" />
-			</section>
-			
+			<br>
+			<h3 class="tableLabel">
+				<fmt:message key="workers" />
+			</h3>
 			<table:operatorworkerstable workers="${ sessionScope.workers }" />
-			
-			
-			<input type="submit" value='<fmt:message key="assign_squad"/>' />
+			<br> <input type="submit"
+				value='<fmt:message key="assign_squad"/>' />
 		</form>
 	</section>
 </myTag:basepage>

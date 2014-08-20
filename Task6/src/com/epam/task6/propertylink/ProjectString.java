@@ -40,6 +40,11 @@ public final class ProjectString {
 	public static final String PROFESSION = "profession";
 	public static final String ADDRESS = "address";
 	public static final String SEND_CLAIM = "send_claim";
+	public static final String UPDATE_CLAIM = "update_claim";
+	public static final String ADD_ADDRESS = "add_address";
+	public static final String NEW_ADDRESS = "new_address";
+	public static final String CLEAR = "clear";
+	public static final String QUALIFICATION = "qualification";
 	
 	public static final String DESCRIBE_PROBLEM = "describe_problem";
 	public static final String ERROR_MESSAGE = "error_message";

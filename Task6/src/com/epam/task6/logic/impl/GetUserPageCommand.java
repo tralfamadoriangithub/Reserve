@@ -48,9 +48,9 @@ public class GetUserPageCommand implements ICommand {
 		// ///////////////////////////////////////////////////////////////////////////////////////
 
 		DaoFactory daoFactory = DaoFactory.getInstance();
-		IAccessDao accessManager = daoFactory.getAccessDao();
-
+		
 		try {
+			IAccessDao accessManager = daoFactory.getAccessDao();
 			user = accessManager.signIn( login, password );
 			IDataDao dataDao = daoFactory.getDataDao();
 			page = getPageForUser( user );

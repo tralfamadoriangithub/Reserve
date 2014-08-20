@@ -6,23 +6,22 @@
 <%@ taglib uri="/WEB-INF/tld/tableTags.tld" prefix="table"%>
 
 <c:set var="language"
-	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+	value="${ not empty param.language ? param.language : not empty language ? language : pageContext.request.locale }"
 	scope="session" />
-<fmt:setLocale value="${language}" />
+<fmt:setLocale value="${ language }" />
 <fmt:setBundle basename="string" />
 
 <c:if test="${ not sessionScope.is_login }">
 	<c:redirect url="login.jsp"></c:redirect>
 </c:if>
 
-
 <myTag:basepage title="${ sessionScope.user.name }">
 	<h3 class = "tableLabel"><fmt:message key="addresses"/></h3>
 	<table:addressestable addresses="${ sessionScope.addresses }" />
-	<a href="new_address.jsp" id="newAddressButton">Add address</a>
-	<c:url value="new_address.jsp" >
+	<section class="tableButton">
+		<a href="new_address.jsp" id="newAddressButton"><fmt:message key="add_address"/></a>
+	</section>
 	
-	</c:url>
 	<br>
 	<br>
 	<h3 class = "tableLabel"><fmt:message key="claims"/></h3>

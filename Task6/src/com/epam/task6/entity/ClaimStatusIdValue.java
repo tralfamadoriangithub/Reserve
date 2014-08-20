@@ -1,8 +1,8 @@
 package com.epam.task6.entity;
 
-public final class ClaimStatusValues {
+public final class ClaimStatusIdValue {
 	
-	private ClaimStatusValues(){}
+	private ClaimStatusIdValue(){}
 	
 	public static final int EXCEPTED = 0;
 	public static final int PROCESSED = 1;

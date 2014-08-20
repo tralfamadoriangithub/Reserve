@@ -13,43 +13,46 @@ public class DaoFactory implements IDao {
 		instance = new DaoFactory();
 	}
 
-	public static DaoFactory getInstance() {
+	public synchronized static DaoFactory getInstance() {
 		return instance;
 	}
 
 	@Override
-	public IDataDao getDataDao( DataType dataType ) {
+	public IDataDao getDataDao( DataType dataType ) throws DaoException {
 
 		IDataDao dataManager = null;
 
-		switch ( dataType ) {
-		case MYSQL:
-			dataManager = MySQLDataDao.getInstance();
-			break;
-		default:
-			break;
+		if ( dataType != null ) {
+			switch ( dataType ) {
+			case MYSQL:
+				dataManager = MySQLDataDao.getInstance();
+				break;
+			default:
+				break;
+			}
+		}else{
+			throw new DaoException("Exception in \"getDataDao\"");
 		}
 		return dataManager;
 	}
 
 	@Override
-	public IDataDao getDataDao() {
+	public IDataDao getDataDao() throws DaoException {
 		IDataDao dataManager;
 		ResourceBundle bundle = ResourceBundle.getBundle( "project_properties" );
 		DataType dataType = DataType.valueOf( bundle.getString( "data_type" )
 				.toUpperCase() );
-		if ( null != dataType ) {
-			dataManager = getDataDao( dataType );
-		} else {
-			dataManager = null;
-		}
+		
+		dataManager = getDataDao( dataType );
+		
 		return dataManager;
 	}
 
 	@Override
-	public IAccessDao getAccessDao( DataType dataType ) {
+	public IAccessDao getAccessDao( DataType dataType ) throws DaoException {
 
 		IAccessDao accessManager = null;
+		if ( null != dataType ) {
 		switch ( dataType ) {
 		case MYSQL:
 			accessManager = MySQLAccessDao.getInstance();
@@ -57,20 +60,21 @@ public class DaoFactory implements IDao {
 		default:
 			break;
 		}
+		}else{
+			throw new DaoException("Exception in \"getAccessDao\"");
+		}
 		return accessManager;
 	}
 
 	@Override
-	public IAccessDao getAccessDao() {
+	public IAccessDao getAccessDao() throws DaoException {
 		IAccessDao accessManager;
 		ResourceBundle bundle = ResourceBundle.getBundle( "project_properties" );
 		DataType dataType = DataType.valueOf( bundle.getString( "data_type" )
 				.toUpperCase() );
-		if ( null != dataType ) {
-			accessManager = getAccessDao( dataType );
-		} else {
-			accessManager = null;
-		}
+		
+		accessManager = getAccessDao( dataType );
+		
 		return accessManager;
 	}
 }

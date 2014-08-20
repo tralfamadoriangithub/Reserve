@@ -3,7 +3,6 @@ package com.epam.task6.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.epam.task6.dao.impl.connectionpool.ConnectionPool;
 import com.epam.task6.dao.DBField;
@@ -13,7 +12,7 @@ import com.epam.task6.entity.Address;
 import com.epam.task6.entity.Assignation;
 import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.ClaimStatus;
-import com.epam.task6.entity.ClaimStatusValues;
+import com.epam.task6.entity.ClaimStatusIdValue;
 import com.epam.task6.entity.Profession;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.Worker;
@@ -74,10 +73,11 @@ public class MySQLDataDao implements IDataDao {
 				user.setUserId( resultSet.getInt( 1 ) );
 			}
 			preparedStatement.close();
-			releaseConnection( connection );
 			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"addUser\"", e );
+		}finally{
+			releaseConnection( connection );
 		}
 	}
 
@@ -107,10 +107,11 @@ public class MySQLDataDao implements IDataDao {
 				addresses.add( address );
 			}
 			preparedStatement.close();
-			releaseConnection( connection );
 			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getUsersAddress\"", e );
+		}finally{
+			releaseConnection( connection );
 		}
 		return addresses;
 	}
@@ -136,10 +137,11 @@ public class MySQLDataDao implements IDataDao {
 				claim.setClaimId( resultSet.getInt( 1 ) );
 			}
 			preparedStatement.close();
-			releaseConnection( connection );
 			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"addClaim\"", e );
+		}finally{
+			releaseConnection( connection );
 		}
 	}
 
@@ -183,10 +185,11 @@ public class MySQLDataDao implements IDataDao {
 				}
 				preparedStatement.close();
 			}
-			releaseConnection( connection );
 			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getUserClaims\"", e );
+		}finally{
+			releaseConnection( connection );
 		}
 		return claims;
 	}
@@ -213,10 +216,11 @@ public class MySQLDataDao implements IDataDao {
 				addresses.add( address );
 			}
 			statement.close();
-			releaseConnection( connection );
 			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getAllAddresses\"", e );
+		}finally{
+			releaseConnection( connection );
 		}
 		return addresses;
 	}
@@ -254,11 +258,11 @@ public class MySQLDataDao implements IDataDao {
 						.getString( DBField.CLAIM_STATUS_VALUE ) );
 				claims.add( claim );
 			}
-			statement.close();
-			releaseConnection( connection );
 			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getAllClaims\"", e );
+		}finally{
+			releaseConnection( connection );
 		}
 		return claims;
 	}
@@ -293,10 +297,11 @@ public class MySQLDataDao implements IDataDao {
 				workers.add( worker );
 			}
 			statement.close();
-			releaseConnection( connection );
 			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getAllWorkers\"", e );
+		}finally{
+			releaseConnection( connection );
 		}
 		return workers;
 	}
@@ -345,10 +350,11 @@ public class MySQLDataDao implements IDataDao {
 				assignations.add( assignation );
 			}
 			statement.close();
-			releaseConnection( connection );
 			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"getAllAssignations\"", e );
+		}finally{
+			releaseConnection( connection );
 		}
 		return assignations;
 	}
@@ -388,19 +394,20 @@ public class MySQLDataDao implements IDataDao {
 			preparedStatement.executeBatch();
 			preparedStatement.close();
 			preparedStatement = connection.prepareStatement( "UPDATE claim SET claim_status_id = ? WHERE claim_id = ? ");
-			preparedStatement.setInt( 1, ClaimStatusValues.PROCESSED );
+			preparedStatement.setInt( 1, ClaimStatusIdValue.PROCESSED );
 			preparedStatement.setInt( 2, assignation.getClaimId() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
-			releaseConnection( connection );
 			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"addClaim\"", e );
+		}finally{
+			releaseConnection( connection );
 		}
 	}
 	
 	@Override
-	public void deleteAssignation( int assignationId ) throws DaoException {
+	public void deleteAssignation( int assignationId , int claimId  ) throws DaoException {
 		
 		connection = getConnection();
 		PreparedStatement preparedStatement;
@@ -417,9 +424,16 @@ public class MySQLDataDao implements IDataDao {
 			preparedStatement.setInt( 1, assignationId );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
-			releaseConnection( connection );
+			preparedStatement = connection.prepareStatement( "UPDATE claim SET claim_status_id = ? WHERE claim_id = ? ");
+			preparedStatement.setInt( 1, ClaimStatusIdValue.EXCEPTED );
+			preparedStatement.setInt( 2, claimId );
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			
 		} catch ( SQLException e ) {
 			throw new DaoException( "Exception in \"deleteAssignation\"", e );
+		}finally{
+			releaseConnection( connection );
 		}
 	}
 	
@@ -428,12 +442,6 @@ public class MySQLDataDao implements IDataDao {
 		List<User> users = new ArrayList<>();
 
 		return users;
-	}
-
-	@Override
-	public HashMap<String, String> query( String query ) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -458,13 +466,50 @@ public class MySQLDataDao implements IDataDao {
 				address.setAddressId( resultSet.getInt( 1 ) );
 			}
 			preparedStatement.close();
+			
 		}catch( SQLException e){
 			throw new DaoException( "Exception in \"addAddress\"", e);
-		}	
+		}finally{
+			releaseConnection( connection );
+		}
+	}
+	
+	@Override
+	public synchronized void updateClaim( int claimId , String problemDescription  ) throws DaoException {
+		connection = getConnection();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement( "UPDATE claim SET problem_description = ? WHERE claim_id = ?" );
+			preparedStatement.setString( 1, problemDescription );
+			preparedStatement.setInt( 2, claimId );
+			preparedStatement.executeUpdate();
+			preparedStatement.close();		
+		} catch ( SQLException e ) {
+			throw new DaoException( "Exception in \"updateClaim\"", e);
+		}finally{
+			releaseConnection( connection );
+		}
+	}
+	
+	@Override
+	public void deleteClaim( int claimId ) throws DaoException {
+		
+		connection = getConnection();
+		PreparedStatement preparedStatement;
+		try{
+			preparedStatement = connection.prepareStatement( "DELETE FROM claim WHERE claim_id = ?" );
+			preparedStatement.setInt( 1, claimId );
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		}catch(SQLException e){
+			throw new DaoException( "Exception in \"deleteClaim\"", e );
+		}finally{
+			releaseConnection( connection );
+		}
 	}
 
 	@Override
-	public void updateAddress( Address address ) throws DaoException {
+	public synchronized void updateAddress( Address address ) throws DaoException {
 		
 	}
 
@@ -477,16 +522,6 @@ public class MySQLDataDao implements IDataDao {
 	public List<Address> getAddress( int... userId ) throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void updateClaim( Claim claim ) throws DaoException {
-		
-	}
-
-	@Override
-	public void deleteClaim( int claimId ) throws DaoException {
-
 	}
 
 	@Override
@@ -614,4 +649,11 @@ public class MySQLDataDao implements IDataDao {
 
 		return claimStatuses;
 	}
+	
+	@Override
+	public HashMap<String, String> query( String query ) throws DaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

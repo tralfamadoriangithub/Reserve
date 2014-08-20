@@ -25,9 +25,5 @@
 	<tabletag:assignationstable
 		assignations="${ sessionScope.assignations }" />
 	<br>
-	<h3 class = "tableLabel">
-		<fmt:message key="workers" />
-	</h3>
-	<tabletag:workerstable workers="${ sessionScope.workers }" />
 
 </myTag:basepage>

@@ -18,28 +18,34 @@ public class AssignationsTableTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
 	private List<AssignationTableEntity> assignations;
 	private ResourceBundle bundle;
-	
+
 	@Override
 	public int doStartTag() throws JspException {
-		bundle = ResourceBundle.getBundle( ProjectBundle.PROJECT_STRING, Locale.getDefault() );
+		bundle = ResourceBundle.getBundle( ProjectBundle.PROJECT_STRING,
+				Locale.getDefault() );
 		JspWriter out = pageContext.getOut();
 		try {
 			out.write( "<table>" );
-			
+
 			StringBuilder tableHeader = new StringBuilder();
-			tableHeader.append( "<th>" )
-				.append( bundle.getString( ProjectString.PROBLEM_DESCRIPTION ) )
-				.append( "</th><th>" )
-				.append( bundle.getString( ProjectString.BEGIN_WORK ) )
-				.append( "</th><th>" )
-				.append( bundle.getString( ProjectString.END_WORK ) )
-				.append( "</th><th>" )
-				.append( bundle.getString( ProjectString.STATUS ) )
-				.append( "</th>" );
-			
+			tableHeader
+					.append( "<th>" )
+					.append(
+							bundle.getString( ProjectString.PROBLEM_DESCRIPTION ) )
+					.append( "</th><th>" )
+					.append( bundle.getString( ProjectString.BEGIN_WORK ) )
+					.append( "</th><th>" )
+					.append( bundle.getString( ProjectString.END_WORK ) )
+					.append( "</th><th>" )
+					.append( bundle.getString( ProjectString.STATUS ) )
+					.append( "</th>" );
+
 			out.write( tableHeader.toString() );
-			for(AssignationTableEntity assignation : assignations){
+			
+			if ( assignations != null ) {
+				for ( AssignationTableEntity assignation : assignations ) {
 					printAssignationRow( assignation, out );
+				}
 			}
 			out.write( "</table>" );
 		} catch ( IOException e ) {
@@ -54,28 +60,23 @@ public class AssignationsTableTag extends TagSupport {
 		out.write( String.valueOf( assignation.getClaim()
 				.getProblemDescription() ) );
 		out.write( "</td><td>" );
-		out.write( String.valueOf( assignation.getBeginWork() ) );
+		out.write( String.valueOf( assignation.getBeginWork() ).replace(
+				":00.0", "" ) );
 		out.write( "</td><td>" );
-		out.write( String.valueOf( assignation.getEndWork() ) );
+		out.write( String.valueOf( assignation.getEndWork() ).replace( ":00.0",
+				"" ) );
 		out.write( "</td><td>" );
 		out.write( String.valueOf( assignation.getClaim().getClaimStatus() ) );
 		out.write( "</td><td>" );
-		out.write( "<form action='controller' method='post'>"
-				+ "<input type='hidden' name='command' value='delete_assignation_command'/>"
-				+ "<input type='hidden' name='assignation_id' value='"
-				+ assignation.getAssignationId() + "'/>"
-				+ "<input type='submit' value='"
-				+ bundle.getString( ProjectString.DELETE )
-				+ "'/>" + "</form>" );
-		out.write( "</td><td>" );
-		out.write( "<form action='controller' method='post'>"
-				+ "<input type='hidden' name='command' value='edit_assignation_command'/>"
-				+ "<input type='hidden' name='assignation_id' value='"
-				+ assignation.getAssignationId() + "'/>"
-				+ "<input type='submit' value='"
-				+ bundle.getString( ProjectString.EDIT )
-				+ "'/>" + "</form>" );
-		out.write( "</td></tr>" );
+		out.write( "<form action='controller' method='post'>" );
+		out.write( "<input type='hidden' name='command' value='delete_assignation_command'/>" );
+		out.write( "<input type='hidden' name='assignation_id' value='" );
+		out.write( String.valueOf( assignation.getAssignationId() ) );
+		out.write( "'/><input type='hidden' name='claim_id' value='" );
+		out.write( String.valueOf( assignation.getClaim().getClaimId() ) );
+		out.write( "'/><input type='submit' value='" );
+		out.write( bundle.getString( ProjectString.DELETE ) );
+		out.write( "'/></form></td></tr>" );
 	}
 
 	public List<AssignationTableEntity> getAssignations() {

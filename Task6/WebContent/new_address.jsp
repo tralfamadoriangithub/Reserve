@@ -5,38 +5,64 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="myTag"%>
 <%@ taglib uri="/WEB-INF/tld/tableTags.tld" prefix="table"%>
 
+<c:set var="language"
+	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+	scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="string" />
+
 <myTag:basepage title="New address">
-	<form id="new_address_form" action="controller" method="post">
-		<table>
-			<tr>
-				<td>Street</td>
-				<td><input type="text" name="street" value="" required
-					autofocus /></td>
-			</tr>
-			<tr>
-				<td>House</td>
-				<td><input type="text" name="house" value="" required /></td>
-			</tr>
-			<tr>
-				<td>Block</td>
-				<td><input type="text" name="house" value="" required /></td>
-			</tr>
-			<tr>
-			<td>Flat</td><td><input type="text" name="flat" value="" required /></td>
-			</tr>
-		</table>
-		<section id="newaddressLabel">
-			<label>Street</label> <label>House</label> <label>Block</label> <label>Flat</label> <label>Phone</label>
-		</section>
-		<section id="newAddressField">
-			<input type="hidden" name="userId"
-				value="${ sessionScope.user.userId }" /> <input type="text"
-				name="street" value="" required autofocus /> <input type="text"
-				name="house" value="" required /> <input type="text" name="block"
-				value="" /> <input type="text" name="flat" value="" required />
-				<input type="text" name="phone" value="" required />
-		</section>
-		<input type="reset" value="Clear All" /> <input type="submit"
-			value="Add Address" />
-	</form>
+	<section id="newAddressSection">
+		<h3>
+			<fmt:message key="new_address" />
+		</h3>
+		<br>
+		<form id="newAddressForm" action="controller" method="post">
+			<input type="hidden" name="command" value="register_new_address_command"/>
+			<dl>
+				<dt>
+					<fmt:message key="street" />
+				</dt>
+				<dd>
+					<input type="text" name="street" value="" required autofocus />
+				</dd>
+
+				<dt>
+					<fmt:message key="house" />
+				</dt>
+				<dd>
+					<input type="number" name="house" required />
+				</dd>
+
+				<dt>
+					<fmt:message key="block" />
+				</dt>
+				<dd>
+					<input type="number" name="block" />
+				</dd>
+
+				<dt>
+					<fmt:message key="flat" />
+				</dt>
+				<dd>
+					<input type="number" name="flat" required />
+				</dd>
+
+				<dt>
+					<fmt:message key="phone" />
+				</dt>
+				<dd>
+					<input type="number" name="phone" required />
+				</dd>
+
+				<dt></dt>
+				<dd>
+					<input class="whiteButton" type="reset"
+						value="<fmt:message key="clear"/>" /> <input class="whiteButton"
+						type="submit" value='<fmt:message key="add_address"/>' />
+				</dd>
+
+			</dl>
+		</form>
+	</section>
 </myTag:basepage>

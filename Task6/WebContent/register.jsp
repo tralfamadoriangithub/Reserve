@@ -22,7 +22,7 @@
 			<input type="password" placeholder="<fmt:message key="password"/>" name="password" required/>
 			<p><fmt:message key="password_confirm"/>:<br>
 			<input type="password" placeholder="<fmt:message key="password_confirm"/>" name="confirm_password" required/>
-			<br>
+			<br><br>
 			<input type="submit" value="${ register }"/>
 		</form>
 	</section>

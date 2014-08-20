@@ -21,11 +21,12 @@ public class AddressesTableTag extends TagSupport {
 
 	@Override
 	public int doStartTag() throws JspException {
-		bundle = ResourceBundle.getBundle( ProjectBundle.PROJECT_STRING, Locale.getDefault() );
+		bundle = ResourceBundle.getBundle( ProjectBundle.PROJECT_STRING,
+				Locale.getDefault() );
 		JspWriter out = pageContext.getOut();
 		try {
 			out.write( "<table>" );
-			
+
 			StringBuilder tableHeader = new StringBuilder();
 			tableHeader.append( "<th>" )
 					.append( bundle.getString( ProjectString.STREET ) )
@@ -38,10 +39,12 @@ public class AddressesTableTag extends TagSupport {
 					.append( "</th><th>" )
 					.append( bundle.getString( ProjectString.PHONE ) )
 					.append( "</th>" );
-			
+
 			out.write( tableHeader.toString() );
-			for ( Address address : addresses ) {
-				printAddressRow( address, out );
+			if ( addresses != null ) {
+				for ( Address address : addresses ) {
+					printAddressRow( address, out );
+				}
 			}
 			out.write( "</table>" );
 		} catch ( IOException e ) {
@@ -79,10 +82,8 @@ public class AddressesTableTag extends TagSupport {
 				+ "'/>" + "<input type='hidden' name='block' value='" + block
 				+ "'/>" + "<input type='hidden' name='flat' value='" + flat
 				+ "'/>" + "<input type='hidden' name='user_id' value='"
-				+ userId + "'/>" + "<input type='submit' value='" 
-				+ bundle.getString( ProjectString.CLAIM )
-				+ "'/>"
-				+ "</form>" );
+				+ userId + "'/>" + "<input type='submit' value='"
+				+ bundle.getString( ProjectString.CLAIM ) + "'/>" + "</form>" );
 		out.write( "</td></tr>" );
 	}
 

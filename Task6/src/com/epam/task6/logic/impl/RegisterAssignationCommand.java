@@ -1,6 +1,7 @@
 package com.epam.task6.logic.impl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.Assignation;
 import com.epam.task6.entity.Claim;
+import com.epam.task6.entity.ClaimStatusStringValue;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
@@ -27,6 +29,7 @@ public class RegisterAssignationCommand implements ICommand {
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException, CommandLogicException {
 		HttpSession session = request.getSession();
+		
 		ClaimTableEntity claim = (ClaimTableEntity) session
 				.getAttribute( SessionParameterName.CLAIM_FOR_ASSIGNATION );
 
@@ -46,9 +49,9 @@ public class RegisterAssignationCommand implements ICommand {
 		assignation.setClaimId( claim.getClaimId() );
 		assignation.setBeginWork( beginWork );
 		assignation.setEndWork( endWork );
-
-		IDataDao dataDao = DaoFactory.getInstance().getDataDao();
+		
 		try {
+			IDataDao dataDao = DaoFactory.getInstance().getDataDao();
 			dataDao.registerNewAssignation( assignation, workersId );
 		} catch ( DaoException e ) {
 			throw new CommandException(
@@ -56,12 +59,11 @@ public class RegisterAssignationCommand implements ICommand {
 		}
 		
 		List<ClaimTableEntity> claimsList = (List<ClaimTableEntity>) session.getAttribute( SessionParameterName.CLAIMS );
-		claimsList.remove( claim );
+		claimsList = updateClaimFromList( claim.getClaimId(), claimsList );
 		session.setAttribute( SessionParameterName.CLAIMS, claimsList );
 		
-		/////////////////////////
-		claim.setClaimStatus( "Processed" );
-		/////////////////////////
+		claim.setClaimStatus( ClaimStatusStringValue.PROCESSED );
+		
 		AssignationTableEntity assignationTableEntity = new AssignationTableEntity();
 		assignationTableEntity.setAssignationId( assignation.getAssignationId() );
 		assignationTableEntity.setBeginWork( beginWork );
@@ -92,5 +94,21 @@ public class RegisterAssignationCommand implements ICommand {
 			intWorkersId[i] = Integer.parseInt( strWorkersId[i] );
 		}
 		return intWorkersId;
+	}
+	
+	private List<ClaimTableEntity> updateClaimFromList( int claimId, List<ClaimTableEntity> claims ){
+		System.out.println("Claim update : " + claims);
+		System.out.println("Claim ID : " + claimId);
+		List<ClaimTableEntity> temp = new ArrayList<>();
+		temp.addAll( claims );
+		
+		for(ClaimTableEntity claim : claims){
+			if(claim.getClaimId() == claimId ){
+				int index = claims.indexOf( claim );
+				System.out.println("Claim index : " + index);
+				temp.get( index ).setClaimStatus( ClaimStatusStringValue.PROCESSED );
+			}
+		}
+		return temp;
 	}
 }

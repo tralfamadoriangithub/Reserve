@@ -2,6 +2,8 @@ package com.epam.task6.controller;
 
 public final class RequestParameterName {
 	
+	private RequestParameterName(){}
+	
 	public static final String COMMAND = "command";
 	public static final String LANGUAGE = "language";
 	public static final String NAME = "name";

@@ -22,7 +22,7 @@ import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.ClaimTableEntity;
 
-public class SendClaimCommand implements ICommand{
+public class RegisterClaimCommand implements ICommand{
 
 	@Override
 	public String execute( HttpServletRequest request,
@@ -42,10 +42,9 @@ public class SendClaimCommand implements ICommand{
 		newClaim.setAddressId( address.getAddressId() );
 		newClaim.setUserId( user.getUserId() );
 		newClaim.setProblemDescription( claimTable.getProblemDescription() );
-		
-		IDataDao dataManager = DaoFactory.getInstance().getDataDao();
-		
+			
 		try {
+			IDataDao dataManager = DaoFactory.getInstance().getDataDao();
 			dataManager.addClaim( newClaim );
 			claimTable.setClaimStatus( "Excepted" );
 		} catch ( DaoException e ) {
@@ -55,7 +54,6 @@ public class SendClaimCommand implements ICommand{
 		
 		List<ClaimTableEntity> claims = (List<ClaimTableEntity>) session.getAttribute( "claims" );
 		claims.add( claimTable );
-		System.out.println(claimTable.getClaimId());
 		session.setAttribute( "claims", claims );
 		return JspPageName.USER_PAGE;
 	}

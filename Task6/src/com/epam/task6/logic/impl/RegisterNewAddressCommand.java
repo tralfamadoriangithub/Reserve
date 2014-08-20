@@ -11,9 +11,9 @@ import com.epam.task6.controller.RequestParameterName;
 import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
-import com.epam.task6.dao.IDao;
 import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.Address;
+import com.epam.task6.entity.User;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
@@ -27,15 +27,22 @@ public class RegisterNewAddressCommand implements ICommand{
 		
 		HttpSession session = request.getSession();
 		Address address = new Address();
-		address.setUserId( Integer.valueOf( request.getParameter( RequestParameterName.USER_ID ) ) );
+		
+		User user = (User) session.getAttribute( SessionParameterName.USER );
+		
+		address.setUserId( user.getUserId() );
 		address.setStreet( request.getParameter( RequestParameterName.STREET) );
 		address.setHouseNumber( Integer.valueOf( request.getParameter( RequestParameterName.HOUSE ) ) );
-		address.setBlockNumber( Integer.valueOf( request.getParameter( RequestParameterName.BLOCK ) ) );
+		
+// 					Block field can be empty
+		String block = request.getParameter( RequestParameterName.BLOCK ); 
+		address.setBlockNumber( "".equals( block ) ? 0 : Integer.valueOf( block ));
+		
 		address.setFlatNumber( Integer.valueOf( request.getParameter( RequestParameterName.FLAT ) ) );
 		address.setPhone( request.getParameter( RequestParameterName.PHONE ) );
 		
-		IDataDao dataDao = DaoFactory.getInstance().getDataDao();
 		try {
+			IDataDao dataDao = DaoFactory.getInstance().getDataDao();
 			dataDao.addAddress( address );
 		} catch ( DaoException e ) {
 			throw new CommandException( "Exception in \"RegisterNewAddressCommand\"", e );
@@ -45,6 +52,7 @@ public class RegisterNewAddressCommand implements ICommand{
 		List<Address> addresses = (List<Address>) session.getAttribute( SessionParameterName.ADDRESSES );
 		addresses.add( address );
 		session.setAttribute( SessionParameterName.ADDRESSES, addresses );
+		
 		return JspPageName.USER_PAGE;
 	}
 

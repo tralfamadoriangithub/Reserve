@@ -10,7 +10,8 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import com.epam.task6.entity.Claim;
-import com.epam.task6.entity.ClaimStatusValues;
+import com.epam.task6.entity.ClaimStatusIdValue;
+import com.epam.task6.entity.ClaimStatusStringValue;
 import com.epam.task6.propertylink.ProjectBundle;
 import com.epam.task6.propertylink.ProjectString;
 import com.epam.task6.tableentity.ClaimTableEntity;
@@ -43,10 +44,13 @@ public class UserClaimsTableTag extends TagSupport {
 			out.write( "</th><th>" );
 			out.write( bundle.getString( ProjectString.STATUS ) );
 			out.write( "</th>" );
-			for ( ClaimTableEntity claim : claims ) {
-				out.write( "<tr>" );
-				printClaim( claim, out );
-				out.write( "</tr>" );
+			
+			if ( claims != null ) {
+				for ( ClaimTableEntity claim : claims ) {
+					out.write( "<tr>" );
+					printClaim( claim, out );
+					out.write( "</tr>" );
+				}
 			}
 			out.write( "</table>" );
 		} catch ( IOException e ) {
@@ -71,15 +75,39 @@ public class UserClaimsTableTag extends TagSupport {
 		out.write( claim.getClaimStatus() );
 		out.write( "</td><td>" );
 		// ////////////////////////////////////////////////////////////////////
-		if ( "Excepted".equals( claim.getClaimStatus() ) ) {
-			// ////////////////////////////////////////////////////////////////////
+		if ( claim.getClaimStatus().equals( ClaimStatusStringValue.EXCEPTED ) ) {
+			// ////////////////////////////////////////////////////////////////
 			out.write( "<form action='controller' method='post'>" );
 			out.write( "<input type='hidden' name='command' value='edit_claim_command'/>" );
 			out.write( "<input type='hidden' name='claim_id' value='" );
-			out.write( claim.getClaimId() );
+			out.write( String.valueOf( claim.getClaimId() ) );
+			out.write( "'/>" );
+			out.write( "<input type='hidden' name='problem_description' value='" );
+			out.write( claim.getProblemDescription() );
+			out.write( "'/>" );
+			out.write( "<input type='hidden' name='street' value='" );
+			out.write( claim.getAddress().getStreet() );
+			out.write( "'/>" );
+			out.write( "<input type='hidden' name='house' value='" );
+			out.write( String.valueOf( claim.getAddress().getHouseNumber() ) );
+			out.write( "'/>" );
+			out.write( "<input type='hidden' name='block' value='" );
+			out.write( String.valueOf( claim.getAddress().getBlockNumber() ) );
+			out.write( "'/>" );
+			out.write( "<input type='hidden' name='flat' value='" );
+			out.write( String.valueOf( claim.getAddress().getFlatNumber() ) );
 			out.write( "'/>" );
 			out.write( "<input type='submit' value='" );
 			out.write( bundle.getString( ProjectString.EDIT ) );
+			out.write( "'/></form>" );
+			out.write( "</td><td>" );
+			out.write( "<form action='controller' method='post'>" );
+			out.write( "<input type='hidden' name='command' value='delete_claim_command'/>" );
+			out.write( "<input type='hidden' name='claim_id' value='" );
+			out.write( String.valueOf( claim.getClaimId() ) );
+			out.write( "'/>" );
+			out.write( "<input type='submit' value='" );
+			out.write( bundle.getString( ProjectString.DELETE ) );
 			out.write( "'/></form>" );
 		}
 		out.write( "</td>" );

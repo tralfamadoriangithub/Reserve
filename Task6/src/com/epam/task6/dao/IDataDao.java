@@ -32,7 +32,7 @@ public interface IDataDao {
 
 	public void addClaim( Claim claim ) throws DaoException;
 
-	public void updateClaim( Claim claim ) throws DaoException;
+	public void updateClaim( int claimId , String problemDescription  ) throws DaoException;
 
 	public void deleteClaim( int claimId ) throws DaoException;
 
@@ -68,7 +68,7 @@ public interface IDataDao {
 	public void updateAssignation( Assignation assignation )
 			throws DaoException;
 
-	public void deleteAssignation( int assignationId ) throws DaoException;
+	public void deleteAssignation( int assignationId , int claimId  ) throws DaoException;
 
 	public List<Assignation> getAssignation( int... assignationId )
 			throws DaoException;

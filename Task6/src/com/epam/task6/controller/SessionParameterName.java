@@ -2,6 +2,8 @@ package com.epam.task6.controller;
 
 public final class SessionParameterName {
 	
+	private SessionParameterName(){}
+	
 	public static final String CURRENT_PAGE = "current_page";
 	public static final String USER_PAGE = "user_page";
 	public static final String LANGUAGE = "language";
@@ -15,5 +17,6 @@ public final class SessionParameterName {
 	public static final String PROFESSIONS = "professions";
 	public static final String CLAIM_STATUSES = "claim_statuses";
 	public static final String CLAIM_FOR_ASSIGNATION = "claim_for_assignation";
+	public static final String CLAIM_FOR_EDIT = "claim_for_edit";
 	
 }

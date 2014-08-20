@@ -18,27 +18,33 @@ public class OperatorWorkersTableTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
 	private List<WorkerTableEntity> workers;
 	private ResourceBundle bundle;
-	
+
 	@Override
 	public int doStartTag() throws JspException {
-		
-		bundle = ResourceBundle.getBundle( ProjectBundle.PROJECT_STRING, Locale.getDefault() );
+
+		bundle = ResourceBundle.getBundle( ProjectBundle.PROJECT_STRING,
+				Locale.getDefault() );
 		JspWriter out = pageContext.getOut();
 		try {
 			out.write( "<table>" );
 			StringBuilder tableHead = new StringBuilder();
-			tableHead.append( "<thead><tr><td width='10%'><td>" )
-				.append( bundle.getString( ProjectString.PROFESSION ) )
-				.append( "</td><td>" )
-				.append( bundle.getString( ProjectString.NAME ) )
-				.append( "</td><td>" )
-				.append( bundle.getString( ProjectString.SURNAME ) )
-				.append( "</td></thead>" );
+			tableHead.append( "<th width='10%'></th><th>" )
+					.append( bundle.getString( ProjectString.PROFESSION ) )
+					.append( "</th><th>" )
+					.append( bundle.getString( ProjectString.QUALIFICATION ) )
+					.append( "</th><th>" )
+					.append( bundle.getString( ProjectString.NAME ) )
+					.append( "</th><th>" )
+					.append( bundle.getString( ProjectString.SURNAME ) )
+					.append( "</th>" );
 			out.write( tableHead.toString() );
-			for ( WorkerTableEntity worker : workers ) {
+
+			if ( workers != null ) {
+				for ( WorkerTableEntity worker : workers ) {
 					out.write( "<tr>" );
 					printWorkerRow( worker, out );
 					out.write( "</tr>" );
+				}
 			}
 			out.write( "</table>" );
 		} catch ( IOException e ) {
@@ -49,9 +55,12 @@ public class OperatorWorkersTableTag extends TagSupport {
 
 	private void printWorkerRow( WorkerTableEntity worker, JspWriter out )
 			throws IOException {
-		out.write( "<td><input type='checkbox' name='selected_worker' value='" + worker.getWorkerId() + "'/>" );
+		out.write( "<td><input type='checkbox' name='selected_worker' value='"
+				+ worker.getWorkerId() + "'/>" );
 		out.write( "</td><td>" );
-		out.write( String.valueOf( worker.getProfession().getProfessionName() ) );
+		out.write( worker.getProfession().getProfessionName() );
+		out.write( "</td><td>" );
+		out.write( String.valueOf( worker.getQualification() ) );
 		out.write( "</td><td>" );
 		out.write( worker.getName() );
 		out.write( "</td><td>" );

@@ -3,7 +3,6 @@ package com.epam.task6.dao.impl.connectionpool;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
 

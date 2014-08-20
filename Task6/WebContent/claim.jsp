@@ -13,9 +13,7 @@
 <myTag:basepage title="${ title }">
 	<section id="claimForm">
 		<h3>
-			<fmt:message key="claim" />
-			:
-		</h3>
+			<fmt:message key="claim" />:</h3>
 		<br>
 		<table>
 			<tr>
@@ -41,7 +39,7 @@
 			<tr>
 				<td><form action="controller" method="post">
 						<input type="hidden" name="command" value="send_claim_command" />
-						<textarea rows="4" cols="50" name="problem_description"></textarea>
+						<textarea rows="4" cols="50" name="problem_description" style="border-radius: 4px" required ><c:out value="${ param.problem_description }"></c:out></textarea>
 						<br> <input type="submit"
 							value='<fmt:message key="send_claim" />' />
 					</form></td>

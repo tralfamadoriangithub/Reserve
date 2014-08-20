@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
+import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.IDataDao;
@@ -15,23 +16,24 @@ import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 
-public class RegisterNewUser implements ICommand {
+public class RegisterNewUserCommand implements ICommand {
 
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException, CommandLogicException {
 
 		User newUser = createUser( request );
-		IDataDao dataManager = DaoFactory.getInstance().getDataDao();
+		
 		try {
+			IDataDao dataManager = DaoFactory.getInstance().getDataDao();
 			dataManager.addUser( newUser );
 		} catch ( DaoException e ) {
 			throw new CommandException(
 					"Exception in \"RegisterNewUserCommand\"", e );
 		}
 		HttpSession session = request.getSession();
-		session.setAttribute( "user", newUser );
-		session.setAttribute( "login", true );
+		session.setAttribute( SessionParameterName.USER, newUser );
+		session.setAttribute( SessionParameterName.IS_LOGIN, true );
 		return JspPageName.USER_PAGE;
 	}
 

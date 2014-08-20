@@ -188,7 +188,7 @@ public final class DatabaseHelper {
 				.addBatch( "INSERT INTO worker VALUES (5, 'Барак', 'Обама', 1, 3)" );
 		statement
 				.addBatch( "INSERT INTO worker VALUES (6, 'Билл', 'Гейтс', 4, 3)" );
-		int[] batch2 = statement.executeBatch();
+		statement.executeBatch();
 	}
 
 	public void createTables2() throws DaoException {
