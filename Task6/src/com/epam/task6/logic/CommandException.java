@@ -1,5 +1,4 @@
 package com.epam.task6.logic;
-
 import com.epam.task6.exception.ProjectException;
 
 public class CommandException extends ProjectException{

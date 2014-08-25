@@ -9,13 +9,15 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import com.epam.task6.entity.Claim;
-import com.epam.task6.entity.ClaimStatusIdValue;
 import com.epam.task6.entity.ClaimStatusStringValue;
 import com.epam.task6.propertylink.ProjectBundle;
 import com.epam.task6.propertylink.ProjectString;
 import com.epam.task6.tableentity.ClaimTableEntity;
-
+/**
+ * Класс, реализующий пользовательский тег вывода таблицы заявок для пользователя.
+ * @author dmitry
+ *
+ */
 public class UserClaimsTableTag extends TagSupport {
 
 	private static final long serialVersionUID = 1L;

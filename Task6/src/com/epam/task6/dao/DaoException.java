@@ -1,7 +1,11 @@
 package com.epam.task6.dao;
-
 import com.epam.task6.exception.ProjectException;
-
+/**
+ * Class defines DAO exception.
+ * 
+ * @author dmitry
+ *
+ */
 public class DaoException extends ProjectException{
 
 	private static final long serialVersionUID = 1L;

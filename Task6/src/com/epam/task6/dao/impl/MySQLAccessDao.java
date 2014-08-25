@@ -11,7 +11,12 @@ import com.epam.task6.dao.DataNotFoundException;
 import com.epam.task6.dao.impl.connectionpool.ConnectionPool;
 import com.epam.task6.entity.User;
 import com.mysql.jdbc.PreparedStatement;
-
+/**
+ * Класс, реализующий интерфейс {@link com.epam.task6.dao.IAccessDao} для логинации 
+ * с использованием БД MySQL.
+ * @author dmitry
+ *
+ */
 public class MySQLAccessDao implements IAccessDao {
 
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();

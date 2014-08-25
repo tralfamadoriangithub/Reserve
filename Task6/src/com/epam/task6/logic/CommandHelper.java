@@ -20,7 +20,14 @@ import com.epam.task6.logic.impl.RegisterClaimCommand;
 import com.epam.task6.logic.impl.SignInCommand;
 import com.epam.task6.logic.impl.SignOutCommand;
 import com.epam.task6.logic.impl.UpdateClaimCommand;
-
+/**
+ *  ласс, обеспечивающий доступ к функциональным возможност€м приложени€.
+ * 
+ *  ласс создает перечень доступного дл€ приложени€ набора функциональных возможностей 
+ * и предоставл€ющий к ним доступ.
+ * @author dmitry
+ *
+ */
 public class CommandHelper {
 	
 	private static final CommandHelper instance;

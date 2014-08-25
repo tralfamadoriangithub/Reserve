@@ -11,9 +11,17 @@ import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
-
+/**
+ * Класс, реализующий {@link com.epam.task6.logic.ICommand} реализующий команду смены языковых
+ * установок приложения.
+ * @author dmitry
+ *
+ */
 public class ChangeLanguageCommand implements ICommand {
 
+	/**
+	 * @return адрес страницы, на которой находится пользователь.
+	 */
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException, CommandLogicException {

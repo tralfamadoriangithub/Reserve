@@ -2,18 +2,23 @@ package com.epam.task6.logic.impl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.catalina.filters.AddDefaultCharsetFilter;
-
 import com.epam.task6.controller.JspPageName;
 import com.epam.task6.controller.RequestParameterName;
 import com.epam.task6.entity.Address;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
-
+/**
+* Класс, реализующий {@link com.epam.task6.logic.ICommand} реализующий команду создания
+* новой заявки пользователем.
+* @author dmitry
+*
+*/
 public class CreateClaimCommand implements ICommand {
 
+	/**
+	 * @return адрес страницы создания заявки.
+	 */
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException, CommandLogicException {

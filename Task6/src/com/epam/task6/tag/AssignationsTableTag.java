@@ -12,7 +12,11 @@ import javax.servlet.jsp.tagext.TagSupport;
 import com.epam.task6.propertylink.ProjectBundle;
 import com.epam.task6.propertylink.ProjectString;
 import com.epam.task6.tableentity.AssignationTableEntity;
-
+/**
+ * Класс, реализующий пользовательский тег вывода таблицы назначений.
+ * @author dmitry
+ *
+ */
 public class AssignationsTableTag extends TagSupport {
 
 	private static final long serialVersionUID = 1L;

@@ -16,9 +16,13 @@ table{
 	border-spacing: 0px;
 	margin: auto;
 }
+tr{
+	border-top: 1px solid rgba(150,150,150,0.8);
+}
 td{
-	max-width: 280px;
+	max-width: 200px;
 	white-space: nowrap;
+	margin-left: 3px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	border-top: 1px solid rgba(150,150,150,0.8);

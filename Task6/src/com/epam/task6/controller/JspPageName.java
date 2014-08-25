@@ -1,5 +1,11 @@
 package com.epam.task6.controller;
 
+/**
+ * Class contains application's JSP pages names.
+ * 
+ * @author dmitry
+ *
+ */
 public final class JspPageName {
 	
 	private JspPageName(){}

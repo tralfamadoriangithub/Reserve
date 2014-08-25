@@ -1,7 +1,6 @@
 package com.epam.task6.logic.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +15,6 @@ import com.epam.task6.dao.DataNotFoundException;
 import com.epam.task6.dao.IAccessDao;
 import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.Address;
-import com.epam.task6.entity.Assignation;
-import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.UserStatusValues;
 import com.epam.task6.logic.CommandException;
@@ -26,9 +23,20 @@ import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.AssignationTableEntity;
 import com.epam.task6.tableentity.ClaimTableEntity;
 import com.epam.task6.tableentity.WorkerTableEntity;
-
+/**
+* Класс, реализующий {@link com.epam.task6.logic.ICommand} реализующий команду входа пользователя
+* в систему.
+* 
+* Класс реализует вход пользователя в систему и получение соответствующих типу пользователя страницы и 
+* данных. Перегружен функционалом и несоответствующей названию класса логикой. Необходимо исправить.
+* @author dmitry
+*
+*/
 public class GetUserPageCommand implements ICommand {
 
+	/**
+	 * @return адрес страницы соответствующей типу пользователя.
+	 */
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException, CommandLogicException {
@@ -68,7 +76,12 @@ public class GetUserPageCommand implements ICommand {
 		}
 		return page;
 	}
-
+	/**
+	 * Метод, возвращающий адрес страницы, соответствующий типу пользователя.
+	 * @param user объект пользователя
+	 * @return адрес страницы пользователя
+	 * @throws DaoException
+	 */
 	private String getPageForUser( User user ) throws DaoException {
 		String page;
 
@@ -93,7 +106,13 @@ public class GetUserPageCommand implements ICommand {
 		
 		return page;
 	}
-
+	/**
+	 * Метод, загружающий данные, соответствующие типу пользователя
+	 * @param user объект пользователя
+	 * @param dataDao объект взаимодействия с источником данных
+	 * @param session текущая сессия
+	 * @throws DaoException
+	 */
 	private void loadUserData( User user, IDataDao dataDao, HttpSession session ) throws DaoException {
 		switch ( user.getStatus() ) {
 
@@ -115,6 +134,13 @@ public class GetUserPageCommand implements ICommand {
 		}
 	}
 
+	/**
+	 * Метод, загружающий данные, соответствующие типу обычного пользователя
+	 * @param user объект пользователя
+	 * @param dataDao объект взаимодействия с источником данных
+	 * @param session текущая сессия
+	 * @throws DaoException
+	 */
 	private void loadRegularUserData( User user, HttpSession session,
 			IDataDao dataDao ) throws DaoException {
 		List<Address> addresses = dataDao
@@ -124,6 +150,12 @@ public class GetUserPageCommand implements ICommand {
 		session.setAttribute( SessionParameterName.CLAIMS, claims );
 	}
 
+	/**
+	 * Метод, загружающий данные, соответствующие типу пользователя-оператора
+	 * @param dataDao объект взаимодействия с источником данных
+	 * @param session текущая сессия
+	 * @throws DaoException
+	 */
 	private void loadOperatorData( HttpSession session,
 			IDataDao dataDao ) throws DaoException {
 
@@ -136,9 +168,13 @@ public class GetUserPageCommand implements ICommand {
 		session.setAttribute( SessionParameterName.ASSIGNATIONS, assignations );
 	}
 
+	/**
+	 * Метод, загружающий данные, соответствующие типу пользователя-администратора
+	 * @param dataDao объект взаимодействия с источником данных
+	 * @param session текущая сессия
+	 * @throws DaoException
+	 */
 	private void loadAdminData( HttpSession session, IDataDao dataDao )
 			throws DaoException {
-		List<Address> addresses = dataDao.getAllAddresses();
-		List<User> users = dataDao.getAllUsers();
 	}
 }

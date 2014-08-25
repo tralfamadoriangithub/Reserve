@@ -1,5 +1,9 @@
 package com.epam.task6.logic;
-
+/**
+ * ѕеречисление команд, доступных дл€ приложени€.
+ * @author dmitry
+ *
+ */
 public enum CommandName {
 	LOGIN_COMMAND,
 	NO_SUCH_COMMAND,

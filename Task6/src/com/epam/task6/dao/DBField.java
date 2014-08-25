@@ -1,5 +1,10 @@
 package com.epam.task6.dao;
-
+/**
+ * Класс содержащий константы, соответствующие полям источника данных.
+ * 
+ * @author dmitry
+ *
+ */
 public final class DBField {
 	
 	private DBField(){}

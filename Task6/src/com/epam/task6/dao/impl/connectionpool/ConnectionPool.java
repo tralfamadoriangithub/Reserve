@@ -1,5 +1,4 @@
 package com.epam.task6.dao.impl.connectionpool;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -9,7 +8,14 @@ import java.util.concurrent.ArrayBlockingQueue;
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.propertylink.ProjectBundle;
 import com.epam.task6.propertylink.ProjectProperties;
-
+/**
+ * Класс пула соединений.
+ * 
+ * Класс, отвечающий за создание пула соединений и управление им.
+ * Экземпляр класса предоставляется методом <code>getInstance()</code>.
+ * @author dmitry
+ *
+ */
 public class ConnectionPool {
 
 	private static ConnectionPool connectionPool;
@@ -56,6 +62,11 @@ public class ConnectionPool {
 			new DaoException( "Exception in \"initializeConnectionPool\"", e );
 		}
 	}
+	/**
+	 * Метод для получения значения количества соединений из свойства <code>connections_limit</code>
+	 * файла <code>project_properties</code>. Хардкод. Заменить более вменяемым.
+	 * @return количество соединений в пуле.
+	 */
 
 	private int getPoolSize() {
 
@@ -66,6 +77,14 @@ public class ConnectionPool {
 		return poolSize;
 	}
 
+	/**
+	 * 
+	 * Метод, возвращающий соединение из коллекции свободных соединений клиенту. 
+	 * Ссылка на  соединение помещается также в коллекцию занятых соединений.
+	 * 
+	 * @return соединение с источником данных
+	 * @throws DaoException выбрасывается при возникновении ощибки
+	 */
 	public Connection getConnection() throws DaoException {
 		Connection connection = null;
 		try {
@@ -77,6 +96,14 @@ public class ConnectionPool {
 		return connection;
 	}
 
+	/**
+	 * Метод, принимающий соединение от клиента и помещающие его в коллекцию свободных соединений.
+	 * Предварительно производится проверка есть ли принятое соединение в коллекции занятых соединений пула.
+	 * 
+	 * @param conn соединение, принятое от клиента
+	 * @throws DaoException выбрасывается, если переданное соединение не содержится в коллекции 
+	 * занятых соединений пула
+	 */
 	public void releaseConnection( Connection conn ) throws DaoException {
 		if ( buisyCoonnections.contains( conn ) ) {
 			freeConnections.add( conn );
@@ -85,6 +112,11 @@ public class ConnectionPool {
 			throw new DaoException( "Exception in \"releaseConnection\"" );
 		}
 	}
+	
+	/**
+	 * Метод, закрывающий все соединения пулаю
+	 * @throws DaoException 
+	 */
 
 	private void closeConnections() throws DaoException {
 		freeConnections.forEach( conn -> {

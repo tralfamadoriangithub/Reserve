@@ -10,7 +10,11 @@ import com.epam.task6.entity.ClaimStatusStringValue;
 import com.epam.task6.propertylink.ProjectBundle;
 import com.epam.task6.propertylink.ProjectString;
 import com.epam.task6.tableentity.ClaimTableEntity;
-
+/**
+ * Класс, реализующий пользовательский тег вывода таблицы заявок для оператора.
+ * @author dmitry
+ *
+ */
 public class OperatorClaimsTableTag extends UserClaimsTableTag {
 
 	private static final long serialVersionUID = 1L;

@@ -1,5 +1,10 @@
 package com.epam.task6.dao;
-
+/**
+ * Класс, содержащий константы, соответствующие таблицам источника данных.
+ * 
+ * @author dmitry
+ *
+ */
 public final class DBTable{
 	
 	private DBTable(){}

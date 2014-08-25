@@ -15,13 +15,22 @@ import com.epam.task6.entity.UserStatusValues;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
-
+/**
+* Класс, реализующий {@link com.epam.task6.logic.ICommand} реализующий команду регистрации
+* нового обычного пользователя.
+* @author dmitry
+*
+*/
 public class RegisterNewUserCommand implements ICommand {
 
+	/**
+	 * @return адрес страницы пользователя.
+	 */
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException, CommandLogicException {
-
+		
+		HttpSession session = request.getSession();
 		User newUser = createUser( request );
 		
 		try {
@@ -31,7 +40,6 @@ public class RegisterNewUserCommand implements ICommand {
 			throw new CommandException(
 					"Exception in \"RegisterNewUserCommand\"", e );
 		}
-		HttpSession session = request.getSession();
 		session.setAttribute( SessionParameterName.USER, newUser );
 		session.setAttribute( SessionParameterName.IS_LOGIN, true );
 		return JspPageName.USER_PAGE;

@@ -1,5 +1,11 @@
 package com.epam.task6.controller;
 
+/**
+ * Class contains request parameter constants available in application.
+ * 
+ * @author dmitry
+ *
+ */
 public final class RequestParameterName {
 	
 	private RequestParameterName(){}

@@ -17,9 +17,17 @@ import com.epam.task6.entity.User;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
-
+/**
+* Класс, реализующий {@link com.epam.task6.logic.ICommand} реализующий команду регистрации
+* нового адреса.
+* @author dmitry
+*
+*/
 public class RegisterNewAddressCommand implements ICommand{
 
+	/**
+	 * @return адрес страницы пользователя.
+	 */
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException,

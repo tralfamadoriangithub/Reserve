@@ -1,5 +1,4 @@
 package com.epam.task6.dao;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +12,13 @@ import com.epam.task6.entity.Worker;
 import com.epam.task6.tableentity.AssignationTableEntity;
 import com.epam.task6.tableentity.ClaimTableEntity;
 import com.epam.task6.tableentity.WorkerTableEntity;
-
+/**
+ * »нтерфейс, объ€вл€ющий методы дл€ взаимодействи€ с источником данных.
+ * 
+ * 
+ * @author dmitry
+ *
+ */
 public interface IDataDao {
 
 	public HashMap<String, String> query( String query ) throws DaoException;

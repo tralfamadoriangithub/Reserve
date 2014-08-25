@@ -15,16 +15,23 @@ import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.IDataDao;
 import com.epam.task6.entity.Assignation;
-import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.ClaimStatusStringValue;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.AssignationTableEntity;
 import com.epam.task6.tableentity.ClaimTableEntity;
-
+/**
+* Класс, реализующий {@link com.epam.task6.logic.ICommand} реализующий команду регистрации
+* нового назначения оператором.
+* @author dmitry
+*
+*/
 public class RegisterAssignationCommand implements ICommand {
 
+	/**
+	 * @return адрес страницы оператора.
+	 */
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException, CommandLogicException {

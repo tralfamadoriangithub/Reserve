@@ -12,9 +12,17 @@ import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.ClaimTableEntity;
-
+/**
+* Класс, реализующий {@link com.epam.task6.logic.ICommand} реализующий команду редактирования
+* заявки пользователем.
+* @author dmitry
+*
+*/
 public class EditClaimCommand implements ICommand{
 
+	/**
+	 * @return адрес страницы пользователя системы.
+	 */
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException,

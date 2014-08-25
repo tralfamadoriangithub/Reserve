@@ -1,5 +1,11 @@
 package com.epam.task6.controller;
 
+/**
+ * Class contains session parameter constants available in application. 
+ * 
+ * @author dmitry
+ *
+ */
 public final class SessionParameterName {
 	
 	private SessionParameterName(){}

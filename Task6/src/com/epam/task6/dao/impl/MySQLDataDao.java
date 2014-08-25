@@ -25,7 +25,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/**
+ * Класс, реализующий интерфейс {@link com.epam.task6.dao.IDataDao} для взаимодействия с БД MySQL.
+ * @author dmitry
+ *
+ */
 public class MySQLDataDao implements IDataDao {
 
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();

@@ -12,7 +12,11 @@ import javax.servlet.jsp.tagext.TagSupport;
 import com.epam.task6.entity.Address;
 import com.epam.task6.propertylink.ProjectBundle;
 import com.epam.task6.propertylink.ProjectString;
-
+/**
+ * Класс, реализующий пользовательский тег вывода таблицы адресов.
+ * @author dmitry
+ *
+ */
 public class AddressesTableTag extends TagSupport {
 
 	private static final long serialVersionUID = 1L;

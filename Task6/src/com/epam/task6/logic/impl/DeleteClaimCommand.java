@@ -17,9 +17,17 @@ import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
 import com.epam.task6.tableentity.ClaimTableEntity;
-
+/**
+*  ласс, реализующий {@link com.epam.task6.logic.ICommand} реализующий команду удалени€
+* за€вки.
+* @author dmitry
+*
+*/
 public class DeleteClaimCommand implements ICommand{
 
+	/**
+	 * @return адрес страницы пользовател€ системы.
+	 */
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException, CommandLogicException {
@@ -40,6 +48,12 @@ public class DeleteClaimCommand implements ICommand{
 		return (String) session.getAttribute( SessionParameterName.USER_PAGE );
 	}
 	
+	/**
+	 * ћетод, удал€ющий за€вку из списка за€вок.
+	 * @param claimId идентификатор за€вки
+	 * @param claims список за€вок
+	 * @return обновленный список
+	 */
 	private List<ClaimTableEntity> deleteClaimFromList(int claimId, List<ClaimTableEntity> claims ){
 		List<ClaimTableEntity> temp = new ArrayList<>();
 		temp.addAll( claims );

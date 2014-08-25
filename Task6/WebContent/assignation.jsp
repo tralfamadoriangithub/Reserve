@@ -13,6 +13,9 @@
 <fmt:message var="title" key="assignation" />
 
 <myTag:basepage title="${ title }">
+
+<h4><fmt:message key="problem_description"/> : </h4>
+<h3><c:out value="${ sessionScope.claim_for_assignation.problemDescription }"/></h3>
 	<section id="assignation_section">
 
 		<br>

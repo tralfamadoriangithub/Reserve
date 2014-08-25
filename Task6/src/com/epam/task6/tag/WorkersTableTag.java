@@ -8,7 +8,11 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import com.epam.task6.tableentity.WorkerTableEntity;
-
+/**
+ * Класс, реализующий пользовательский тег вывода таблицы рабочих.
+ * @author dmitry
+ *
+ */
 public class WorkersTableTag extends TagSupport {
 
 	private static final long serialVersionUID = 1L;

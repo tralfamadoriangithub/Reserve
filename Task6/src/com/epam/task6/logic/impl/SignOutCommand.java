@@ -11,9 +11,18 @@ import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.logic.CommandException;
 import com.epam.task6.logic.CommandLogicException;
 import com.epam.task6.logic.ICommand;
-
+/**
+* Класс, реализующий {@link com.epam.task6.logic.ICommand} реализующий команду выхода из системы.
+* @author dmitry
+*
+*/
 public class SignOutCommand implements ICommand {
 
+	/**
+	 * Метод сохраняет текущее значение языковых настроек системы.
+	 * Алгоритм???
+	 * @return адрес страницы входа в систему.
+	 */
 	@Override
 	public String execute( HttpServletRequest request,
 			HttpServletResponse response ) throws CommandException, CommandLogicException {
