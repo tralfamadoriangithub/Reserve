@@ -20,7 +20,6 @@ import com.mysql.jdbc.PreparedStatement;
 public class MySQLAccessDao implements IAccessDao {
 
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
-	private Connection connection;
 	private static MySQLAccessDao instance;
 	
 	private MySQLAccessDao() {
@@ -37,7 +36,7 @@ public class MySQLAccessDao implements IAccessDao {
 	@Override
 	public User signIn( final String login, final String password ) throws DaoException, DataNotFoundException {
 		User user = null;
-		connection = connectionPool.getConnection();
+		Connection connection = connectionPool.getConnection();
 		try {
 			PreparedStatement preparedStatement = (PreparedStatement) connection
 					.prepareStatement( "SELECT * FROM user WHERE login = ?" );

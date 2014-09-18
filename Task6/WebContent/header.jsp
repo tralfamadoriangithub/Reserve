@@ -3,12 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<c:set var="current_page" value="${ pageContext.request.requestURI }"
+<c:set var="current_page" value="${ pageContext.request.requestURI }" 
 	scope="session" />
-
 <c:set var="language"
 	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
 	scope="session" />
+	 
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="string" />
 

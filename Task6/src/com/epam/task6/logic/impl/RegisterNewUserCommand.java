@@ -1,5 +1,7 @@
 package com.epam.task6.logic.impl;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,8 @@ import com.epam.task6.controller.SessionParameterName;
 import com.epam.task6.dao.DaoException;
 import com.epam.task6.dao.DaoFactory;
 import com.epam.task6.dao.IDataDao;
+import com.epam.task6.entity.Address;
+import com.epam.task6.entity.Claim;
 import com.epam.task6.entity.User;
 import com.epam.task6.entity.UserStatusValues;
 import com.epam.task6.logic.CommandException;
@@ -42,6 +46,8 @@ public class RegisterNewUserCommand implements ICommand {
 		}
 		session.setAttribute( SessionParameterName.USER, newUser );
 		session.setAttribute( SessionParameterName.IS_LOGIN, true );
+		session.setAttribute(SessionParameterName.ADDRESSES, new ArrayList<Address>());
+		session.setAttribute(SessionParameterName.CLAIMS, new ArrayList<Claim>());
 		return JspPageName.USER_PAGE;
 	}
 

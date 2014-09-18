@@ -33,7 +33,6 @@ import java.sql.Statement;
 public class MySQLDataDao implements IDataDao {
 
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
-	private Connection connection;
 	private static MySQLDataDao instance;
 
 	private MySQLDataDao() {
@@ -58,7 +57,7 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public synchronized void addUser( User user ) throws DaoException {
 		
-		connection = getConnection();
+		Connection connection = getConnection();
 		PreparedStatement preparedStatement;
 		
 		try {
@@ -88,7 +87,7 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public List<Address> getUsersAddress( int... userId ) throws DaoException {
 		
-		connection = getConnection();
+		Connection connection = getConnection();
 		List<Address> addresses = new ArrayList<Address>();
 		
 		try {
@@ -123,7 +122,7 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public synchronized void addClaim( Claim claim ) throws DaoException {
 		
-		connection = getConnection();
+		Connection connection = getConnection();
 		PreparedStatement preparedStatement;
 		
 		try {
@@ -153,7 +152,7 @@ public class MySQLDataDao implements IDataDao {
 	public List<ClaimTableEntity> getUsersClaim( User... users )
 			throws DaoException {
 		
-		connection = getConnection();
+		Connection connection = getConnection();
 		List<ClaimTableEntity> claims = new ArrayList<ClaimTableEntity>();
 
 		try {
@@ -201,7 +200,7 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public List<Address> getAllAddresses() throws DaoException {
 
-		connection = getConnection();
+		Connection connection = getConnection();
 		List<Address> addresses = new ArrayList<>();
 		
 		try {
@@ -232,7 +231,7 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public List<ClaimTableEntity> getAllClaims() throws DaoException {
 
-		connection = getConnection();
+		Connection connection = getConnection();
 		List<ClaimTableEntity> claims = new ArrayList<>();
 		
 		try {
@@ -274,7 +273,7 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public List<WorkerTableEntity> getAllWorkers() throws DaoException {
 
-		connection = getConnection();
+		Connection connection = getConnection();
 		List<WorkerTableEntity> workers = new ArrayList<>();
 		
 		try {
@@ -314,7 +313,7 @@ public class MySQLDataDao implements IDataDao {
 	public List<AssignationTableEntity> getAllAssignations()
 			throws DaoException {
 
-		connection = getConnection();
+		Connection connection = getConnection();
 		List<AssignationTableEntity> assignations = new ArrayList<>();
 		
 		try {
@@ -367,7 +366,7 @@ public class MySQLDataDao implements IDataDao {
 	public void registerNewAssignation( Assignation assignation,
 			int... workersId ) throws DaoException {
 		
-		connection = getConnection();
+		Connection connection = getConnection();
 		PreparedStatement preparedStatement;
 		
 		try {
@@ -413,7 +412,7 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public void deleteAssignation( int assignationId , int claimId  ) throws DaoException {
 		
-		connection = getConnection();
+		Connection connection = getConnection();
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection
@@ -450,9 +449,10 @@ public class MySQLDataDao implements IDataDao {
 
 	@Override
 	public synchronized void addAddress( Address address ) throws DaoException {
-		connection = getConnection();
 		
+		Connection connection = getConnection();
 		PreparedStatement preparedStatement;
+		
 		try {
 			preparedStatement = connection
 					.prepareStatement(
@@ -480,7 +480,8 @@ public class MySQLDataDao implements IDataDao {
 	
 	@Override
 	public synchronized void updateClaim( int claimId , String problemDescription  ) throws DaoException {
-		connection = getConnection();
+		
+		Connection connection = getConnection();
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement( "UPDATE claim SET problem_description = ? WHERE claim_id = ?" );
@@ -498,7 +499,7 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public void deleteClaim( int claimId ) throws DaoException {
 		
-		connection = getConnection();
+		Connection connection = getConnection();
 		PreparedStatement preparedStatement;
 		try{
 			preparedStatement = connection.prepareStatement( "DELETE FROM claim WHERE claim_id = ?" );
@@ -574,7 +575,7 @@ public class MySQLDataDao implements IDataDao {
 	@Override
 	public synchronized void addAssignation( Assignation assignation )
 			throws DaoException {
-		connection = getConnection();
+		Connection connection = getConnection();
 
 	}
 

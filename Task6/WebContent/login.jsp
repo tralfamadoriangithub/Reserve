@@ -14,17 +14,18 @@
 	<section id="loginForm">	
 		<form action="controller" method="post">
 		
-			<c:out value='<fmt:message key="login" />'/>
+			
 			
 			<section class=inputFieldWithTitle>	
-				<p><fmt:message key="login" />
-				<br> <input type="text" placeholder='<fmt:message key="login" />' name="login" style="width:25%; border:0px; height:10%; padding-left: 50%"
+				<p><fmt:message key="login" />:
+				<br> <input type="text" placeholder='<fmt:message key="login" />' name="login" 
 					value="" required />
 			</section>
 			<p>
 				<fmt:message key="password" />
-				:<br> <input type="password" placeholder="Password"
-					name="password" value="" required /> <br> <br> <input
+				:<br> <input type="password" placeholder='<fmt:message key="password" />'
+					name="password" value="" required /> <br> 
+					<br> <input
 					type="submit" value='<fmt:message key="sign_in"/>' />
 					<input type="hidden" name="command" value="get_user_page_command" />			
 		</form>

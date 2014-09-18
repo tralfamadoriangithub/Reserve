@@ -1,5 +1,6 @@
 package com.epam.task6.logic.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,6 @@ public class RegisterNewAddressCommand implements ICommand{
 		address.setStreet( request.getParameter( RequestParameterName.STREET) );
 		address.setHouseNumber( Integer.valueOf( request.getParameter( RequestParameterName.HOUSE ) ) );
 		
-// 					Block field can be empty
 		String block = request.getParameter( RequestParameterName.BLOCK ); 
 		address.setBlockNumber( "".equals( block ) ? 0 : Integer.valueOf( block ));
 		

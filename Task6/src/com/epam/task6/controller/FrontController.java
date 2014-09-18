@@ -64,6 +64,9 @@ public class FrontController extends HttpServlet {
 		}catch ( CommandLogicException e ) {
 			log.error( "Logic Exception", e.getHiddenException() );
 			page = JspPageName.ERROR_PAGE;
+		}catch ( Exception e ) {
+			log.error( "Exception", e );
+			page = JspPageName.ERROR_PAGE;
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher( page );
